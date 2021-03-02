@@ -23,20 +23,24 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.mobilitySpeedDropDown = new System.Windows.Forms.ComboBox();
+            this.mobilityGroup = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.mobilitySpecialDropDown = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.mobilityTypeDropDown = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.goldCostText = new System.Windows.Forms.TextBox();
+            this.buildingSizeGroup = new System.Windows.Forms.GroupBox();
+            this.buildingSizeDropDown = new System.Windows.Forms.ComboBox();
+            this.totalCostGroup = new System.Windows.Forms.GroupBox();
+            this.DTPCostLabel = new System.Windows.Forms.Label();
+            this.DTPCostText = new System.Windows.Forms.TextBox();
+            this.goldCostLabel = new System.Windows.Forms.Label();
+            this.roomPanel = new System.Windows.Forms.Panel();
+            this.addNewRoomButton = new System.Windows.Forms.Button();
+            this.roomGroup1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
@@ -63,14 +67,11 @@
             this.button4 = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.mobilityGroup.SuspendLayout();
+            this.buildingSizeGroup.SuspendLayout();
+            this.totalCostGroup.SuspendLayout();
+            this.roomPanel.SuspendLayout();
+            this.roomGroup1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -78,29 +79,43 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // mobilitySpeedDropDown
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(72, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.mobilitySpeedDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mobilitySpeedDropDown.FormattingEnabled = true;
+            this.mobilitySpeedDropDown.Items.AddRange(new object[] {
+            "None",
+            "Extremely Slow",
+            "Very Slothful",
+            "Slothful",
+            "Extremely Slow",
+            "Very Slow",
+            "Slow",
+            "Fair",
+            "Fleet",
+            "Fast",
+            "Very Fast",
+            "Extraordinary",
+            "Incredible"});
+            this.mobilitySpeedDropDown.Location = new System.Drawing.Point(72, 19);
+            this.mobilitySpeedDropDown.Name = "mobilitySpeedDropDown";
+            this.mobilitySpeedDropDown.Size = new System.Drawing.Size(121, 21);
+            this.mobilitySpeedDropDown.TabIndex = 0;
             // 
-            // groupBox1
+            // mobilityGroup
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(32, 185);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(211, 109);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Mobility";
+            this.mobilityGroup.Controls.Add(this.label3);
+            this.mobilityGroup.Controls.Add(this.mobilitySpecialDropDown);
+            this.mobilityGroup.Controls.Add(this.label2);
+            this.mobilityGroup.Controls.Add(this.mobilityTypeDropDown);
+            this.mobilityGroup.Controls.Add(this.label1);
+            this.mobilityGroup.Controls.Add(this.mobilitySpeedDropDown);
+            this.mobilityGroup.Location = new System.Drawing.Point(32, 185);
+            this.mobilityGroup.Name = "mobilityGroup";
+            this.mobilityGroup.Size = new System.Drawing.Size(211, 109);
+            this.mobilityGroup.TabIndex = 1;
+            this.mobilityGroup.TabStop = false;
+            this.mobilityGroup.Text = "Mobility";
             // 
             // label3
             // 
@@ -111,14 +126,21 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Special";
             // 
-            // comboBox3
+            // mobilitySpecialDropDown
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(72, 73);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 4;
+            this.mobilitySpecialDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mobilitySpecialDropDown.FormattingEnabled = true;
+            this.mobilitySpecialDropDown.Items.AddRange(new object[] {
+            "None",
+            "Astral",
+            "Ethereal",
+            "Plane Linked",
+            "Plane Shifting",
+            "Teleporting"});
+            this.mobilitySpecialDropDown.Location = new System.Drawing.Point(72, 73);
+            this.mobilitySpecialDropDown.Name = "mobilitySpecialDropDown";
+            this.mobilitySpecialDropDown.Size = new System.Drawing.Size(121, 21);
+            this.mobilitySpecialDropDown.TabIndex = 4;
             // 
             // label2
             // 
@@ -129,100 +151,151 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Type";
             // 
-            // comboBox2
+            // mobilityTypeDropDown
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(72, 46);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 2;
+            this.mobilityTypeDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mobilityTypeDropDown.FormattingEnabled = true;
+            this.mobilityTypeDropDown.Items.AddRange(new object[] {
+            "None",
+            "Walking",
+            "Sailing",
+            "Burrowing",
+            "Submersible",
+            "Flying"});
+            this.mobilityTypeDropDown.Location = new System.Drawing.Point(72, 46);
+            this.mobilityTypeDropDown.Name = "mobilityTypeDropDown";
+            this.mobilityTypeDropDown.Size = new System.Drawing.Size(121, 21);
+            this.mobilityTypeDropDown.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Location = new System.Drawing.Point(10, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Speed";
             // 
-            // textBox1
+            // goldCostText
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.goldCostText.Location = new System.Drawing.Point(6, 19);
+            this.goldCostText.Name = "goldCostText";
+            this.goldCostText.ReadOnly = true;
+            this.goldCostText.Size = new System.Drawing.Size(100, 20);
+            this.goldCostText.TabIndex = 3;
             // 
-            // groupBox2
+            // buildingSizeGroup
             // 
-            this.groupBox2.Controls.Add(this.comboBox4);
-            this.groupBox2.Location = new System.Drawing.Point(32, 106);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(133, 51);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Building Size";
+            this.buildingSizeGroup.Controls.Add(this.buildingSizeDropDown);
+            this.buildingSizeGroup.Location = new System.Drawing.Point(32, 106);
+            this.buildingSizeGroup.Name = "buildingSizeGroup";
+            this.buildingSizeGroup.Size = new System.Drawing.Size(133, 51);
+            this.buildingSizeGroup.TabIndex = 4;
+            this.buildingSizeGroup.TabStop = false;
+            this.buildingSizeGroup.Text = "Building Size";
             // 
-            // comboBox4
+            // buildingSizeDropDown
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(6, 19);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 6;
+            this.buildingSizeDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.buildingSizeDropDown.Enabled = false;
+            this.buildingSizeDropDown.FormattingEnabled = true;
+            this.buildingSizeDropDown.Items.AddRange(new object[] {
+            "Cottage",
+            "Simple House",
+            "Grand House",
+            "Mansion",
+            "Galder\'s Tower",
+            "Keep",
+            "Castle",
+            "Mighty Fortress",
+            "Daern\'s Instant Fortress",
+            "Huge Castle",
+            "Small Dungeon",
+            "Medium Dungeon",
+            "Large Dungeon"});
+            this.buildingSizeDropDown.Location = new System.Drawing.Point(6, 19);
+            this.buildingSizeDropDown.Name = "buildingSizeDropDown";
+            this.buildingSizeDropDown.Size = new System.Drawing.Size(121, 21);
+            this.buildingSizeDropDown.TabIndex = 6;
             // 
-            // groupBox3
+            // totalCostGroup
             // 
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(32, 21);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(169, 79);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Total Cost";
+            this.totalCostGroup.Controls.Add(this.DTPCostLabel);
+            this.totalCostGroup.Controls.Add(this.DTPCostText);
+            this.totalCostGroup.Controls.Add(this.goldCostLabel);
+            this.totalCostGroup.Controls.Add(this.goldCostText);
+            this.totalCostGroup.Location = new System.Drawing.Point(32, 21);
+            this.totalCostGroup.Name = "totalCostGroup";
+            this.totalCostGroup.Size = new System.Drawing.Size(169, 79);
+            this.totalCostGroup.TabIndex = 5;
+            this.totalCostGroup.TabStop = false;
+            this.totalCostGroup.Text = "Total Cost";
             // 
-            // panel1
+            // DTPCostLabel
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.groupBox4);
-            this.panel1.Location = new System.Drawing.Point(298, 28);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(251, 637);
-            this.panel1.TabIndex = 6;
+            this.DTPCostLabel.AutoSize = true;
+            this.DTPCostLabel.Location = new System.Drawing.Point(121, 48);
+            this.DTPCostLabel.Name = "DTPCostLabel";
+            this.DTPCostLabel.Size = new System.Drawing.Size(29, 13);
+            this.DTPCostLabel.TabIndex = 6;
+            this.DTPCostLabel.Text = "DTP";
             // 
-            // button2
+            // DTPCostText
             // 
-            this.button2.Location = new System.Drawing.Point(64, 212);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Add New Room";
-            this.button2.UseVisualStyleBackColor = true;
+            this.DTPCostText.Location = new System.Drawing.Point(6, 45);
+            this.DTPCostText.Name = "DTPCostText";
+            this.DTPCostText.ReadOnly = true;
+            this.DTPCostText.Size = new System.Drawing.Size(100, 20);
+            this.DTPCostText.TabIndex = 5;
             // 
-            // groupBox4
+            // goldCostLabel
             // 
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.comboBox8);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.comboBox7);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.comboBox6);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.comboBox5);
-            this.groupBox4.Location = new System.Drawing.Point(19, 27);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 170);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Room 1";
+            this.goldCostLabel.AutoSize = true;
+            this.goldCostLabel.Location = new System.Drawing.Point(121, 22);
+            this.goldCostLabel.Name = "goldCostLabel";
+            this.goldCostLabel.Size = new System.Drawing.Size(29, 13);
+            this.goldCostLabel.TabIndex = 4;
+            this.goldCostLabel.Text = "Gold";
+            // 
+            // roomPanel
+            // 
+            this.roomPanel.AutoScroll = true;
+            this.roomPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.roomPanel.Controls.Add(this.addNewRoomButton);
+            this.roomPanel.Location = new System.Drawing.Point(298, 24);
+            this.roomPanel.Name = "roomPanel";
+            this.roomPanel.Size = new System.Drawing.Size(250, 637);
+            this.roomPanel.TabIndex = 6;
+            // 
+            // addNewRoomButton
+            // 
+            this.addNewRoomButton.AutoSize = true;
+            this.addNewRoomButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addNewRoomButton.Location = new System.Drawing.Point(79, 12);
+            this.addNewRoomButton.Name = "addNewRoomButton";
+            this.addNewRoomButton.Size = new System.Drawing.Size(92, 23);
+            this.addNewRoomButton.TabIndex = 3;
+            this.addNewRoomButton.Text = "Add New Room";
+            this.addNewRoomButton.UseVisualStyleBackColor = true;
+            this.addNewRoomButton.Click += new System.EventHandler(this.newRoomButton_Click);
+            // 
+            // roomGroup1
+            // 
+            this.roomGroup1.Controls.Add(this.button1);
+            this.roomGroup1.Controls.Add(this.label8);
+            this.roomGroup1.Controls.Add(this.comboBox8);
+            this.roomGroup1.Controls.Add(this.label7);
+            this.roomGroup1.Controls.Add(this.comboBox7);
+            this.roomGroup1.Controls.Add(this.label6);
+            this.roomGroup1.Controls.Add(this.comboBox6);
+            this.roomGroup1.Controls.Add(this.label5);
+            this.roomGroup1.Controls.Add(this.comboBox5);
+            this.roomGroup1.Location = new System.Drawing.Point(11, 331);
+            this.roomGroup1.Name = "roomGroup1";
+            this.roomGroup1.Size = new System.Drawing.Size(226, 170);
+            this.roomGroup1.TabIndex = 2;
+            this.roomGroup1.TabStop = false;
+            this.roomGroup1.Text = "Room 1";
             // 
             // button1
             // 
@@ -465,32 +538,6 @@
             this.comboBox10.Size = new System.Drawing.Size(121, 21);
             this.comboBox10.TabIndex = 12;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(121, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Gold";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(121, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "DTP";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(6, 45);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -501,21 +548,23 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.roomPanel);
+            this.Controls.Add(this.totalCostGroup);
+            this.Controls.Add(this.buildingSizeGroup);
+            this.Controls.Add(this.mobilityGroup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Lantern\'s Housing Calculator";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.mobilityGroup.ResumeLayout(false);
+            this.mobilityGroup.PerformLayout();
+            this.buildingSizeGroup.ResumeLayout(false);
+            this.totalCostGroup.ResumeLayout(false);
+            this.totalCostGroup.PerformLayout();
+            this.roomPanel.ResumeLayout(false);
+            this.roomPanel.PerformLayout();
+            this.roomGroup1.ResumeLayout(false);
+            this.roomGroup1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -529,19 +578,19 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox mobilitySpeedDropDown;
+        private System.Windows.Forms.GroupBox mobilityGroup;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox mobilitySpecialDropDown;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox mobilityTypeDropDown;
+        private System.Windows.Forms.TextBox goldCostText;
+        private System.Windows.Forms.GroupBox buildingSizeGroup;
+        private System.Windows.Forms.ComboBox buildingSizeDropDown;
+        private System.Windows.Forms.GroupBox totalCostGroup;
+        private System.Windows.Forms.Panel roomPanel;
+        private System.Windows.Forms.GroupBox roomGroup1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox8;
         private System.Windows.Forms.Label label7;
@@ -558,7 +607,7 @@
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addNewRoomButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox9;
         private System.Windows.Forms.Button button3;
@@ -569,9 +618,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label DTPCostLabel;
+        private System.Windows.Forms.TextBox DTPCostText;
+        private System.Windows.Forms.Label goldCostLabel;
     }
 }
 
