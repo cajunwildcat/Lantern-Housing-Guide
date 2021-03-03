@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.goldCostText = new System.Windows.Forms.TextBox();
             this.buildingSizeGroup = new System.Windows.Forms.GroupBox();
-            this.buildingSizeDropDown = new System.Windows.Forms.ComboBox();
+            this.buildingSizeText = new System.Windows.Forms.TextBox();
             this.totalCostGroup = new System.Windows.Forms.GroupBox();
             this.DTPCostLabel = new System.Windows.Forms.Label();
             this.DTPCostText = new System.Windows.Forms.TextBox();
@@ -52,6 +52,13 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -61,12 +68,14 @@
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.wonderousArchPanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.freeStandWallsPanel = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.calculateButton = new System.Windows.Forms.Button();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -74,8 +83,8 @@
             this.roomGroup1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.wonderousArchPanel.SuspendLayout();
+            this.freeStandWallsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,7 +119,7 @@
             this.mobilityGroup.Controls.Add(this.mobilityTypeDropDown);
             this.mobilityGroup.Controls.Add(this.label1);
             this.mobilityGroup.Controls.Add(this.mobilitySpeedDropDown);
-            this.mobilityGroup.Location = new System.Drawing.Point(32, 185);
+            this.mobilityGroup.Location = new System.Drawing.Point(32, 213);
             this.mobilityGroup.Name = "mobilityGroup";
             this.mobilityGroup.Size = new System.Drawing.Size(211, 109);
             this.mobilityGroup.TabIndex = 1;
@@ -170,7 +179,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 22);
+            this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 1;
@@ -186,37 +195,21 @@
             // 
             // buildingSizeGroup
             // 
-            this.buildingSizeGroup.Controls.Add(this.buildingSizeDropDown);
-            this.buildingSizeGroup.Location = new System.Drawing.Point(32, 106);
+            this.buildingSizeGroup.Controls.Add(this.buildingSizeText);
+            this.buildingSizeGroup.Location = new System.Drawing.Point(32, 156);
             this.buildingSizeGroup.Name = "buildingSizeGroup";
             this.buildingSizeGroup.Size = new System.Drawing.Size(133, 51);
             this.buildingSizeGroup.TabIndex = 4;
             this.buildingSizeGroup.TabStop = false;
             this.buildingSizeGroup.Text = "Building Size";
             // 
-            // buildingSizeDropDown
+            // buildingSizeText
             // 
-            this.buildingSizeDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.buildingSizeDropDown.Enabled = false;
-            this.buildingSizeDropDown.FormattingEnabled = true;
-            this.buildingSizeDropDown.Items.AddRange(new object[] {
-            "Cottage",
-            "Simple House",
-            "Grand House",
-            "Mansion",
-            "Galder\'s Tower",
-            "Keep",
-            "Castle",
-            "Mighty Fortress",
-            "Daern\'s Instant Fortress",
-            "Huge Castle",
-            "Small Dungeon",
-            "Medium Dungeon",
-            "Large Dungeon"});
-            this.buildingSizeDropDown.Location = new System.Drawing.Point(6, 19);
-            this.buildingSizeDropDown.Name = "buildingSizeDropDown";
-            this.buildingSizeDropDown.Size = new System.Drawing.Size(121, 21);
-            this.buildingSizeDropDown.TabIndex = 6;
+            this.buildingSizeText.Location = new System.Drawing.Point(7, 19);
+            this.buildingSizeText.Name = "buildingSizeText";
+            this.buildingSizeText.ReadOnly = true;
+            this.buildingSizeText.Size = new System.Drawing.Size(120, 20);
+            this.buildingSizeText.TabIndex = 7;
             // 
             // totalCostGroup
             // 
@@ -377,7 +370,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(301, 21);
+            this.label4.Location = new System.Drawing.Point(305, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 7;
@@ -385,23 +378,100 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.checkBox13);
+            this.groupBox5.Controls.Add(this.checkBox11);
+            this.groupBox5.Controls.Add(this.checkBox12);
+            this.groupBox5.Controls.Add(this.checkBox9);
+            this.groupBox5.Controls.Add(this.checkBox10);
+            this.groupBox5.Controls.Add(this.checkBox8);
+            this.groupBox5.Controls.Add(this.checkBox7);
             this.groupBox5.Controls.Add(this.checkBox5);
             this.groupBox5.Controls.Add(this.checkBox6);
             this.groupBox5.Controls.Add(this.checkBox3);
             this.groupBox5.Controls.Add(this.checkBox4);
             this.groupBox5.Controls.Add(this.checkBox2);
             this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Location = new System.Drawing.Point(32, 314);
+            this.groupBox5.Location = new System.Drawing.Point(32, 336);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(142, 351);
+            this.groupBox5.Size = new System.Drawing.Size(142, 329);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Access to Cost Modifiers";
+            this.groupBox5.Text = "Wall Cost Modifiers";
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Location = new System.Drawing.Point(6, 66);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(126, 17);
+            this.checkBox13.TabIndex = 12;
+            this.checkBox13.Text = "Envirvonment, Forest";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(6, 20);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(95, 17);
+            this.checkBox11.TabIndex = 11;
+            this.checkBox11.Text = "Above Ground";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(6, 227);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(89, 17);
+            this.checkBox12.TabIndex = 10;
+            this.checkBox12.Text = "Wall of Force";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(6, 89);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(135, 17);
+            this.checkBox9.TabIndex = 9;
+            this.checkBox9.Text = "Environment, Mountain";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(6, 250);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(90, 17);
+            this.checkBox10.TabIndex = 8;
+            this.checkBox10.Text = "Wall of Stone";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(6, 158);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(87, 17);
+            this.checkBox8.TabIndex = 7;
+            this.checkBox8.Text = "Plant Growth";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(6, 43);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(118, 17);
+            this.checkBox7.TabIndex = 6;
+            this.checkBox7.Text = "Environment, Arctic";
+            this.checkBox7.UseVisualStyleBackColor = true;
             // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(9, 148);
+            this.checkBox5.Location = new System.Drawing.Point(6, 181);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(88, 17);
             this.checkBox5.TabIndex = 5;
@@ -411,7 +481,7 @@
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(9, 125);
+            this.checkBox6.Location = new System.Drawing.Point(6, 273);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(95, 17);
             this.checkBox6.TabIndex = 4;
@@ -421,7 +491,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(9, 102);
+            this.checkBox3.Location = new System.Drawing.Point(6, 296);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(91, 17);
             this.checkBox3.TabIndex = 3;
@@ -431,7 +501,7 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(9, 79);
+            this.checkBox4.Location = new System.Drawing.Point(6, 204);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(88, 17);
             this.checkBox4.TabIndex = 2;
@@ -441,7 +511,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(9, 56);
+            this.checkBox2.Location = new System.Drawing.Point(6, 135);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(81, 17);
             this.checkBox2.TabIndex = 1;
@@ -451,7 +521,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 33);
+            this.checkBox1.Location = new System.Drawing.Point(6, 112);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(70, 17);
             this.checkBox1.TabIndex = 0;
@@ -482,16 +552,16 @@
             this.button3.Text = "Add New";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // wonderousArchPanel
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.numericUpDown1);
-            this.panel2.Controls.Add(this.comboBox9);
-            this.panel2.Location = new System.Drawing.Point(585, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 298);
-            this.panel2.TabIndex = 11;
+            this.wonderousArchPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.wonderousArchPanel.Controls.Add(this.button3);
+            this.wonderousArchPanel.Controls.Add(this.numericUpDown1);
+            this.wonderousArchPanel.Controls.Add(this.comboBox9);
+            this.wonderousArchPanel.Location = new System.Drawing.Point(585, 28);
+            this.wonderousArchPanel.Name = "wonderousArchPanel";
+            this.wonderousArchPanel.Size = new System.Drawing.Size(200, 298);
+            this.wonderousArchPanel.TabIndex = 11;
             // 
             // label9
             // 
@@ -502,50 +572,70 @@
             this.label9.TabIndex = 11;
             this.label9.Text = "Wonderous Architecture";
             // 
-            // groupBox6
+            // freeStandWallsPanel
             // 
-            this.groupBox6.Controls.Add(this.button4);
-            this.groupBox6.Controls.Add(this.numericUpDown2);
-            this.groupBox6.Controls.Add(this.comboBox10);
-            this.groupBox6.Location = new System.Drawing.Point(585, 356);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(200, 309);
-            this.groupBox6.TabIndex = 12;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Freestanding Walls";
+            this.freeStandWallsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.freeStandWallsPanel.Controls.Add(this.button4);
+            this.freeStandWallsPanel.Controls.Add(this.numericUpDown2);
+            this.freeStandWallsPanel.Controls.Add(this.comboBox10);
+            this.freeStandWallsPanel.Location = new System.Drawing.Point(585, 359);
+            this.freeStandWallsPanel.Name = "freeStandWallsPanel";
+            this.freeStandWallsPanel.Size = new System.Drawing.Size(200, 302);
+            this.freeStandWallsPanel.TabIndex = 12;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(43, 60);
+            this.button4.Location = new System.Drawing.Point(42, 50);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 23);
-            this.button4.TabIndex = 11;
+            this.button4.TabIndex = 14;
             this.button4.Text = "Add New Section";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(14, 23);
+            this.numericUpDown2.Location = new System.Drawing.Point(13, 13);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(35, 20);
-            this.numericUpDown2.TabIndex = 13;
+            this.numericUpDown2.TabIndex = 16;
             // 
             // comboBox10
             // 
             this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(65, 23);
+            this.comboBox10.Location = new System.Drawing.Point(64, 13);
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(121, 21);
-            this.comboBox10.TabIndex = 12;
+            this.comboBox10.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(591, 351);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(97, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Freestanding Walls";
+            // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(32, 117);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(75, 23);
+            this.calculateButton.TabIndex = 18;
+            this.calculateButton.Text = "Calculate";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 677);
-            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.calculateButton);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.freeStandWallsPanel);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.wonderousArchPanel);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.roomPanel);
@@ -559,6 +649,7 @@
             this.mobilityGroup.ResumeLayout(false);
             this.mobilityGroup.PerformLayout();
             this.buildingSizeGroup.ResumeLayout(false);
+            this.buildingSizeGroup.PerformLayout();
             this.totalCostGroup.ResumeLayout(false);
             this.totalCostGroup.PerformLayout();
             this.roomPanel.ResumeLayout(false);
@@ -568,8 +659,8 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
+            this.wonderousArchPanel.ResumeLayout(false);
+            this.freeStandWallsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -587,7 +678,6 @@
         private System.Windows.Forms.ComboBox mobilityTypeDropDown;
         private System.Windows.Forms.TextBox goldCostText;
         private System.Windows.Forms.GroupBox buildingSizeGroup;
-        private System.Windows.Forms.ComboBox buildingSizeDropDown;
         private System.Windows.Forms.GroupBox totalCostGroup;
         private System.Windows.Forms.Panel roomPanel;
         private System.Windows.Forms.GroupBox roomGroup1;
@@ -612,15 +702,25 @@
         private System.Windows.Forms.ComboBox comboBox9;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel wonderousArchPanel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.ComboBox comboBox10;
         private System.Windows.Forms.Label DTPCostLabel;
         private System.Windows.Forms.TextBox DTPCostText;
         private System.Windows.Forms.Label goldCostLabel;
+        private System.Windows.Forms.TextBox buildingSizeText;
+        private System.Windows.Forms.Panel freeStandWallsPanel;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.CheckBox checkBox13;
+        private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button calculateButton;
     }
 }
 
