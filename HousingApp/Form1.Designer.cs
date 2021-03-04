@@ -52,19 +52,19 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.forestCheck = new System.Windows.Forms.CheckBox();
+            this.aboveGroundCheck = new System.Windows.Forms.CheckBox();
+            this.wallOForceCheck = new System.Windows.Forms.CheckBox();
+            this.mountainCheck = new System.Windows.Forms.CheckBox();
+            this.wallOStoneCheck = new System.Windows.Forms.CheckBox();
+            this.plantGrowthCheck = new System.Windows.Forms.CheckBox();
+            this.articCheck = new System.Windows.Forms.CheckBox();
+            this.stoneShapeCheck = new System.Windows.Forms.CheckBox();
+            this.wallOThornsCheck = new System.Windows.Forms.CheckBox();
+            this.wallOWaterCheck = new System.Windows.Forms.CheckBox();
+            this.underGround = new System.Windows.Forms.CheckBox();
+            this.moveEarthCheck = new System.Windows.Forms.CheckBox();
+            this.fabricateCheck = new System.Windows.Forms.CheckBox();
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
@@ -76,6 +76,7 @@
             this.comboBox10 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
+            this.wallOIceCheck = new System.Windows.Forms.CheckBox();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -378,155 +379,156 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.checkBox13);
-            this.groupBox5.Controls.Add(this.checkBox11);
-            this.groupBox5.Controls.Add(this.checkBox12);
-            this.groupBox5.Controls.Add(this.checkBox9);
-            this.groupBox5.Controls.Add(this.checkBox10);
-            this.groupBox5.Controls.Add(this.checkBox8);
-            this.groupBox5.Controls.Add(this.checkBox7);
-            this.groupBox5.Controls.Add(this.checkBox5);
-            this.groupBox5.Controls.Add(this.checkBox6);
-            this.groupBox5.Controls.Add(this.checkBox3);
-            this.groupBox5.Controls.Add(this.checkBox4);
-            this.groupBox5.Controls.Add(this.checkBox2);
-            this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Location = new System.Drawing.Point(32, 336);
+            this.groupBox5.Controls.Add(this.wallOIceCheck);
+            this.groupBox5.Controls.Add(this.forestCheck);
+            this.groupBox5.Controls.Add(this.aboveGroundCheck);
+            this.groupBox5.Controls.Add(this.wallOForceCheck);
+            this.groupBox5.Controls.Add(this.mountainCheck);
+            this.groupBox5.Controls.Add(this.wallOStoneCheck);
+            this.groupBox5.Controls.Add(this.plantGrowthCheck);
+            this.groupBox5.Controls.Add(this.articCheck);
+            this.groupBox5.Controls.Add(this.stoneShapeCheck);
+            this.groupBox5.Controls.Add(this.wallOThornsCheck);
+            this.groupBox5.Controls.Add(this.wallOWaterCheck);
+            this.groupBox5.Controls.Add(this.underGround);
+            this.groupBox5.Controls.Add(this.moveEarthCheck);
+            this.groupBox5.Controls.Add(this.fabricateCheck);
+            this.groupBox5.Location = new System.Drawing.Point(32, 328);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(142, 329);
+            this.groupBox5.Size = new System.Drawing.Size(142, 340);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Wall Cost Modifiers";
             // 
-            // checkBox13
+            // forestCheck
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(6, 66);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(126, 17);
-            this.checkBox13.TabIndex = 12;
-            this.checkBox13.Text = "Envirvonment, Forest";
-            this.checkBox13.UseVisualStyleBackColor = true;
+            this.forestCheck.AutoSize = true;
+            this.forestCheck.Location = new System.Drawing.Point(6, 66);
+            this.forestCheck.Name = "forestCheck";
+            this.forestCheck.Size = new System.Drawing.Size(126, 17);
+            this.forestCheck.TabIndex = 12;
+            this.forestCheck.Text = "Envirvonment, Forest";
+            this.forestCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox11
+            // aboveGroundCheck
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(6, 20);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(95, 17);
-            this.checkBox11.TabIndex = 11;
-            this.checkBox11.Text = "Above Ground";
-            this.checkBox11.UseVisualStyleBackColor = true;
+            this.aboveGroundCheck.AutoSize = true;
+            this.aboveGroundCheck.Location = new System.Drawing.Point(6, 20);
+            this.aboveGroundCheck.Name = "aboveGroundCheck";
+            this.aboveGroundCheck.Size = new System.Drawing.Size(95, 17);
+            this.aboveGroundCheck.TabIndex = 11;
+            this.aboveGroundCheck.Text = "Above Ground";
+            this.aboveGroundCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox12
+            // wallOForceCheck
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(6, 227);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(89, 17);
-            this.checkBox12.TabIndex = 10;
-            this.checkBox12.Text = "Wall of Force";
-            this.checkBox12.UseVisualStyleBackColor = true;
+            this.wallOForceCheck.AutoSize = true;
+            this.wallOForceCheck.Location = new System.Drawing.Point(6, 227);
+            this.wallOForceCheck.Name = "wallOForceCheck";
+            this.wallOForceCheck.Size = new System.Drawing.Size(89, 17);
+            this.wallOForceCheck.TabIndex = 10;
+            this.wallOForceCheck.Text = "Wall of Force";
+            this.wallOForceCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox9
+            // mountainCheck
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(6, 89);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(135, 17);
-            this.checkBox9.TabIndex = 9;
-            this.checkBox9.Text = "Environment, Mountain";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.mountainCheck.AutoSize = true;
+            this.mountainCheck.Location = new System.Drawing.Point(6, 89);
+            this.mountainCheck.Name = "mountainCheck";
+            this.mountainCheck.Size = new System.Drawing.Size(135, 17);
+            this.mountainCheck.TabIndex = 9;
+            this.mountainCheck.Text = "Environment, Mountain";
+            this.mountainCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox10
+            // wallOStoneCheck
             // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(6, 250);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(90, 17);
-            this.checkBox10.TabIndex = 8;
-            this.checkBox10.Text = "Wall of Stone";
-            this.checkBox10.UseVisualStyleBackColor = true;
+            this.wallOStoneCheck.AutoSize = true;
+            this.wallOStoneCheck.Location = new System.Drawing.Point(6, 273);
+            this.wallOStoneCheck.Name = "wallOStoneCheck";
+            this.wallOStoneCheck.Size = new System.Drawing.Size(90, 17);
+            this.wallOStoneCheck.TabIndex = 8;
+            this.wallOStoneCheck.Text = "Wall of Stone";
+            this.wallOStoneCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox8
+            // plantGrowthCheck
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(6, 158);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(87, 17);
-            this.checkBox8.TabIndex = 7;
-            this.checkBox8.Text = "Plant Growth";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.plantGrowthCheck.AutoSize = true;
+            this.plantGrowthCheck.Location = new System.Drawing.Point(6, 158);
+            this.plantGrowthCheck.Name = "plantGrowthCheck";
+            this.plantGrowthCheck.Size = new System.Drawing.Size(87, 17);
+            this.plantGrowthCheck.TabIndex = 7;
+            this.plantGrowthCheck.Text = "Plant Growth";
+            this.plantGrowthCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox7
+            // articCheck
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(6, 43);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(118, 17);
-            this.checkBox7.TabIndex = 6;
-            this.checkBox7.Text = "Environment, Arctic";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.articCheck.AutoSize = true;
+            this.articCheck.Location = new System.Drawing.Point(6, 43);
+            this.articCheck.Name = "articCheck";
+            this.articCheck.Size = new System.Drawing.Size(118, 17);
+            this.articCheck.TabIndex = 6;
+            this.articCheck.Text = "Environment, Arctic";
+            this.articCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // stoneShapeCheck
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(6, 181);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(88, 17);
-            this.checkBox5.TabIndex = 5;
-            this.checkBox5.Text = "Stone Shape";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.stoneShapeCheck.AutoSize = true;
+            this.stoneShapeCheck.Location = new System.Drawing.Point(6, 181);
+            this.stoneShapeCheck.Name = "stoneShapeCheck";
+            this.stoneShapeCheck.Size = new System.Drawing.Size(88, 17);
+            this.stoneShapeCheck.TabIndex = 5;
+            this.stoneShapeCheck.Text = "Stone Shape";
+            this.stoneShapeCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // wallOThornsCheck
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(6, 273);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(95, 17);
-            this.checkBox6.TabIndex = 4;
-            this.checkBox6.Text = "Wall of Thorns";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.wallOThornsCheck.AutoSize = true;
+            this.wallOThornsCheck.Location = new System.Drawing.Point(6, 296);
+            this.wallOThornsCheck.Name = "wallOThornsCheck";
+            this.wallOThornsCheck.Size = new System.Drawing.Size(95, 17);
+            this.wallOThornsCheck.TabIndex = 4;
+            this.wallOThornsCheck.Text = "Wall of Thorns";
+            this.wallOThornsCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // wallOWaterCheck
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 296);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(91, 17);
-            this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "Wall of Water";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.wallOWaterCheck.AutoSize = true;
+            this.wallOWaterCheck.Location = new System.Drawing.Point(6, 319);
+            this.wallOWaterCheck.Name = "wallOWaterCheck";
+            this.wallOWaterCheck.Size = new System.Drawing.Size(91, 17);
+            this.wallOWaterCheck.TabIndex = 3;
+            this.wallOWaterCheck.Text = "Wall of Water";
+            this.wallOWaterCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // underGround
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(6, 204);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(88, 17);
-            this.checkBox4.TabIndex = 2;
-            this.checkBox4.Text = "Underground";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.underGround.AutoSize = true;
+            this.underGround.Location = new System.Drawing.Point(6, 204);
+            this.underGround.Name = "underGround";
+            this.underGround.Size = new System.Drawing.Size(88, 17);
+            this.underGround.TabIndex = 2;
+            this.underGround.Text = "Underground";
+            this.underGround.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // moveEarthCheck
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 135);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(81, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Move Earth";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.moveEarthCheck.AutoSize = true;
+            this.moveEarthCheck.Location = new System.Drawing.Point(6, 135);
+            this.moveEarthCheck.Name = "moveEarthCheck";
+            this.moveEarthCheck.Size = new System.Drawing.Size(81, 17);
+            this.moveEarthCheck.TabIndex = 1;
+            this.moveEarthCheck.Text = "Move Earth";
+            this.moveEarthCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // fabricateCheck
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 112);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(70, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Fabricate";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.fabricateCheck.AutoSize = true;
+            this.fabricateCheck.Location = new System.Drawing.Point(6, 112);
+            this.fabricateCheck.Name = "fabricateCheck";
+            this.fabricateCheck.Size = new System.Drawing.Size(70, 17);
+            this.fabricateCheck.TabIndex = 0;
+            this.fabricateCheck.Text = "Fabricate";
+            this.fabricateCheck.UseVisualStyleBackColor = true;
             // 
             // comboBox9
             // 
@@ -626,6 +628,16 @@
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
+            // wallOIceCheck
+            // 
+            this.wallOIceCheck.AutoSize = true;
+            this.wallOIceCheck.Location = new System.Drawing.Point(6, 250);
+            this.wallOIceCheck.Name = "wallOIceCheck";
+            this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
+            this.wallOIceCheck.TabIndex = 13;
+            this.wallOIceCheck.Text = "Wall of Ice";
+            this.wallOIceCheck.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,12 +703,12 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox stoneShapeCheck;
+        private System.Windows.Forms.CheckBox wallOThornsCheck;
+        private System.Windows.Forms.CheckBox wallOWaterCheck;
+        private System.Windows.Forms.CheckBox underGround;
+        private System.Windows.Forms.CheckBox moveEarthCheck;
+        private System.Windows.Forms.CheckBox fabricateCheck;
         private System.Windows.Forms.Button addNewRoomButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox9;
@@ -712,15 +724,16 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox forestCheck;
+        private System.Windows.Forms.CheckBox aboveGroundCheck;
+        private System.Windows.Forms.CheckBox wallOForceCheck;
+        private System.Windows.Forms.CheckBox mountainCheck;
+        private System.Windows.Forms.CheckBox wallOStoneCheck;
+        private System.Windows.Forms.CheckBox plantGrowthCheck;
+        private System.Windows.Forms.CheckBox articCheck;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.CheckBox wallOIceCheck;
     }
 }
 
