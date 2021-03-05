@@ -9,6 +9,35 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HousingApp {
+
+    enum RoomType: int {
+        Armory = 0,
+        Auditorium = 1,
+        Barbican = 2,
+        Barracks = 3,
+        Bath = 4,
+        Bedrooms = 5,
+        BedroomSuite = 6,
+        Chapel = 7,
+        CommonArea = 8,
+        Courtyard = 9,
+        DiningHall = 10,
+        Dock = 11,
+        Gatehouse = 12,
+        Kitchen = 13,
+        Library = 14,
+        MagicLaboratory = 15,
+        Shop = 16,
+        Stable = 17,
+        Storage = 18,
+        Study = 19,
+        Tavern = 20,
+        ThroneRoom = 21,
+        TrainingHallCombat = 22,
+        TrainingHallRogue = 23,
+        Trophy = 24,
+        Workshop = 25
+    }
     public partial class Form1 : Form {
 
         private double numORooms; //room slots filled
@@ -21,10 +50,15 @@ namespace HousingApp {
         private string[] wallUpgrades;
         private string[] addons;
 
+        private List<string[]> roomInfo;
+        private List<Room> rooms;
+
         public Form1() {
             InitializeComponent();
             numORooms = 0;
             margin = 6;
+            roomInfo = new List<string[]>();
+            rooms = new List<Room>();
             roomTypes = new string[] { "Armory", "Auditorium", 
                 "Barbican", "Barracks", "Bath", "Bedrooms", "Bedroom Suite", 
                 "Chapel", "Common Area", "Courtyard",
@@ -57,6 +91,10 @@ namespace HousingApp {
             mobilitySpeedDropDown.SelectedIndex = 0;
             mobilityTypeDropDown.SelectedIndex = 0;
             mobilitySpecialDropDown.SelectedIndex = 0;
+            roomInfo.Add(roomTypes);
+            roomInfo.Add(wallTypes);
+            roomInfo.Add(wallUpgrades);
+            roomInfo.Add(addons);
         }
 
         private void newRoomButton_Click(object sender, EventArgs e) {
@@ -65,87 +103,8 @@ namespace HousingApp {
             if (Control.ModifierKeys == Keys.Shift)
                 roomsToAdd = 10;
             for (int j = 0; j < roomsToAdd; j++) {
-                numORooms += 1;
-                RoomCountChanged(sender, e);
-                GroupBox gb = new GroupBox();
-                roomPanel.Controls.Add(gb);
-                gb.Location = new Point(12,
-                    roomPanel.Controls[roomPanel.Controls.Count - 2].Height 
-                    + roomPanel.Controls[roomPanel.Controls.Count - 2].Location.Y + 12);
-                //height is the starting point + height of the last room added + 12
-                gb.Size = new Size(roomPanel.Width - 24 - 17, 170);
-                gb.Text = $"Room {roomPanel.Controls.Count - 1}";
-                { //labels
-                    Label l1 = new Label();
-                    Label l2 = new Label();
-                    Label l3 = new Label();
-                    Label l4 = new Label();
-                    gb.Controls.Add(l1);
-                    gb.Controls.Add(l2);
-                    gb.Controls.Add(l3);
-                    gb.Controls.Add(l4);
-                    l1.Text = "Type";
-                    l2.Text = "Quality";
-                    l3.Text = "Walls";
-                    l4.Text = "Wall Upgrade";
-                    l1.Location = new Point(margin, 24);
-                    l2.Location = new Point(margin, 48);
-                    l3.Location = new Point(margin, 72);
-                    l4.Location = new Point(margin, 96);
-                    l1.AutoSize = true;
-                    l2.AutoSize = true;
-                    l3.AutoSize = true;
-                    l4.AutoSize = true;
-                }
-                { //drop downs
-                    string[] rt = new string[roomTypes.Length];
-                    string[] rq = new string[roomQualities.Length];
-                    string[] wt = new string[wallTypes.Length];
-                    string[] wu = new string[wallUpgrades.Length];
-                    //string[]
-                    for (int i = 0; i < rt.Length; i++)
-                        rt[i] = roomTypes[i];
-                    for (int i = 0; i < rq.Length; i++)
-                        rq[i] = roomQualities[i];
-                    for (int i = 0; i < wt.Length; i++)
-                        wt[i] = wallTypes[i];
-                    for (int i = 0; i < wu.Length; i++)
-                        wu[i] = wallUpgrades[i];
-
-
-                    ComboBox cb1 = new ComboBox();
-                    ComboBox cb2 = new ComboBox();
-                    ComboBox cb3 = new ComboBox();
-                    ComboBox cb4 = new ComboBox();
-                    cb1.DataSource = rt;
-                    cb2.DataSource = rq;
-                    cb3.DataSource = wt;
-                    cb4.DataSource = wu;
-                    gb.Controls.Add(cb1);
-                    gb.Controls.Add(cb2);
-                    gb.Controls.Add(cb3);
-                    gb.Controls.Add(cb4);
-                    cb1.Location = new Point(gb.Width - margin - cb1.Width, 24);
-                    cb2.Location = new Point(gb.Width - margin - cb2.Width, 48);
-                    cb3.Location = new Point(gb.Width - margin - cb3.Width, 72);
-                    cb4.Location = new Point(gb.Width - margin - cb4.Width, 96);
-                    cb1.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cb2.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cb3.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cb4.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cb1.SelectedIndexChanged += RoomCountChanged;
-                    cb2.SelectedIndexChanged += RoomCountChanged;
-                    cb3.SelectedIndexChanged += RoomCountChanged;
-                    cb4.SelectedIndexChanged += RoomCountChanged;
-                    cb3.SelectedIndex = cb3.Items.Count - 1;
-                }
-                Button b1 = new Button();
-                gb.Controls.Add(b1);
-                b1.Text = "New Add-on";
-                b1.AutoSize = true;
-                b1.Location = new Point((gb.Width - b1.Width) / 2,
-                    125);
-                b1.Click += AddRoomArchitecture;
+                Room room = new Room(roomPanel, roomInfo);
+                rooms.Add(room);
             }
         }
 
@@ -175,155 +134,12 @@ namespace HousingApp {
         private void calculateButton_Click(object sender, EventArgs e) {
             costTotal = 0;
             int roomCost = 0;
+            numORooms = 0;
             int wallCost = 0;
             ComboBox cb;
-            for (int i = 1; i < roomPanel.Controls.Count; i++) {
-                //room type
-                cb = (ComboBox)roomPanel.Controls[i].Controls[4];
-                if (cb.SelectedIndex == 4 || //bath
-                    cb.SelectedIndex == 18) //storage
-                   roomCost= 250;
-                else if (cb.SelectedIndex == 5) //bedroom
-                   roomCost= 300;
-                else if (cb.SelectedIndex == 3) //barracks
-                   roomCost= 400;
-                else if (cb.SelectedIndex == 0 || //armory
-                    cb.SelectedIndex == 6 || //bedroom suite
-                    cb.SelectedIndex == 8 || //common area
-                    cb.SelectedIndex == 9 || //courtyard
-                    cb.SelectedIndex == 17 || //stable
-                    cb.SelectedIndex == 19 || //study/office
-                    cb.SelectedIndex == 25) //workshop
-                   roomCost= 500;
-                else if (cb.SelectedIndex == 13 || //kitchen
-                    cb.SelectedIndex == 14 || //library
-                    cb.SelectedIndex == 15 || //magic laboratory
-                    cb.SelectedIndex == 16 || //sohp
-                    cb.SelectedIndex == 20 || //tavern
-                    cb.SelectedIndex == 22 || //training hall, combat
-                    cb.SelectedIndex == 23) //training hall, rogue
-                   roomCost= 750;
-                else if (cb.SelectedIndex == 1 || //auditorium
-                    cb.SelectedIndex == 2 || //barbican
-                    cb.SelectedIndex == 7 || //chapel
-                    cb.SelectedIndex == 10 || //dining hall
-                    cb.SelectedIndex == 11 || //dock
-                    cb.SelectedIndex == 12 || //gatehouse
-                    cb.SelectedIndex == 24) //trophy hall
-                   roomCost= 1000;
-                else
-                   roomCost= 2500; //throne room
-                //room quality
-                cb = (ComboBox)roomPanel.Controls[i].Controls[5];
-                if (cb.SelectedIndex == 1)
-                   roomCost*= 5;
-                else if (cb.SelectedIndex == 2)
-                   roomCost*= 15;
-
-                //wall type
-                cb = (ComboBox)roomPanel.Controls[i].Controls[6];
-                switch (cb.SelectedIndex) {
-                    case 0: //adamantine
-                       wallCost= 5000;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 1: //bone
-                       wallCost= 400;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 2: //deep coral
-                       wallCost= 600;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 3: //earth, packed
-                       wallCost= 50;
-                        /*if (underGround.Checked)
-                           wallCost-= c;
-                        else*/ if (moveEarthCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 4: //glass, magically treated
-                       wallCost= 2000;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 5: //ice
-                       wallCost= 500;
-                        if (articCheck.Checked || 
-                            wallOIceCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        else if (wallOWaterCheck.Checked ||
-                            fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 6: //iron
-                       wallCost= 600;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 7: //living wood
-                       wallCost= 1000;
-                        if (wallOThornsCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        else if (plantGrowthCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 8: //masonry
-                       wallCost= 200;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        break;
-                    case 9: //masonry, superior
-                       wallCost= 300;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 10: //masonry, reinforced
-                       wallCost= 400;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 11: //mithril
-                       wallCost= 2500;
-                        if (fabricateCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;
-                    case 12: //stone, hewn
-                       wallCost= 200;
-                        if (fabricateCheck.Checked ||
-                            stoneShapeCheck.Checked ||
-                            mountainCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        else if (wallOStoneCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        break;
-                    case 13: //stone, unworked
-                       wallCost= 100;
-                        if (fabricateCheck.Checked ||
-                            stoneShapeCheck.Checked ||
-                            mountainCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        else if (wallOStoneCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        break;
-                    case 14: //wall of force
-                       wallCost= 7500;
-                        if (wallOForceCheck.Checked)
-                           wallCost-=wallCost/ 2;
-                        break;
-                    /*case 15: //wood
-                       wallCost= 0;
-                        if (fabricateCheck.Checked ||
-                            plantGrowthCheck.Checked ||
-                            forestCheck.Checked)
-                           wallCost-=wallCost/ 4;
-                        break;*/
-                }
-
-                costTotal += roomCost + wallCost;
+            for (int i = 0; i < rooms.Count; i++) {
+                costTotal += rooms[i].Cost;
+                numORooms += rooms[i].RoomSize;
             }
             //mobility
             double speedCost = 0;

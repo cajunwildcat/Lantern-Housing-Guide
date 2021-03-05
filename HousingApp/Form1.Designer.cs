@@ -52,6 +52,7 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.wallOIceCheck = new System.Windows.Forms.CheckBox();
             this.forestCheck = new System.Windows.Forms.CheckBox();
             this.aboveGroundCheck = new System.Windows.Forms.CheckBox();
             this.wallOForceCheck = new System.Windows.Forms.CheckBox();
@@ -76,7 +77,6 @@
             this.comboBox10 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
-            this.wallOIceCheck = new System.Windows.Forms.CheckBox();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -400,6 +400,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Wall Cost Modifiers";
             // 
+            // wallOIceCheck
+            // 
+            this.wallOIceCheck.AutoSize = true;
+            this.wallOIceCheck.Location = new System.Drawing.Point(6, 250);
+            this.wallOIceCheck.Name = "wallOIceCheck";
+            this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
+            this.wallOIceCheck.TabIndex = 13;
+            this.wallOIceCheck.Text = "Wall of Ice";
+            this.wallOIceCheck.UseVisualStyleBackColor = true;
+            // 
             // forestCheck
             // 
             this.forestCheck.AutoSize = true;
@@ -628,16 +638,6 @@
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
-            // wallOIceCheck
-            // 
-            this.wallOIceCheck.AutoSize = true;
-            this.wallOIceCheck.Location = new System.Drawing.Point(6, 250);
-            this.wallOIceCheck.Name = "wallOIceCheck";
-            this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
-            this.wallOIceCheck.TabIndex = 13;
-            this.wallOIceCheck.Text = "Wall of Ice";
-            this.wallOIceCheck.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -656,6 +656,7 @@
             this.Controls.Add(this.mobilityGroup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Lantern\'s Housing Calculator";
             this.mobilityGroup.ResumeLayout(false);
