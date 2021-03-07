@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace HousingApp {
 
+    delegate void RoomSizeDelegate();
+    delegate void RoomRemovedDelegate(Object sender);
+
     enum RoomType: int {
         Armory = 0,
         Auditorium = 1,
@@ -105,10 +108,24 @@ namespace HousingApp {
             for (int j = 0; j < roomsToAdd; j++) {
                 Room room = new Room(roomPanel, roomInfo);
                 rooms.Add(room);
+                room.RoomSizeChanged += RoomCountChanged;
+                room.RoomRemoved += RoomRemoved;
+            }
+            RoomCountChanged();
+        }
+
+        private void RoomRemoved(Object sender) {
+            rooms.Remove((Room)sender);
+            for (int i = 0; i < rooms.Count; i++) {
+                roomPanel.Controls[i+1].Text = $"Room {i+1}";
+                rooms[i].MoveUp();
             }
         }
 
-        private void RoomCountChanged(object sender, EventArgs e) {
+        private void RoomCountChanged() {
+            numORooms = 0;
+            foreach (Room r in rooms)
+                numORooms += r.RoomSize;
             if (numORooms == 1)
                 buildingSizeText.Text = "Cottage";
             else if (numORooms <= 4)
@@ -133,67 +150,63 @@ namespace HousingApp {
 
         private void calculateButton_Click(object sender, EventArgs e) {
             costTotal = 0;
-            int roomCost = 0;
-            numORooms = 0;
-            int wallCost = 0;
-            ComboBox cb;
-            for (int i = 0; i < rooms.Count; i++) {
+            for (int i = 0; i < rooms.Count; i++)
                 costTotal += rooms[i].Cost;
-                numORooms += rooms[i].RoomSize;
-            }
             //mobility
             double speedCost = 0;
             //speed
             switch (mobilitySpeedDropDown.SelectedIndex) {
-                case 0: //extremely slothful
+                case 1: //extremely slothful
                     speedCost = 500 * numORooms;
                     break;
-                case 1: //very sloth
+                case 2: //very sloth
                     speedCost = 750 * numORooms;
                     break;
-                case 2: //sloth
+                case 3: //sloth
                     speedCost = 1000 * numORooms;
                     break;
-                case 3: //extremely slow
+                case 4: //extremely slow
                     speedCost = 1500 * numORooms;
                     break;
-                case 4: //very slow
+                case 5: //very slow
                     speedCost = 2000 * numORooms;
                     break;
-                case 5: //slow
+                case 6: //slow
                     speedCost = 2500 * numORooms;
                     break;
-                case 6: //fair
+                case 7: //fair
                     speedCost = 3000 * numORooms;
                     break;
-                case 7: //fleet
+                case 8: //fleet
                     speedCost = 4000 * numORooms;
                     break;
-                case 8: //fast
+                case 9: //fast
                     speedCost = 5000 * numORooms;
                     break;
-                case 9: //very fast
+                case 10: //very fast
                     speedCost = 7500 * numORooms;
                     break;
-                case 10: //extraordinary
+                case 11: //extraordinary
                     speedCost = 10000 * numORooms;
                     break;
-                case 11: //incredible
+                case 12: //incredible
                     speedCost = 12500 * numORooms;
                     break;
             }
             //special
-            if (mobilitySpecialDropDown.SelectedIndex <= 1)
+            if (mobilitySpecialDropDown.SelectedIndex == 2 ||
+                mobilitySpecialDropDown.SelectedIndex == 1)
                 speedCost += 5000 * numORooms;
-            else if (mobilitySpecialDropDown.SelectedIndex == 2)
+            else if (mobilitySpecialDropDown.SelectedIndex == 3)
                 speedCost += 10000 * numORooms;
-            else
+            else if (mobilitySpecialDropDown.SelectedIndex == 4 ||
+                mobilitySpecialDropDown.SelectedIndex == 5)
                 speedCost += 25000 * numORooms;
             //type
-            if (mobilityTypeDropDown.SelectedIndex == 2 || //burrowing
-                mobilityTypeDropDown.SelectedIndex == 3) //submersive
+            if (mobilityTypeDropDown.SelectedIndex == 3 || //burrowing
+                mobilityTypeDropDown.SelectedIndex == 4) //submersive
                 speedCost *= 2;
-            else if (mobilityTypeDropDown.SelectedIndex == 4) //flying
+            else if (mobilityTypeDropDown.SelectedIndex == 5) //flying
                 speedCost *= 2.5;
             costTotal += speedCost;
             //dtp cost

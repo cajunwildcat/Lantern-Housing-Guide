@@ -9,6 +9,9 @@ using System.Windows.Forms;
 namespace HousingApp {
     class Room {
 
+        public event RoomSizeDelegate RoomSizeChanged;
+        public event RoomRemovedDelegate RoomRemoved;
+
         private double roomSize;
         private int roomCost;
         private int qualityMod;
@@ -25,11 +28,14 @@ namespace HousingApp {
         private ComboBox wallDrop;
         private ComboBox wallUpDrop;
         private Button addonButton;
+        private Button closeButton;
         private string[] adddons;
 
         private int margin;
 
         public Room(Panel roomPanel, List<string[]> roomOptions) {
+            roomSize = 1;
+            qualityMod = 1;
             margin = 6;
             box = new GroupBox();
             roomPanel.Controls.Add(box);
@@ -81,6 +87,13 @@ namespace HousingApp {
             addonButton.AutoSize = true;
             addonButton.Location = new Point((box.Width - addonButton.Width) / 2,
                 125);
+            closeButton = new Button();
+            box.Controls.Add(closeButton);
+            closeButton.Size = new Size(10, 11);
+            closeButton.Location = new Point(box.Width - closeButton.Width, 5);
+            closeButton.Text = "x";
+            closeButton.FlatStyle = FlatStyle.System;
+            closeButton.Click += RemoveRoom;
             //comboboxes
             typeDrop = new ComboBox();
             qualityDrop = new ComboBox();
@@ -105,6 +118,13 @@ namespace HousingApp {
             qualityDrop.SelectedIndexChanged += RoomSizeUpdate;
         }
 
+        private void RemoveRoom(Object sender, EventArgs e) {
+            box.Parent.Controls.Remove(box);
+            box.Dispose();
+            if (RoomRemoved != null)
+                RoomRemoved(this);
+        }
+
         private void RoomChanged(Object sender, EventArgs e) {
             ComboBox drop = (ComboBox)sender;
             if (drop.SelectedIndex == (int)RoomType.Auditorium ||
@@ -112,7 +132,7 @@ namespace HousingApp {
                 drop.SelectedIndex == (int)RoomType.Gatehouse)
                 qualityDrop.DataSource = new string[] { "Basic" };
             else
-                qualityDrop.DataSource = new string[] { "Basic", "Fnacy", "Luxury" };
+                qualityDrop.DataSource = new string[] { "Basic", "Fancy", "Luxury" };
 
             //cost
             if (drop.SelectedIndex == (int)RoomType.Bath ||
@@ -151,7 +171,9 @@ namespace HousingApp {
         }
 
         private void QualityChanged(Object sender, EventArgs e) {
-            if (qualityDrop.SelectedIndex == 1)
+            if (qualityDrop.SelectedIndex == 0)
+                qualityMod = 1;
+            else if (qualityDrop.SelectedIndex == 1)
                 qualityMod = 5;
             else if (qualityDrop.SelectedIndex == 2)
                 qualityMod = 15;
@@ -200,6 +222,14 @@ namespace HousingApp {
                 else
                     roomSize = 2;
             }
+            if (RoomSizeChanged != null)
+                RoomSizeChanged();
+        }
+
+        public void MoveUp() {
+            box.Location = new Point(12,
+                    box.Parent.Controls[box.Parent.Controls.IndexOf(box)-1].Height
+                    + box.Parent.Controls[box.Parent.Controls.IndexOf(box) - 1].Location.Y + 12);
         }
 
         public GroupBox Box { get { return box; } }
