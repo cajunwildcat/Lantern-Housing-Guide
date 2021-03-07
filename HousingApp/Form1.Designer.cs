@@ -77,6 +77,10 @@
             this.comboBox10 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -218,7 +222,7 @@
             this.totalCostGroup.Controls.Add(this.DTPCostText);
             this.totalCostGroup.Controls.Add(this.goldCostLabel);
             this.totalCostGroup.Controls.Add(this.goldCostText);
-            this.totalCostGroup.Location = new System.Drawing.Point(32, 21);
+            this.totalCostGroup.Location = new System.Drawing.Point(32, 71);
             this.totalCostGroup.Name = "totalCostGroup";
             this.totalCostGroup.Size = new System.Drawing.Size(169, 79);
             this.totalCostGroup.TabIndex = 5;
@@ -630,7 +634,7 @@
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(32, 117);
+            this.calculateButton.Location = new System.Drawing.Point(192, 172);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(75, 23);
             this.calculateButton.TabIndex = 18;
@@ -638,11 +642,37 @@
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
+            // saveButton
+            // 
+            this.saveButton.AutoSize = true;
+            this.saveButton.Location = new System.Drawing.Point(33, 28);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(82, 23);
+            this.saveButton.TabIndex = 19;
+            this.saveButton.Text = "Save Building";
+            this.saveButton.UseVisualStyleBackColor = true;
+            // 
+            // loadButton
+            // 
+            this.loadButton.AutoSize = true;
+            this.loadButton.Location = new System.Drawing.Point(162, 28);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(81, 23);
+            this.loadButton.TabIndex = 20;
+            this.loadButton.Text = "Load Building";
+            this.loadButton.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 677);
+            this.Controls.Add(this.loadButton);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.freeStandWallsPanel);
@@ -735,6 +765,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.CheckBox wallOIceCheck;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
