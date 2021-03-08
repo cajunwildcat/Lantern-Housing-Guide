@@ -17,7 +17,6 @@ namespace HousingApp {
         private int qualityMod;
         private int wallCost;
         private int wallUpCost;
-        private int addonCost;
         private double wallMod; //decimal representation of percent
         private GroupBox box;
         private List<bool> wallMods;
@@ -50,7 +49,7 @@ namespace HousingApp {
             box.Location = new Point(12,
                     roomPanel.Controls[roomPanel.Controls.Count - 2].Height
                     + roomPanel.Controls[roomPanel.Controls.Count - 2].Location.Y + 12);
-            box.Size = new Size(roomPanel.Width - 41, 170);
+            box.Size = new Size(roomPanel.Width - 41, 154);
             box.Text = $"Room {roomPanel.Controls.Count - 1}";
             SetUpControls();
             typeDrop.DataSource = roomOptions[0].Clone();
@@ -335,6 +334,7 @@ namespace HousingApp {
             addons.Add(possibleAddons[cb.SelectedIndex]);
             cb.Location = new Point(box.Width - margin - cb.Width, 96 + 24 * addons.Count);
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb.SelectedIndexChanged += UpdateAddon;
 
             Label l = new Label();
             box.Controls.Add(l);
@@ -357,6 +357,11 @@ namespace HousingApp {
             }
         }
 
+        private void UpdateAddon(Object sender, EventArgs e) {
+            ComboBox cb = (ComboBox)sender;
+            addons[((cb.Location.Y - 96) / 24) - 1] = possibleAddons[cb.SelectedIndex];
+        }
+
         private void RemoveAddon(Object sender, EventArgs e) {
             Button b = (Button)sender;
             int addonNum = ((b.Location.Y - 96 ) / 24) - 1;
@@ -374,6 +379,91 @@ namespace HousingApp {
             for (int i = box.Parent.Controls.IndexOf(box) + 1; i < box.Parent.Controls.Count; i++) {
                 box.Parent.Controls[i].Location = new Point(box.Parent.Controls[i].Location.X, box.Parent.Controls[i].Location.Y - 24);
             }
+        }
+
+        private int AddonCost() {
+            //IMPORTANT NOTE: for two-portals to properly be accounted for, the addon after the kind of portal must be Portal, Two-Way
+            int cost = 0;
+            for (int i = 0; i < addons.Count; i++) {
+                if (addons[i] == possibleAddons[(int)Addon.LockSimple])
+                    cost += 5;
+                else if (addons[i] == possibleAddons[(int)Addon.LockAverage] ||
+                    addons[i] == possibleAddons[(int)Addon.WindowShutterGood])
+                    cost += 15;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorWoodGood])
+                    cost += 25;
+                else if (addons[i] == possibleAddons[(int)Addon.WindowIronBar] ||
+                    addons[i] == possibleAddons[(int)Addon.WindowMurderHoles])
+                    cost += 30;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorWoodStrong])
+                    cost += 50;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorStoneSimple] ||
+                    addons[i] == possibleAddons[(int)Addon.LockGood] ||
+                    addons[i] == possibleAddons[(int)Addon.DoorSecretSimple] ||
+                    addons[i] == possibleAddons[(int)Addon.GateWoodSimple] ||
+                    addons[i] == possibleAddons[(int)Addon.WindowGlass])
+                    cost += 100;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorStoneGood] ||
+                    addons[i] == possibleAddons[(int)Addon.GateWoodGood])
+                    cost += 200;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorIronSimple] ||
+                    addons[i] == possibleAddons[(int)Addon.LockAmazing] ||
+                    addons[i] == possibleAddons[(int)Addon.DoorSecretAverage] ||
+                    addons[i] == possibleAddons[(int)Addon.GateIronSimple] ||
+                    addons[i] == possibleAddons[(int)Addon.WindowStainedGlass])
+                    cost += 250;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorStoneStrong] ||
+                    addons[i] == possibleAddons[(int)Addon.GateWoodStrong])
+                    cost += 400;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorIronGood] ||
+                    addons[i] == possibleAddons[(int)Addon.LockImpossible] ||
+                    addons[i] == possibleAddons[(int)Addon.DoorSecretGood] ||
+                    addons[i] == possibleAddons[(int)Addon.GateIronGood] ||
+                    addons[i] == possibleAddons[(int)Addon.WindowStainedGlassFancy])
+                    cost += 500;
+                else if (addons[i] == possibleAddons[(int)Addon.GateIronStrong])
+                    cost += 750;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorIronStrong] ||
+                    addons[i] == possibleAddons[(int)Addon.DoorSecretAmazing] ||
+                    addons[i] == possibleAddons[(int)Addon.DrawbridgeWood])
+                    cost += 1000;
+                else if (addons[i] == possibleAddons[(int)Addon.DoorSecretImpossible] ||
+                    addons[i] == possibleAddons[(int)Addon.DrawbridgeIron])
+                    cost += 1500;
+                else if (addons[i] == possibleAddons[(int)Addon.PortalSPLU]) {
+                    if (addons[i + 1] == possibleAddons[(int)Addon.PortalTW]) {
+                        cost += 45000;
+                        i++;
+                    }
+                    else
+                        cost += 30000;
+                }
+                else if (addons[i] == possibleAddons[(int)Addon.PortalOPLU]) {
+                    if (addons[i + 1] == possibleAddons[(int)Addon.PortalTW]) {
+                        cost += 67500;
+                        i++;
+                    }
+                    else
+                        cost += 45000;
+                }
+                else if (addons[i] == possibleAddons[(int)Addon.PortalSP]) {
+                    if (addons[i + 1] == possibleAddons[(int)Addon.PortalTW]) {
+                        cost += 75000;
+                        i++;
+                    }
+                    else
+                        cost += 50000;
+                }
+                else if (addons[i] == possibleAddons[(int)Addon.PortalOP]) {
+                    if (addons[i + 1] == possibleAddons[(int)Addon.PortalTW]) {
+                        cost += 112500;
+                        i++;
+                    }
+                    else
+                        cost += 75000;
+                }
+            }
+            return cost;
         }
         
         public void UpdateWallMod() {
@@ -473,7 +563,7 @@ namespace HousingApp {
         }
 
         public GroupBox Box { get { return box; } }
-        public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost; } }
+        public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost + AddonCost(); } }
         public double RoomSize { get { return roomSize; } }
         public List<bool> WallMods { set { wallMods = value; } }
     }

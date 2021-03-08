@@ -102,10 +102,49 @@ namespace HousingApp {
         Webbed = 20,
         Windwall = 21
     }
+
+    enum Addon: int {
+        DoorWoodGood = 0,
+        DoorWoodStrong = 1,
+        DoorStoneSimple = 2,
+        DoorStoneGood = 3,
+        DoorStoneStrong = 4,
+        DoorIronSimple = 5,
+        DoorIronGood = 6,
+        DoorIronStrong = 7,
+        LockSimple = 8,
+        LockAverage = 9,
+        LockGood = 10,
+        LockAmazing = 11,
+        LockImpossible = 12,
+        DoorSecretSimple = 13,
+        DoorSecretAverage = 14,
+        DoorSecretGood = 15,
+        DoorSecretAmazing = 16,
+        DoorSecretImpossible = 17,
+        GateWoodSimple = 18,
+        GateWoodGood = 19,
+        GateWoodStrong = 20,
+        GateIronSimple = 21,
+        GateIronGood = 22,
+        GateIronStrong = 23,
+        DrawbridgeWood = 24,
+        DrawbridgeIron = 25,
+        WindowShutterGood = 26,
+        WindowIronBar = 27,
+        WindowMurderHoles = 28,
+        WindowGlass = 29,
+        WindowStainedGlass = 30,
+        WindowStainedGlassFancy = 31,
+        PortalSPLU = 32,
+        PortalOPLU = 33,
+        PortalSP = 34,
+        PortalOP = 35,
+        PortalTW = 36
+    }
     public partial class Form1 : Form {
 
         private double numORooms; //room slots
-        private int margin;
         private double costTotal;
 
         private string[] roomTypes;
@@ -121,7 +160,6 @@ namespace HousingApp {
         public Form1() {
             InitializeComponent();
             numORooms = 0;
-            margin = 6;
             roomInfo = new List<string[]>();
             rooms = new List<Room>();
             wallMods = new List<bool>();
