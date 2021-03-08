@@ -41,9 +41,70 @@ namespace HousingApp {
         Trophy = 24,
         Workshop = 25
     }
+
+    enum WallType: int {
+        Adamatine = 0,
+        Bone = 1,
+        DeepCoral = 2,
+        EarthPacked = 3,
+        GlassTreated = 4,
+        Ice = 5,
+        Iron = 6,
+        LivingWood = 7,
+        Masonry = 8,
+        MasonrySuperior = 9,
+        MasonryReinforced = 10,
+        Mithril = 11,
+        StoneHewn = 12,
+        StoneUnworked = 13,
+        WallOfForce = 14,
+        Wood = 15
+    }
+
+    enum WallModsIndex: int {
+        Above = 0,
+        Artic = 1,
+        Forest = 2,
+        Moutain = 3,
+        Fabricate = 4,
+        MoveEarth = 5,
+        PlantGrowth = 6,
+        StoneShape = 7,
+        Underground = 8,
+        WallOfForce = 9,
+        WallOfIce = 10,
+        WallOfStone = 11,
+        WallOfThorns = 12,
+        WallOfWater = 13
+    }
+
+    enum WallUpgrade: int {
+        None = 0,
+        Airtight = 1,
+        Bladed = 2,
+        ElementalProtection = 3,
+        ElementalProtectionImproved = 4,
+        EtherallySolid = 5,
+        Fiery = 6,
+        FogVeil = 7,
+        FogVeilSolid = 8,
+        FogVeilStinking = 9,
+        FogVeilKilling = 10,
+        FogVeilIncendiary = 11,
+        Frostwall = 12,
+        MagicWarding = 13,
+        PrismaticScreen = 14,
+        Slick = 15,
+        Spiderwalk = 16,
+        Tanglewood = 17,
+        Thornwood = 18,
+        Transparent = 19,
+        Webbed = 20,
+        Windwall = 21
+    }
     public partial class Form1 : Form {
 
-        private double numORooms; //room slots filled
+        private double numORooms; //room slots
         private int margin;
         private double costTotal;
 
@@ -55,6 +116,7 @@ namespace HousingApp {
 
         private List<string[]> roomInfo;
         private List<Room> rooms;
+        private List<bool> wallMods;
 
         public Form1() {
             InitializeComponent();
@@ -62,6 +124,7 @@ namespace HousingApp {
             margin = 6;
             roomInfo = new List<string[]>();
             rooms = new List<Room>();
+            wallMods = new List<bool>();
             roomTypes = new string[] { "Armory", "Auditorium", 
                 "Barbican", "Barracks", "Bath", "Bedrooms", "Bedroom Suite", 
                 "Chapel", "Common Area", "Courtyard",
@@ -79,7 +142,7 @@ namespace HousingApp {
                 "Stone, Hewn", "Stone, Unworked", "Wall of Force", "Wood" };
             wallUpgrades = new string[] { "None", "Airtight", "Bladed", "Elemental Protection", "Elemental Proticetion, Improved",
                 "Ethereally Solid", "Fiery", "Fog Veil", "Fog Veil, Solid", "Fog Veil, Stinking", "Fog Veil, Killing",
-                "Fog Veil, Killing", "Fog Veil Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick",
+                "Fog Veil Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick",
                 "Spiderwalk", "Tanglewood", "Thornwood", "Transparent", "Webbed", "Windwall" };
             addons = new string[] {/*"Door, Wood Simple",*/ "Door, Wood Good", "Door, Wood Strong",
             "Door, Stone Simple", "Door, Stone Good", "Door, Stone Strong",
@@ -98,15 +161,28 @@ namespace HousingApp {
             roomInfo.Add(wallTypes);
             roomInfo.Add(wallUpgrades);
             roomInfo.Add(addons);
+            for (int i = 0; i < wallModsBox.Controls.Count; i++) {
+                wallMods.Add(((CheckBox)wallModsBox.Controls[i]).Checked);
+            }
         }
 
-        private void newRoomButton_Click(object sender, EventArgs e) {
+        private void WallModsUpdated(Object sender, EventArgs e) {
+            for (int i = 0; i < wallMods.Count; i++) {
+                wallMods[i] = ((CheckBox)wallModsBox.Controls[i]).Checked;
+            }
+            for (int i = 0; i < rooms.Count; i++) {
+                rooms[i].WallMods = wallMods;
+                rooms[i].UpdateWallMod();
+            }
+        }
+
+        private void NewRoomButton_Click(object sender, EventArgs e) {
             //TODO if shift is being helf when clicked, add 10 rooms
             int roomsToAdd = 1;
             if (Control.ModifierKeys == Keys.Shift)
                 roomsToAdd = 10;
             for (int j = 0; j < roomsToAdd; j++) {
-                Room room = new Room(roomPanel, roomInfo);
+                Room room = new Room(roomPanel, roomInfo, wallMods);
                 rooms.Add(room);
                 room.RoomSizeChanged += RoomCountChanged;
                 room.RoomRemoved += RoomRemoved;
@@ -148,7 +224,7 @@ namespace HousingApp {
                 buildingSizeText.Text = "Large Dungeon";
         }
 
-        private void calculateButton_Click(object sender, EventArgs e) {
+        private void CalculateButton_Click(object sender, EventArgs e) {
             costTotal = 0;
             for (int i = 0; i < rooms.Count; i++)
                 costTotal += rooms[i].Cost;
@@ -225,31 +301,6 @@ namespace HousingApp {
             else
                 DTPCostText.Text = "500";
             goldCostText.Text = costTotal.ToString();
-        }
-
-        private void AddRoomArchitecture(object sender, EventArgs e) {
-            Button b1 = (Button)sender;
-            //adjust heights & locations of all room groups
-            b1.Parent.Height += 24;
-            for (int i = roomPanel.Controls.IndexOf(b1.Parent) + 1; i < roomPanel.Controls.Count; i++) {
-                roomPanel.Controls[i].Location = new Point(roomPanel.Controls[i].Location.X,
-                    roomPanel.Controls[i].Location.Y + 24);
-            }
-            b1.Location = new Point(b1.Location.X, b1.Location.Y + 24);
-            Label l1 = new Label();
-            b1.Parent.Controls.Add(l1); 
-            l1.Text = "Add-on";
-            l1.Location = new Point(margin, ((b1.Parent.Controls.Count) / 2) * 24);
-            l1.AutoSize = true;
-
-            string[] ad = new string[addons.Length];
-            for (int i = 0; i < ad.Length; i++)
-                ad[i] = addons[i];
-            ComboBox cb1 = new ComboBox();
-            b1.Parent.Controls.Add(cb1);
-            cb1.DataSource = ad;
-            cb1.Location = new Point(b1.Parent.Width - margin - cb1.Width, l1.Location.Y);
-            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

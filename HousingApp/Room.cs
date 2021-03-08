@@ -17,7 +17,9 @@ namespace HousingApp {
         private int qualityMod;
         private int wallCost;
         private int wallUpCost;
+        private double wallMod; //decimal representation of percent
         private GroupBox box;
+        private List<bool> wallMods;
 
         private Label typeLabel;
         private Label qualityLabel;
@@ -29,14 +31,19 @@ namespace HousingApp {
         private ComboBox wallUpDrop;
         private Button addonButton;
         private Button closeButton;
-        private string[] adddons;
+        private List<string> addons;
+        private string[] possibleAddons;
 
         private int margin;
 
-        public Room(Panel roomPanel, List<string[]> roomOptions) {
+        public Room(Panel roomPanel, List<string[]> roomOptions, List<bool> wallMods) {
             roomSize = 1;
             qualityMod = 1;
             margin = 6;
+            wallMod = 1;
+            wallUpCost = 0;
+            addons = new List<string>();
+            this.wallMods = wallMods;
             box = new GroupBox();
             roomPanel.Controls.Add(box);
             box.Location = new Point(12,
@@ -49,7 +56,7 @@ namespace HousingApp {
             qualityDrop.DataSource = new string[] { "Basic", "Fnacy", "Luxury" };
             wallDrop.DataSource = roomOptions[1].Clone();
             wallUpDrop.DataSource = roomOptions[2].Clone();
-
+            possibleAddons = (string[])roomOptions[3].Clone();
 
             wallDrop.SelectedIndex = wallDrop.Items.Count - 1;
         }
@@ -80,16 +87,18 @@ namespace HousingApp {
             qualityLabel.AutoSize = true;
             wallLabel.AutoSize = true;
             wallUpLabel.AutoSize = true;
-            //addon button
+            //buttons
             addonButton = new Button();
             box.Controls.Add(addonButton);
             addonButton.Text = "New Add-on";
             addonButton.AutoSize = true;
             addonButton.Location = new Point((box.Width - addonButton.Width) / 2,
                 125);
+            addonButton.Click += addAddon;
+
             closeButton = new Button();
             box.Controls.Add(closeButton);
-            closeButton.Size = new Size(10, 11);
+            closeButton.Size = new Size(10, 14);
             closeButton.Location = new Point(box.Width - closeButton.Width, 5);
             closeButton.Text = "x";
             closeButton.FlatStyle = FlatStyle.System;
@@ -116,6 +125,8 @@ namespace HousingApp {
             typeDrop.SelectedIndexChanged += RoomSizeUpdate;
             qualityDrop.SelectedIndexChanged += QualityChanged;
             qualityDrop.SelectedIndexChanged += RoomSizeUpdate;
+            wallDrop.SelectedIndexChanged += UpdateWallCost;
+            wallUpDrop.SelectedIndexChanged += UpdateWallUpgrade;
         }
 
         private void RemoveRoom(Object sender, EventArgs e) {
@@ -179,7 +190,7 @@ namespace HousingApp {
                 qualityMod = 15;
         }
 
-        public void RoomSizeUpdate(Object sender, EventArgs e) {
+        private void RoomSizeUpdate(Object sender, EventArgs e) {
             //room size
             if (qualityDrop.SelectedIndex == 0) {
                 if (typeDrop.SelectedIndex == (int)RoomType.Bath)
@@ -226,6 +237,234 @@ namespace HousingApp {
                 RoomSizeChanged();
         }
 
+        private void UpdateWallCost(Object sender, EventArgs e) {
+            switch (wallDrop.SelectedIndex) {
+                case (int)WallType.Adamatine:
+                    wallCost = 5000;
+                    break;
+                case (int)WallType.Bone:
+                    wallCost = 400;
+                    break;
+                case (int)WallType.DeepCoral:
+                    wallCost = 600;
+                    break;
+                case (int)WallType.EarthPacked:
+                    wallCost = 50;
+                    break;
+                case (int)WallType.GlassTreated:
+                    wallCost = 2000;
+                    break;
+                case (int)WallType.Ice:
+                    wallCost = 500;
+                    break;
+                case (int)WallType.Iron:
+                    wallCost = 600;
+                    break;
+                case (int)WallType.LivingWood:
+                    wallCost = 1000;
+                    break;
+                case (int)WallType.Masonry:
+                    wallCost = 200;
+                    break;
+                case (int)WallType.MasonrySuperior:
+                    wallCost = 300;
+                    break;
+                case (int)WallType.MasonryReinforced:
+                    wallCost = 400;
+                    break;
+                case (int)WallType.Mithril:
+                    wallCost = 2500;
+                    break;
+                case (int)WallType.StoneHewn:
+                    wallCost = 200;
+                    break;
+                case (int)WallType.StoneUnworked:
+                    wallCost = 100;
+                    break;
+                case (int)WallType.WallOfForce:
+                    wallCost = 7500;
+                    break;
+                case (int)WallType.Wood:
+                    wallCost = 0;
+                    break;
+            }
+            UpdateWallMod();
+        }
+
+        private void UpdateWallUpgrade(Object sender, EventArgs e) {
+            if (wallUpDrop.SelectedIndex == (int)WallUpgrade.None)
+                wallUpCost = 0;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.Slick)
+                wallUpCost = 500;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.Airtight)
+                wallUpCost = 1000;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.Spiderwalk ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Webbed)
+                wallUpCost = 1500;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.EtherallySolid ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Tanglewood)
+                wallUpCost = 2500;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.ElementalProtection ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.FogVeil ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Windwall)
+                wallUpCost = 3000;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.FogVeilSolid ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.MagicWarding ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Transparent)
+                wallUpCost = 5000;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.ElementalProtectionImproved)
+                wallUpCost = 6000;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.Fiery ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.FogVeilStinking ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.FogVeilKilling ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Frostwall ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.Thornwood)
+                wallUpCost = 7500;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.Bladed ||
+                wallUpDrop.SelectedIndex == (int)WallUpgrade.FogVeilIncendiary)
+                wallUpCost = 12500;
+            else if (wallUpDrop.SelectedIndex == (int)WallUpgrade.PrismaticScreen)
+                wallUpCost = 20000;
+        }
+
+        private void addAddon(Object sender, EventArgs e) {
+            ComboBox cb = new ComboBox();
+            box.Controls.Add(cb);
+            cb.DataSource = possibleAddons.Clone();
+            addons.Add(possibleAddons[cb.SelectedIndex]);
+            cb.Location = new Point(box.Width - margin - cb.Width, 96 + 24 * addons.Count);
+            cb.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            Label l = new Label();
+            box.Controls.Add(l);
+            l.Text = $"Add-on {addons.Count}";
+            l.Location = new Point(margin + 10, 96 + 24 * addons.Count);
+
+            Button b = new Button();
+            box.Controls.Add(b);
+            b.Size = new Size(10, 13);
+            b.Location = new Point(0, 96 + 24 * addons.Count);
+            b.Text = "x";
+            b.FlatStyle = FlatStyle.System;
+            b.Click += RemoveAddon;
+
+            Button s = (Button)sender;
+            s.Location = new Point(s.Location.X, s.Location.Y + 24);
+            box.Height += 24;
+            for (int i = box.Parent.Controls.IndexOf(box)+1; i < box.Parent.Controls.Count; i++) {
+                box.Parent.Controls[i].Location = new Point(box.Parent.Controls[i].Location.X, box.Parent.Controls[i].Location.Y + 24);
+            }
+        }
+
+        private void RemoveAddon(Object sender, EventArgs e) {
+            Button b = (Button)sender;
+            int addonNum = ((b.Location.Y - 96 ) / 24) - 1;
+            addons.RemoveAt(addonNum);
+            box.Controls[12 + 3 * addonNum].Dispose();
+            box.Controls[11 + 3 * addonNum].Dispose();
+            box.Controls[10 + 3 * addonNum].Dispose();
+            for (int i = 10 + (3 * addonNum); i < box.Controls.Count; i++) {
+                box.Controls[i].Location = new Point(box.Controls[i].Location.X, box.Controls[i].Location.Y - 24);
+                if (box.Controls[i] is Label)
+                    box.Controls[i].Text = $"Add-on {++addonNum}";
+            }
+            box.Controls[4].Location = new Point(box.Controls[4].Location.X, box.Controls[4].Location.Y - 24);
+            box.Height -= 24;
+            for (int i = box.Parent.Controls.IndexOf(box) + 1; i < box.Parent.Controls.Count; i++) {
+                box.Parent.Controls[i].Location = new Point(box.Parent.Controls[i].Location.X, box.Parent.Controls[i].Location.Y - 24);
+            }
+        }
+        
+        public void UpdateWallMod() {
+            wallMod = 1;
+            switch (wallDrop.SelectedIndex) {
+                case (int)WallType.Adamatine:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.Bone:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.DeepCoral:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.EarthPacked:
+                    if (wallMods[(int)WallModsIndex.Underground])
+                        wallMod = 0;
+                    else if (wallMods[(int)WallModsIndex.MoveEarth])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.GlassTreated:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.Ice:
+                    if (wallMods[(int)WallModsIndex.WallOfIce])
+                        wallMod = .5;
+                    else if (wallMods[(int)WallModsIndex.WallOfWater] ||
+                        wallMods[(int)WallModsIndex.Artic] ||
+                        wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.Iron:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.LivingWood:
+                    if (wallMods[(int)WallModsIndex.WallOfThorns])
+                        wallMod = .5;
+                    else if (wallMods[(int)WallModsIndex.PlantGrowth])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.Masonry:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.MasonrySuperior:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.MasonryReinforced:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.Mithril:
+                    if (wallMods[(int)WallModsIndex.Fabricate])
+                        wallMod = .75;
+                    break;
+                case (int)WallType.StoneHewn:
+                    if (wallMods[(int)WallModsIndex.Fabricate] ||
+                        wallMods[(int)WallModsIndex.StoneShape] ||
+                        wallMods[(int)WallModsIndex.Moutain])
+                        wallMod = .75;
+                    else if (wallMods[(int)WallModsIndex.WallOfStone])
+                        wallMod = .5;
+                    break;
+                case (int)WallType.StoneUnworked:
+                    if (wallMods[(int)WallModsIndex.Fabricate] ||
+                        wallMods[(int)WallModsIndex.StoneShape] ||
+                        wallMods[(int)WallModsIndex.Moutain])
+                        wallMod = .75;
+                    else if (wallMods[(int)WallModsIndex.WallOfStone])
+                        wallMod = .5;
+                    break;
+                case (int)WallType.WallOfForce:
+                    if (wallMods[(int)WallModsIndex.WallOfForce])
+                        wallMod = .5;
+                    break;
+                case (int)WallType.Wood:
+                    if (wallMods[(int)WallModsIndex.Fabricate] ||
+                        wallMods[(int)WallModsIndex.PlantGrowth] ||
+                        wallMods[(int)WallModsIndex.Forest])
+                        wallMod = .75;
+                    else if (wallMods[(int)WallModsIndex.Above])
+                        wallMod = .5;
+                    break;
+            }
+        }
+
         public void MoveUp() {
             box.Location = new Point(12,
                     box.Parent.Controls[box.Parent.Controls.IndexOf(box)-1].Height
@@ -233,8 +472,8 @@ namespace HousingApp {
         }
 
         public GroupBox Box { get { return box; } }
-        public double Cost { get { return (roomCost * qualityMod) + (wallCost * roomSize) + wallUpCost; } }
+        public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost; } }
         public double RoomSize { get { return roomSize; } }
-
+        public List<bool> WallMods { set { wallMods = value; } }
     }
 }
