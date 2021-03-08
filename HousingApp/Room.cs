@@ -17,6 +17,7 @@ namespace HousingApp {
         private int qualityMod;
         private int wallCost;
         private int wallUpCost;
+        private int addonCost;
         private double wallMod; //decimal representation of percent
         private GroupBox box;
         private List<bool> wallMods;
