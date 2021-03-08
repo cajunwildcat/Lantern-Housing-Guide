@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -159,39 +160,16 @@ namespace HousingApp {
 
         public Form1() {
             InitializeComponent();
+            roomTypes = new string[26];
+            wallTypes = new string[16];
+            wallUpgrades = new string[22];
+            addons = new string[37];
+            LoadInfo();
             numORooms = 0;
             roomInfo = new List<string[]>();
             rooms = new List<Room>();
             wallMods = new List<bool>();
-            roomTypes = new string[] { "Armory", "Auditorium", 
-                "Barbican", "Barracks", "Bath", "Bedrooms", "Bedroom Suite", 
-                "Chapel", "Common Area", "Courtyard",
-                "Dining Hall", "Dock", 
-                "Gatehouse", 
-                "Kitchen",
-                "Library",
-                "Magic Laboratory",
-                "Shop", "Stable", "Storage", "Study",
-                "Tavern", "Throne Room", "Training Hall, Combat", "Training Hall, Rogue", "Trophy Room", 
-                "Workshop"};
             roomQualities = new string[] { "Basic", "Fancy", "Luxury" };
-            wallTypes = new string[] { "Adamantine", "Bone", "Deep Coral", "Earth, Packed", "Glass, Treated", 
-                "Ice", "Iron", "Living Wood", "Masonry", "Masonry, Superior", "Masonry Reinforced", "Mithral", 
-                "Stone, Hewn", "Stone, Unworked", "Wall of Force", "Wood" };
-            wallUpgrades = new string[] { "None", "Airtight", "Bladed", "Elemental Protection", "Elemental Proticetion, Improved",
-                "Ethereally Solid", "Fiery", "Fog Veil", "Fog Veil, Solid", "Fog Veil, Stinking", "Fog Veil, Killing",
-                "Fog Veil Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick",
-                "Spiderwalk", "Tanglewood", "Thornwood", "Transparent", "Webbed", "Windwall" };
-            addons = new string[] {/*"Door, Wood Simple",*/ "Door, Wood Good", "Door, Wood Strong",
-            "Door, Stone Simple", "Door, Stone Good", "Door, Stone Strong",
-            "Door, Iron Simple", "Door, Iron Good", "Door, Iron Strong",
-            "Lock, Simple", "Lock, Average", "Lock, Good", "Lock, Amazing", "Lock, Impossible",
-            "Door, Secret Simple", "Door, Secret Average", "Door, Secret Good", "Door, Secret Amazing", "Door, Secret Impossible",
-            "Gate, Wood Simple", "Gate, Wood Good", "Gate, Wood Strong",
-            "Gate, Iron Simple", "Gate Iron Good", "Gate, Iron Strong",
-            "Drawbridge, Wood", "Drawbridge Iron",
-            /*"Window, Shutters Simple",*/ "Window, Shutters Good", "Window, Iron Bars", "Window, Murder Holes", "Window, Glass", "Window, Stained Glass", "Window, Stained Glass Fnacy",
-            "Portal, Same Plane, Limited Use", "Portal, Other Plane, Limited Use", "Portal, Same Plane", "Portal, Other Plane", "Two-Way Portal"};
             mobilitySpeedDropDown.SelectedIndex = 0;
             mobilityTypeDropDown.SelectedIndex = 0;
             mobilitySpecialDropDown.SelectedIndex = 0;
@@ -202,6 +180,24 @@ namespace HousingApp {
             for (int i = 0; i < wallModsBox.Controls.Count; i++) {
                 wallMods.Add(((CheckBox)wallModsBox.Controls[i]).Checked);
             }
+        }
+
+        private void LoadInfo() {
+            FileStream instream = File.OpenRead("housing.data");
+            BinaryReader reader = new BinaryReader(instream);
+            for (int i = 0; i < roomTypes.Length; i++) {
+                roomTypes[i] = reader.ReadString();
+            }
+            for (int i = 0; i < wallTypes.Length; i++) {
+                wallTypes[i] = reader.ReadString();
+            }
+            for (int i = 0; i < wallUpgrades.Length; i++) {
+                wallUpgrades[i] = reader.ReadString();
+            }
+            for (int i = 0; i < addons.Length; i++) {
+                addons[i] = reader.ReadString();
+            }
+
         }
 
         private void WallModsUpdated(Object sender, EventArgs e) {
