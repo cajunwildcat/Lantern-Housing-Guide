@@ -52,25 +52,23 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.wallModsBox = new System.Windows.Forms.GroupBox();
-            this.wallOIceCheck = new System.Windows.Forms.CheckBox();
-            this.forestCheck = new System.Windows.Forms.CheckBox();
             this.aboveGroundCheck = new System.Windows.Forms.CheckBox();
-            this.wallOForceCheck = new System.Windows.Forms.CheckBox();
-            this.mountainCheck = new System.Windows.Forms.CheckBox();
-            this.wallOStoneCheck = new System.Windows.Forms.CheckBox();
-            this.plantGrowthCheck = new System.Windows.Forms.CheckBox();
             this.articCheck = new System.Windows.Forms.CheckBox();
+            this.forestCheck = new System.Windows.Forms.CheckBox();
+            this.mountainCheck = new System.Windows.Forms.CheckBox();
+            this.fabricateCheck = new System.Windows.Forms.CheckBox();
+            this.moveEarthCheck = new System.Windows.Forms.CheckBox();
+            this.plantGrowthCheck = new System.Windows.Forms.CheckBox();
             this.stoneShapeCheck = new System.Windows.Forms.CheckBox();
+            this.underGround = new System.Windows.Forms.CheckBox();
+            this.wallOForceCheck = new System.Windows.Forms.CheckBox();
+            this.wallOIceCheck = new System.Windows.Forms.CheckBox();
+            this.wallOStoneCheck = new System.Windows.Forms.CheckBox();
             this.wallOThornsCheck = new System.Windows.Forms.CheckBox();
             this.wallOWaterCheck = new System.Windows.Forms.CheckBox();
-            this.underGround = new System.Windows.Forms.CheckBox();
-            this.moveEarthCheck = new System.Windows.Forms.CheckBox();
-            this.fabricateCheck = new System.Windows.Forms.CheckBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button3 = new System.Windows.Forms.Button();
-            this.wonderousArchPanel = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.addNewWondrousArch = new System.Windows.Forms.Button();
+            this.wondrousArchPanel = new System.Windows.Forms.Panel();
+            this.wondrousArchitectureLabel = new System.Windows.Forms.Label();
             this.freeStandWallsPanel = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -81,14 +79,14 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
             this.roomPanel.SuspendLayout();
             this.roomGroup1.SuspendLayout();
             this.wallModsBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.wonderousArchPanel.SuspendLayout();
+            this.wondrousArchPanel.SuspendLayout();
             this.freeStandWallsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -404,28 +402,6 @@
             this.wallModsBox.TabStop = false;
             this.wallModsBox.Text = "Wall Cost Modifiers";
             // 
-            // wallOIceCheck
-            // 
-            this.wallOIceCheck.AutoSize = true;
-            this.wallOIceCheck.Location = new System.Drawing.Point(6, 249);
-            this.wallOIceCheck.Name = "wallOIceCheck";
-            this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
-            this.wallOIceCheck.TabIndex = 13;
-            this.wallOIceCheck.Text = "Wall of Ice";
-            this.wallOIceCheck.UseVisualStyleBackColor = true;
-            this.wallOIceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // forestCheck
-            // 
-            this.forestCheck.AutoSize = true;
-            this.forestCheck.Location = new System.Drawing.Point(6, 65);
-            this.forestCheck.Name = "forestCheck";
-            this.forestCheck.Size = new System.Drawing.Size(126, 17);
-            this.forestCheck.TabIndex = 12;
-            this.forestCheck.Text = "Envirvonment, Forest";
-            this.forestCheck.UseVisualStyleBackColor = true;
-            this.forestCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
             // aboveGroundCheck
             // 
             this.aboveGroundCheck.AutoSize = true;
@@ -436,50 +412,6 @@
             this.aboveGroundCheck.Text = "Above Ground";
             this.aboveGroundCheck.UseVisualStyleBackColor = true;
             this.aboveGroundCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // wallOForceCheck
-            // 
-            this.wallOForceCheck.AutoSize = true;
-            this.wallOForceCheck.Location = new System.Drawing.Point(6, 226);
-            this.wallOForceCheck.Name = "wallOForceCheck";
-            this.wallOForceCheck.Size = new System.Drawing.Size(89, 17);
-            this.wallOForceCheck.TabIndex = 10;
-            this.wallOForceCheck.Text = "Wall of Force";
-            this.wallOForceCheck.UseVisualStyleBackColor = true;
-            this.wallOForceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // mountainCheck
-            // 
-            this.mountainCheck.AutoSize = true;
-            this.mountainCheck.Location = new System.Drawing.Point(6, 88);
-            this.mountainCheck.Name = "mountainCheck";
-            this.mountainCheck.Size = new System.Drawing.Size(135, 17);
-            this.mountainCheck.TabIndex = 9;
-            this.mountainCheck.Text = "Environment, Mountain";
-            this.mountainCheck.UseVisualStyleBackColor = true;
-            this.mountainCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // wallOStoneCheck
-            // 
-            this.wallOStoneCheck.AutoSize = true;
-            this.wallOStoneCheck.Location = new System.Drawing.Point(6, 272);
-            this.wallOStoneCheck.Name = "wallOStoneCheck";
-            this.wallOStoneCheck.Size = new System.Drawing.Size(90, 17);
-            this.wallOStoneCheck.TabIndex = 8;
-            this.wallOStoneCheck.Text = "Wall of Stone";
-            this.wallOStoneCheck.UseVisualStyleBackColor = true;
-            this.wallOStoneCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // plantGrowthCheck
-            // 
-            this.plantGrowthCheck.AutoSize = true;
-            this.plantGrowthCheck.Location = new System.Drawing.Point(6, 157);
-            this.plantGrowthCheck.Name = "plantGrowthCheck";
-            this.plantGrowthCheck.Size = new System.Drawing.Size(87, 17);
-            this.plantGrowthCheck.TabIndex = 7;
-            this.plantGrowthCheck.Text = "Plant Growth";
-            this.plantGrowthCheck.UseVisualStyleBackColor = true;
-            this.plantGrowthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
             // 
             // articCheck
             // 
@@ -492,6 +424,61 @@
             this.articCheck.UseVisualStyleBackColor = true;
             this.articCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
             // 
+            // forestCheck
+            // 
+            this.forestCheck.AutoSize = true;
+            this.forestCheck.Location = new System.Drawing.Point(6, 65);
+            this.forestCheck.Name = "forestCheck";
+            this.forestCheck.Size = new System.Drawing.Size(126, 17);
+            this.forestCheck.TabIndex = 12;
+            this.forestCheck.Text = "Envirvonment, Forest";
+            this.forestCheck.UseVisualStyleBackColor = true;
+            this.forestCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // mountainCheck
+            // 
+            this.mountainCheck.AutoSize = true;
+            this.mountainCheck.Location = new System.Drawing.Point(6, 88);
+            this.mountainCheck.Name = "mountainCheck";
+            this.mountainCheck.Size = new System.Drawing.Size(135, 17);
+            this.mountainCheck.TabIndex = 9;
+            this.mountainCheck.Text = "Environment, Mountain";
+            this.mountainCheck.UseVisualStyleBackColor = true;
+            this.mountainCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // fabricateCheck
+            // 
+            this.fabricateCheck.AutoSize = true;
+            this.fabricateCheck.Location = new System.Drawing.Point(6, 111);
+            this.fabricateCheck.Name = "fabricateCheck";
+            this.fabricateCheck.Size = new System.Drawing.Size(70, 17);
+            this.fabricateCheck.TabIndex = 0;
+            this.fabricateCheck.Text = "Fabricate";
+            this.fabricateCheck.UseVisualStyleBackColor = true;
+            this.fabricateCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // moveEarthCheck
+            // 
+            this.moveEarthCheck.AutoSize = true;
+            this.moveEarthCheck.Location = new System.Drawing.Point(6, 134);
+            this.moveEarthCheck.Name = "moveEarthCheck";
+            this.moveEarthCheck.Size = new System.Drawing.Size(81, 17);
+            this.moveEarthCheck.TabIndex = 1;
+            this.moveEarthCheck.Text = "Move Earth";
+            this.moveEarthCheck.UseVisualStyleBackColor = true;
+            this.moveEarthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // plantGrowthCheck
+            // 
+            this.plantGrowthCheck.AutoSize = true;
+            this.plantGrowthCheck.Location = new System.Drawing.Point(6, 157);
+            this.plantGrowthCheck.Name = "plantGrowthCheck";
+            this.plantGrowthCheck.Size = new System.Drawing.Size(87, 17);
+            this.plantGrowthCheck.TabIndex = 7;
+            this.plantGrowthCheck.Text = "Plant Growth";
+            this.plantGrowthCheck.UseVisualStyleBackColor = true;
+            this.plantGrowthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
             // stoneShapeCheck
             // 
             this.stoneShapeCheck.AutoSize = true;
@@ -502,6 +489,50 @@
             this.stoneShapeCheck.Text = "Stone Shape";
             this.stoneShapeCheck.UseVisualStyleBackColor = true;
             this.stoneShapeCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // underGround
+            // 
+            this.underGround.AutoSize = true;
+            this.underGround.Location = new System.Drawing.Point(6, 203);
+            this.underGround.Name = "underGround";
+            this.underGround.Size = new System.Drawing.Size(88, 17);
+            this.underGround.TabIndex = 2;
+            this.underGround.Text = "Underground";
+            this.underGround.UseVisualStyleBackColor = true;
+            this.underGround.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // wallOForceCheck
+            // 
+            this.wallOForceCheck.AutoSize = true;
+            this.wallOForceCheck.Location = new System.Drawing.Point(6, 226);
+            this.wallOForceCheck.Name = "wallOForceCheck";
+            this.wallOForceCheck.Size = new System.Drawing.Size(89, 17);
+            this.wallOForceCheck.TabIndex = 10;
+            this.wallOForceCheck.Text = "Wall of Force";
+            this.wallOForceCheck.UseVisualStyleBackColor = true;
+            this.wallOForceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // wallOIceCheck
+            // 
+            this.wallOIceCheck.AutoSize = true;
+            this.wallOIceCheck.Location = new System.Drawing.Point(6, 249);
+            this.wallOIceCheck.Name = "wallOIceCheck";
+            this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
+            this.wallOIceCheck.TabIndex = 13;
+            this.wallOIceCheck.Text = "Wall of Ice";
+            this.wallOIceCheck.UseVisualStyleBackColor = true;
+            this.wallOIceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            // 
+            // wallOStoneCheck
+            // 
+            this.wallOStoneCheck.AutoSize = true;
+            this.wallOStoneCheck.Location = new System.Drawing.Point(6, 272);
+            this.wallOStoneCheck.Name = "wallOStoneCheck";
+            this.wallOStoneCheck.Size = new System.Drawing.Size(90, 17);
+            this.wallOStoneCheck.TabIndex = 8;
+            this.wallOStoneCheck.Text = "Wall of Stone";
+            this.wallOStoneCheck.UseVisualStyleBackColor = true;
+            this.wallOStoneCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
             // 
             // wallOThornsCheck
             // 
@@ -525,86 +556,42 @@
             this.wallOWaterCheck.UseVisualStyleBackColor = true;
             this.wallOWaterCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
             // 
-            // underGround
+            // addNewWondrousArch
             // 
-            this.underGround.AutoSize = true;
-            this.underGround.Location = new System.Drawing.Point(6, 203);
-            this.underGround.Name = "underGround";
-            this.underGround.Size = new System.Drawing.Size(88, 17);
-            this.underGround.TabIndex = 2;
-            this.underGround.Text = "Underground";
-            this.underGround.UseVisualStyleBackColor = true;
-            this.underGround.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            this.addNewWondrousArch.AutoSize = true;
+            this.addNewWondrousArch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addNewWondrousArch.Location = new System.Drawing.Point(69, 12);
+            this.addNewWondrousArch.Name = "addNewWondrousArch";
+            this.addNewWondrousArch.Size = new System.Drawing.Size(61, 23);
+            this.addNewWondrousArch.TabIndex = 4;
+            this.addNewWondrousArch.Text = "Add New";
+            this.addNewWondrousArch.UseVisualStyleBackColor = true;
+            this.addNewWondrousArch.Click += new System.EventHandler(this.addNewWondrousArch_Click);
             // 
-            // moveEarthCheck
+            // wondrousArchPanel
             // 
-            this.moveEarthCheck.AutoSize = true;
-            this.moveEarthCheck.Location = new System.Drawing.Point(6, 134);
-            this.moveEarthCheck.Name = "moveEarthCheck";
-            this.moveEarthCheck.Size = new System.Drawing.Size(81, 17);
-            this.moveEarthCheck.TabIndex = 1;
-            this.moveEarthCheck.Text = "Move Earth";
-            this.moveEarthCheck.UseVisualStyleBackColor = true;
-            this.moveEarthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
+            this.wondrousArchPanel.AutoScroll = true;
+            this.wondrousArchPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.wondrousArchPanel.Controls.Add(this.addNewWondrousArch);
+            this.wondrousArchPanel.Location = new System.Drawing.Point(585, 28);
+            this.wondrousArchPanel.Name = "wondrousArchPanel";
+            this.wondrousArchPanel.Size = new System.Drawing.Size(200, 298);
+            this.wondrousArchPanel.TabIndex = 11;
             // 
-            // fabricateCheck
+            // wondrousArchitectureLabel
             // 
-            this.fabricateCheck.AutoSize = true;
-            this.fabricateCheck.Location = new System.Drawing.Point(6, 111);
-            this.fabricateCheck.Name = "fabricateCheck";
-            this.fabricateCheck.Size = new System.Drawing.Size(70, 17);
-            this.fabricateCheck.TabIndex = 0;
-            this.fabricateCheck.Text = "Fabricate";
-            this.fabricateCheck.UseVisualStyleBackColor = true;
-            this.fabricateCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(63, 23);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(121, 21);
-            this.comboBox9.TabIndex = 9;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(12, 23);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(35, 20);
-            this.numericUpDown1.TabIndex = 10;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(42, 55);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Add New";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // wonderousArchPanel
-            // 
-            this.wonderousArchPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wonderousArchPanel.Controls.Add(this.button3);
-            this.wonderousArchPanel.Controls.Add(this.numericUpDown1);
-            this.wonderousArchPanel.Controls.Add(this.comboBox9);
-            this.wonderousArchPanel.Location = new System.Drawing.Point(585, 28);
-            this.wonderousArchPanel.Name = "wonderousArchPanel";
-            this.wonderousArchPanel.Size = new System.Drawing.Size(200, 298);
-            this.wonderousArchPanel.TabIndex = 11;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(591, 21);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(122, 13);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Wonderous Architecture";
+            this.wondrousArchitectureLabel.AutoSize = true;
+            this.wondrousArchitectureLabel.Location = new System.Drawing.Point(591, 21);
+            this.wondrousArchitectureLabel.Name = "wondrousArchitectureLabel";
+            this.wondrousArchitectureLabel.Size = new System.Drawing.Size(116, 13);
+            this.wondrousArchitectureLabel.TabIndex = 11;
+            this.wondrousArchitectureLabel.Text = "Wondrous Architecture";
             // 
             // freeStandWallsPanel
             // 
+            this.freeStandWallsPanel.AutoScroll = true;
             this.freeStandWallsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.freeStandWallsPanel.Controls.Add(this.button2);
             this.freeStandWallsPanel.Controls.Add(this.button4);
             this.freeStandWallsPanel.Controls.Add(this.numericUpDown2);
             this.freeStandWallsPanel.Controls.Add(this.comboBox10);
@@ -615,16 +602,18 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(42, 50);
+            this.button4.AutoSize = true;
+            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button4.Location = new System.Drawing.Point(50, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 23);
+            this.button4.Size = new System.Drawing.Size(100, 23);
             this.button4.TabIndex = 14;
             this.button4.Text = "Add New Section";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(13, 13);
+            this.numericUpDown2.Location = new System.Drawing.Point(33, 41);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(35, 20);
             this.numericUpDown2.TabIndex = 16;
@@ -632,7 +621,7 @@
             // comboBox10
             // 
             this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(64, 13);
+            this.comboBox10.Location = new System.Drawing.Point(74, 41);
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(121, 21);
             this.comboBox10.TabIndex = 15;
@@ -680,6 +669,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button2.Location = new System.Drawing.Point(14, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(13, 21);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -690,8 +689,8 @@
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.freeStandWallsPanel);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.wonderousArchPanel);
+            this.Controls.Add(this.wondrousArchitectureLabel);
+            this.Controls.Add(this.wondrousArchPanel);
             this.Controls.Add(this.wallModsBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.roomPanel);
@@ -715,9 +714,10 @@
             this.roomGroup1.PerformLayout();
             this.wallModsBox.ResumeLayout(false);
             this.wallModsBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.wonderousArchPanel.ResumeLayout(false);
+            this.wondrousArchPanel.ResumeLayout(false);
+            this.wondrousArchPanel.PerformLayout();
             this.freeStandWallsPanel.ResumeLayout(false);
+            this.freeStandWallsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -756,11 +756,9 @@
         private System.Windows.Forms.CheckBox fabricateCheck;
         private System.Windows.Forms.Button addNewRoomButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Panel wonderousArchPanel;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button addNewWondrousArch;
+        private System.Windows.Forms.Panel wondrousArchPanel;
+        private System.Windows.Forms.Label wondrousArchitectureLabel;
         private System.Windows.Forms.Label DTPCostLabel;
         private System.Windows.Forms.TextBox DTPCostText;
         private System.Windows.Forms.Label goldCostLabel;
@@ -783,6 +781,7 @@
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
