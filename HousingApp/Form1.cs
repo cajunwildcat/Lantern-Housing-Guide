@@ -308,6 +308,7 @@ namespace HousingApp {
                 roomPanel.Controls[i+1].Text = $"Room {i+1}";
                 rooms[i].MoveUp();
             }
+            RoomCountChanged();
         }
 
         private void RoomCountChanged() {
