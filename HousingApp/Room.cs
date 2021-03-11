@@ -61,7 +61,7 @@ namespace HousingApp {
             wallDrop.SelectedIndex = wallDrop.Items.Count - 1;
         }
 
-        public Room(Panel roomPanel, int typeIndex, int qualityIndex, int wallIndex, int wallUpIndex) {
+        public Room(Panel roomPanel, List<string[]> roomOptions, List<bool> wallMods, int typeIndex, int qualityIndex, int wallIndex, int wallUpIndex, string[] addons) {
             //TODO load a room from a file
         }
 
@@ -566,5 +566,10 @@ namespace HousingApp {
         public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost + AddonCost(); } }
         public double RoomSize { get { return roomSize; } }
         public List<bool> WallMods { set { wallMods = value; } }
+        public int RoomIndex { get { return typeDrop.SelectedIndex; } }
+        public int QualityIndex { get { return qualityDrop.SelectedIndex; } }
+        public int WallIndex { get { return wallDrop.SelectedIndex; } }
+        public int WallUpIndex { get { return wallUpDrop.SelectedIndex; } }
+        public string[] Addons { get { return addons.ToArray(); } }
     }
 }

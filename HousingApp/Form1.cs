@@ -221,12 +221,14 @@ namespace HousingApp {
         private double numORooms; //room slots
         private double costTotal;
 
+        //room info
         private string[] roomTypes;
         private string[] wallTypes;
         private string[] wallUpgrades;
         private string[] addons;
         private string[] wondrousArch;
 
+        //lists
         private List<string[]> roomInfo;
         private List<Room> rooms;
         private List<bool> wallMods;
@@ -548,7 +550,7 @@ namespace HousingApp {
             Button xb = new Button();
             freeStandWallsPanel.Controls.Add(xb);
             xb.Location = new Point(6,
-                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.IndexOf(xb)-1].Location.Y + 24 + 11);
+                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.IndexOf(xb)-1].Location.Y + 30 + 11);
             xb.Size = new Size(13, 20);
             xb.Text = "X";
             xb.FlatStyle = FlatStyle.System;
@@ -586,7 +588,7 @@ namespace HousingApp {
             freeStandWallsPanel.Controls[index].Dispose();
             for (int i = index; i < freeStandWallsPanel.Controls.Count; i += 4) {
                 freeStandWallsPanel.Controls[i].Location = new Point(freeStandWallsPanel.Controls[i].Location.X,
-                    freeStandWallsPanel.Controls[i-1].Location.Y + 35);
+                    freeStandWallsPanel.Controls[i-1].Location.Y + 41);
                 freeStandWallsPanel.Controls[i+1].Location = new Point(freeStandWallsPanel.Controls[i+1].Location.X,
                     freeStandWallsPanel.Controls[i].Location.Y);
                 freeStandWallsPanel.Controls[i+2].Location = new Point(freeStandWallsPanel.Controls[i+2].Location.X,
@@ -775,6 +777,113 @@ namespace HousingApp {
                     cost += wallCount *  20000;
             }
             return cost;
+        }
+
+        private void saveButton_Click(object sender, EventArgs e) {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                string filePath = saveFileDialog.FileName;
+                FileStream outstream = File.OpenWrite(filePath);
+                BinaryWriter writer = new BinaryWriter(outstream);
+                //wall cost modifiers
+                writer.Write('w');
+                foreach (Control c in wallModsBox.Controls)
+                    writer.Write(((CheckBox)c).Checked);
+
+                //mobility
+                writer.Write('m');
+                writer.Write(mobilitySpeedDropDown.SelectedIndex);
+                writer.Write(mobilityTypeDropDown.SelectedIndex);
+                writer.Write(mobilitySpecialDropDown.SelectedIndex);
+
+                //rooms
+                foreach (Room r in rooms) {
+                    writer.Write('r');
+                    writer.Write(r.RoomIndex);
+                    writer.Write(r.QualityIndex);
+                    writer.Write(r.WallIndex);
+                    writer.Write(r.WallUpIndex);
+                    /*foreach (string s in r.Addons)
+                        writer.Write(s);*/
+                }
+
+                //wondrous architecture
+                for (int i =2; i < wondrousArchPanel.Controls.Count; i += 2) {
+                    writer.Write('a');
+                        writer.Write(((ComboBox)wondrousArchPanel.Controls[i]).SelectedIndex);
+                }
+
+                //freestanding walls
+                for (int i = 2; i < freeStandWallsPanel.Controls.Count; i+= 4) {
+                    writer.Write('f');
+                    writer.Write(((NumericUpDown)freeStandWallsPanel.Controls[i]).Value);
+                    /*writer.Write(((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex);
+                    int x = (((ComboBox)freeStandWallsPanel.Controls[i + 2]).SelectedIndex);*/
+                }
+
+                saveFileDialog.FileName = null;
+                writer.Close();
+            }
+        }
+
+        private void loadButton_Click(object sender, EventArgs e) {
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                FileStream instream = File.OpenRead(openFileDialog.FileName);
+                BinaryReader reader = new BinaryReader(instream);
+                rooms.Clear();
+                while (roomPanel.Controls.Count > 1)
+                    roomPanel.Controls.RemoveAt(1);
+
+                while (wondrousArchPanel.Controls.Count > 1)
+                    wondrousArchPanel.Controls.RemoveAt(1);
+
+                while (freeStandWallsPanel.Controls.Count > 1)
+                    freeStandWallsPanel.Controls.RemoveAt(1);
+
+                bool moreToRead = true;
+                char c;
+                while (moreToRead) {
+                    try {
+                        c = reader.ReadChar();
+                        switch (c) {
+                            case 'w':
+                                CheckBox cb;
+                                for (int i = 0; i < wallModsBox.Controls.Count; i++) {
+                                    cb = (CheckBox)wallModsBox.Controls[i];
+                                    cb.Checked = reader.ReadBoolean();
+                                }
+                                break;
+
+                            case 'm':
+                                mobilitySpeedDropDown.SelectedIndex = reader.ReadInt32();
+                                mobilityTypeDropDown.SelectedIndex = reader.ReadInt32();
+                                mobilitySpecialDropDown.SelectedIndex = reader.ReadInt32();
+                                break;
+
+                            case 'r':
+                                Room r = new Room(roomPanel, roomInfo, wallMods, reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), null);
+                                rooms.Add(r);
+                                break;
+
+                            case 'a':
+                                addNewWondrousArch_Click(sender, e);
+                                ((ComboBox)wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count-1]).SelectedIndex = reader.ReadInt32();
+                                break;
+
+                            case 'f':
+                                newWallSectionButton_Click(sender, e);
+                                ((NumericUpDown)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 3]).Value = reader.ReadInt32();
+/*                                ((ComboBox)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 2]).SelectedIndex = reader.ReadInt32();
+                                int g = reader.ReadInt32();
+*/                                break;
+                        }
+
+                    } catch (Exception) {
+                        moreToRead = false;
+                    }
+                }
+                reader.Close();
+                openFileDialog.FileName = null;
+            }
         }
     }
 }

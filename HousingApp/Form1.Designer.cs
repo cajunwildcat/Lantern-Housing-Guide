@@ -75,8 +75,8 @@
             this.calculateButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -635,6 +635,7 @@
             this.saveButton.TabIndex = 19;
             this.saveButton.Text = "Save Building";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // loadButton
             // 
@@ -645,10 +646,17 @@
             this.loadButton.TabIndex = 20;
             this.loadButton.Text = "Load Building";
             this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
-            // openFileDialog1
+            // saveFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.saveFileDialog.Filter = "Building files|*.house";
+            this.saveFileDialog.Title = "Save a house";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "*.house";
+            this.openFileDialog.Filter = "Building files|*.house";
             // 
             // Form1
             // 
@@ -747,8 +755,8 @@
         private System.Windows.Forms.CheckBox wallOIceCheck;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button loadButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
