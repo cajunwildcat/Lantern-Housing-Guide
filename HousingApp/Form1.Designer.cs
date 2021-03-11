@@ -70,16 +70,13 @@
             this.wondrousArchPanel = new System.Windows.Forms.Panel();
             this.wondrousArchitectureLabel = new System.Windows.Forms.Label();
             this.freeStandWallsPanel = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.newWallSectionButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -88,7 +85,6 @@
             this.wallModsBox.SuspendLayout();
             this.wondrousArchPanel.SuspendLayout();
             this.freeStandWallsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // mobilitySpeedDropDown
@@ -405,6 +401,8 @@
             // aboveGroundCheck
             // 
             this.aboveGroundCheck.AutoSize = true;
+            this.aboveGroundCheck.Checked = true;
+            this.aboveGroundCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.aboveGroundCheck.Location = new System.Drawing.Point(6, 19);
             this.aboveGroundCheck.Name = "aboveGroundCheck";
             this.aboveGroundCheck.Size = new System.Drawing.Size(95, 17);
@@ -560,11 +558,11 @@
             // 
             this.addNewWondrousArch.AutoSize = true;
             this.addNewWondrousArch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addNewWondrousArch.Location = new System.Drawing.Point(69, 12);
+            this.addNewWondrousArch.Location = new System.Drawing.Point(47, 12);
             this.addNewWondrousArch.Name = "addNewWondrousArch";
-            this.addNewWondrousArch.Size = new System.Drawing.Size(61, 23);
+            this.addNewWondrousArch.Size = new System.Drawing.Size(121, 23);
             this.addNewWondrousArch.TabIndex = 4;
-            this.addNewWondrousArch.Text = "Add New";
+            this.addNewWondrousArch.Text = "Add New Architecture";
             this.addNewWondrousArch.UseVisualStyleBackColor = true;
             this.addNewWondrousArch.Click += new System.EventHandler(this.addNewWondrousArch_Click);
             // 
@@ -575,7 +573,7 @@
             this.wondrousArchPanel.Controls.Add(this.addNewWondrousArch);
             this.wondrousArchPanel.Location = new System.Drawing.Point(585, 28);
             this.wondrousArchPanel.Name = "wondrousArchPanel";
-            this.wondrousArchPanel.Size = new System.Drawing.Size(200, 298);
+            this.wondrousArchPanel.Size = new System.Drawing.Size(217, 300);
             this.wondrousArchPanel.TabIndex = 11;
             // 
             // wondrousArchitectureLabel
@@ -591,40 +589,23 @@
             // 
             this.freeStandWallsPanel.AutoScroll = true;
             this.freeStandWallsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.freeStandWallsPanel.Controls.Add(this.button2);
-            this.freeStandWallsPanel.Controls.Add(this.button4);
-            this.freeStandWallsPanel.Controls.Add(this.numericUpDown2);
-            this.freeStandWallsPanel.Controls.Add(this.comboBox10);
-            this.freeStandWallsPanel.Location = new System.Drawing.Point(585, 359);
+            this.freeStandWallsPanel.Controls.Add(this.newWallSectionButton);
+            this.freeStandWallsPanel.Location = new System.Drawing.Point(585, 361);
             this.freeStandWallsPanel.Name = "freeStandWallsPanel";
-            this.freeStandWallsPanel.Size = new System.Drawing.Size(200, 302);
+            this.freeStandWallsPanel.Size = new System.Drawing.Size(217, 300);
             this.freeStandWallsPanel.TabIndex = 12;
             // 
-            // button4
+            // newWallSectionButton
             // 
-            this.button4.AutoSize = true;
-            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button4.Location = new System.Drawing.Point(50, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Add New Section";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(33, 41);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(35, 20);
-            this.numericUpDown2.TabIndex = 16;
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(74, 41);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(121, 21);
-            this.comboBox10.TabIndex = 15;
+            this.newWallSectionButton.AutoSize = true;
+            this.newWallSectionButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.newWallSectionButton.Location = new System.Drawing.Point(58, 12);
+            this.newWallSectionButton.Name = "newWallSectionButton";
+            this.newWallSectionButton.Size = new System.Drawing.Size(100, 23);
+            this.newWallSectionButton.TabIndex = 14;
+            this.newWallSectionButton.Text = "Add New Section";
+            this.newWallSectionButton.UseVisualStyleBackColor = true;
+            this.newWallSectionButton.Click += new System.EventHandler(this.newWallSectionButton_Click);
             // 
             // label10
             // 
@@ -669,16 +650,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Location = new System.Drawing.Point(14, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(13, 21);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "X";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,7 +689,6 @@
             this.wondrousArchPanel.PerformLayout();
             this.freeStandWallsPanel.ResumeLayout(false);
             this.freeStandWallsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -764,9 +734,7 @@
         private System.Windows.Forms.Label goldCostLabel;
         private System.Windows.Forms.TextBox buildingSizeText;
         private System.Windows.Forms.Panel freeStandWallsPanel;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.Button newWallSectionButton;
         private System.Windows.Forms.CheckBox forestCheck;
         private System.Windows.Forms.CheckBox aboveGroundCheck;
         private System.Windows.Forms.CheckBox wallOForceCheck;
@@ -781,7 +749,6 @@
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
     }
 }
 

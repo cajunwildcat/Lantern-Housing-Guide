@@ -94,7 +94,7 @@ namespace HousingApp {
             addonButton.AutoSize = true;
             addonButton.Location = new Point((box.Width - addonButton.Width) / 2,
                 125);
-            addonButton.Click += addAddon;
+            addonButton.Click += AddAddon;
 
             closeButton = new Button();
             box.Controls.Add(closeButton);
@@ -285,7 +285,7 @@ namespace HousingApp {
                     wallCost = 7500;
                     break;
                 case (int)WallType.Wood:
-                    wallCost = 0;
+                    wallCost = 100;
                     break;
             }
             UpdateWallMod();
@@ -327,7 +327,7 @@ namespace HousingApp {
                 wallUpCost = 20000;
         }
 
-        private void addAddon(Object sender, EventArgs e) {
+        private void AddAddon(Object sender, EventArgs e) {
             ComboBox cb = new ComboBox();
             box.Controls.Add(cb);
             cb.DataSource = possibleAddons.Clone();
@@ -551,7 +551,7 @@ namespace HousingApp {
                         wallMods[(int)WallModsIndex.Forest])
                         wallMod = .75;
                     else if (wallMods[(int)WallModsIndex.Above])
-                        wallMod = .5;
+                        wallMod = 0;
                     break;
             }
         }

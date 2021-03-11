@@ -398,6 +398,7 @@ namespace HousingApp {
             costTotal += speedCost;
 
             costTotal += CalculateWondrous();
+            costTotal += CalculateFreeStandWalls();
 
             //dtp cost
             if (costTotal < 5000)
@@ -418,36 +419,43 @@ namespace HousingApp {
         }
 
         private void addNewWondrousArch_Click(object sender, EventArgs e) {
-            Button b = (Button)sender;
-
-            ComboBox cb = new ComboBox();
             Button xb = new Button();
-            wondrousArchPanel.Controls.Add(cb);
             wondrousArchPanel.Controls.Add(xb);
-            cb.Location = new Point((wondrousArchPanel.Width - cb.Width+16) / 2, ((wondrousArchPanel.Controls.Count-2) * 12) + 25);
-            cb.DataSource = wondrousArch.Clone();
-            xb.Location = new Point(cb.Location.X-16, wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.Y);
+            xb.Location = new Point(6,
+                wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.Y + 24);
             xb.Size = new Size(13, 21);
             xb.Text = "X";
             xb.FlatStyle = FlatStyle.System;
             xb.Click += RemoveWondrousArch;
+
+            ComboBox cb = new ComboBox();
+            wondrousArchPanel.Controls.Add(cb);
+            cb.Width = 172;
+            cb.Location = new Point(wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.X + 16,
+               wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.Y);
+            cb.DataSource = wondrousArch.Clone();
+            cb.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            
         }
 
         private void RemoveWondrousArch(Object sender, EventArgs e) {
             Button b = (Button)sender;
-            int archNum = (b.Location.Y - 35) / 24;
-            wondrousArchPanel.Controls.RemoveAt(archNum*2+1);
-            wondrousArchPanel.Controls.RemoveAt(archNum*2+1);   
-            for (int i = archNum*2 + 1; i < wondrousArchPanel.Controls.Count; i++) {
+            int index = wondrousArchPanel.Controls.IndexOf(b);
+            wondrousArchPanel.Controls[index].Dispose();
+            wondrousArchPanel.Controls[index].Dispose();
+            for (int i = index; i < wondrousArchPanel.Controls.Count; i += 2) {
                 wondrousArchPanel.Controls[i].Location = new Point(wondrousArchPanel.Controls[i].Location.X,
-                    wondrousArchPanel.Controls[i].Location.Y - 24);
+                    wondrousArchPanel.Controls[i - 1].Location.Y + 24);
+                wondrousArchPanel.Controls[i + 1].Location = new Point(wondrousArchPanel.Controls[i + 1].Location.X,
+                    wondrousArchPanel.Controls[i].Location.Y);
             }
         }
 
-        private int CalculateWondrous() {
+        private double CalculateWondrous() {
             ComboBox cb;
-            int cost = 0;
-            for (int i = 1; i < wondrousArchPanel.Controls.Count; i+=2) {
+            double cost = 0;
+            for (int i = 2; i < wondrousArchPanel.Controls.Count; i+=2) {
                 cb = (ComboBox)wondrousArchPanel.Controls[i];
                 if (cb.SelectedIndex == (int)WondrousArch.ChamberofGuidance)
                     cost += 500;
@@ -532,6 +540,239 @@ namespace HousingApp {
                     cb.SelectedIndex == (int)WondrousArch.HurricanesEye ||
                     cb.SelectedIndex == (int)WondrousArch.SigilsofAntimagic)
                     cost += 50000;
+            }
+            return cost;
+        }
+
+        private void newWallSectionButton_Click(object sender, EventArgs e) {
+            Button xb = new Button();
+            freeStandWallsPanel.Controls.Add(xb);
+            xb.Location = new Point(6,
+                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.IndexOf(xb)-1].Location.Y + 24 + 11);
+            xb.Size = new Size(13, 20);
+            xb.Text = "X";
+            xb.FlatStyle = FlatStyle.System;
+            xb.Click += RemoveWallSection;
+
+            NumericUpDown nud = new NumericUpDown();
+            freeStandWallsPanel.Controls.Add(nud);
+            nud.Location = new Point(28,
+                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 2].Location.Y);
+            nud.Size = new Size(35, 20);
+            nud.UpDownAlign = LeftRightAlignment.Left;
+            nud.TextAlign = HorizontalAlignment.Center;
+
+            ComboBox cb = new ComboBox();
+            freeStandWallsPanel.Controls.Add(cb);
+            cb.Location = new Point(73,
+                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 3].Location.Y - 11);
+            cb.DataSource = wallTypes.Clone();
+            cb.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            ComboBox wb = new ComboBox();
+            freeStandWallsPanel.Controls.Add(wb);
+            wb.Location = new Point(73,
+                freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 2].Location.Y + 21);
+            wb.DataSource = wallUpgrades.Clone();
+            wb.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void RemoveWallSection(Object sender, EventArgs e) {
+            Button b = (Button)sender;
+            int index = freeStandWallsPanel.Controls.IndexOf(b);
+            freeStandWallsPanel.Controls[index].Dispose();
+            freeStandWallsPanel.Controls[index].Dispose();
+            freeStandWallsPanel.Controls[index].Dispose();
+            freeStandWallsPanel.Controls[index].Dispose();
+            for (int i = index; i < freeStandWallsPanel.Controls.Count; i += 4) {
+                freeStandWallsPanel.Controls[i].Location = new Point(freeStandWallsPanel.Controls[i].Location.X,
+                    freeStandWallsPanel.Controls[i-1].Location.Y + 35);
+                freeStandWallsPanel.Controls[i+1].Location = new Point(freeStandWallsPanel.Controls[i+1].Location.X,
+                    freeStandWallsPanel.Controls[i].Location.Y);
+                freeStandWallsPanel.Controls[i+2].Location = new Point(freeStandWallsPanel.Controls[i+2].Location.X,
+                    freeStandWallsPanel.Controls[i].Location.Y-11);
+                freeStandWallsPanel.Controls[i + 3].Location = new Point(freeStandWallsPanel.Controls[i + 3].Location.X,
+                    freeStandWallsPanel.Controls[i+2].Location.Y+21);
+            }
+        }
+
+        private double CalculateFreeStandWalls() {
+            double cost = 0;
+            double costReduction = .25;
+            double wallCount;
+            for (int i = 3; i < freeStandWallsPanel.Controls.Count; i += 4) {
+                wallCount = (double)((NumericUpDown)freeStandWallsPanel.Controls[i - 1]).Value;
+                switch (((ComboBox)freeStandWallsPanel.Controls[i]).SelectedIndex) {
+                    case (int)WallType.Adamatine:
+                        cost = 5000;
+                        break;
+                    case (int)WallType.Bone:
+                        cost = 400;
+                        break;
+                    case (int)WallType.DeepCoral:
+                        cost = 600;
+                        break;
+                    case (int)WallType.EarthPacked:
+                        cost = 50;
+                        break;
+                    case (int)WallType.GlassTreated:
+                        cost = 2000;
+                        break;
+                    case (int)WallType.Ice:
+                        cost = 500;
+                        break;
+                    case (int)WallType.Iron:
+                        cost = 600;
+                        break;
+                    case (int)WallType.LivingWood:
+                        cost = 1000;
+                        break;
+                    case (int)WallType.Masonry:
+                        cost = 200;
+                        break;
+                    case (int)WallType.MasonrySuperior:
+                        cost = 300;
+                        break;
+                    case (int)WallType.MasonryReinforced:
+                        cost = 400;
+                        break;
+                    case (int)WallType.Mithril:
+                        cost = 2500;
+                        break;
+                    case (int)WallType.StoneHewn:
+                        cost = 200;
+                        break;
+                    case (int)WallType.StoneUnworked:
+                        cost = 100;
+                        break;
+                    case (int)WallType.WallOfForce:
+                        cost = 7500;
+                        break;
+                    case (int)WallType.Wood:
+                        cost = 100;
+                        break;
+                }
+                double wallMod = 1;
+                switch (((ComboBox)freeStandWallsPanel.Controls[i]).SelectedIndex) {
+                    case (int)WallType.Adamatine:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.Bone:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.DeepCoral:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.EarthPacked:
+                        if (wallMods[(int)WallModsIndex.Underground])
+                            wallMod = 0;
+                        else if (wallMods[(int)WallModsIndex.MoveEarth])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.GlassTreated:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.Ice:
+                        if (wallMods[(int)WallModsIndex.WallOfIce])
+                            wallMod = .5;
+                        else if (wallMods[(int)WallModsIndex.WallOfWater] ||
+                            wallMods[(int)WallModsIndex.Artic] ||
+                            wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.Iron:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.LivingWood:
+                        if (wallMods[(int)WallModsIndex.WallOfThorns])
+                            wallMod = .5;
+                        else if (wallMods[(int)WallModsIndex.PlantGrowth])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.Masonry:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.MasonrySuperior:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.MasonryReinforced:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.Mithril:
+                        if (wallMods[(int)WallModsIndex.Fabricate])
+                            wallMod = .75;
+                        break;
+                    case (int)WallType.StoneHewn:
+                        if (wallMods[(int)WallModsIndex.Fabricate] ||
+                            wallMods[(int)WallModsIndex.StoneShape] ||
+                            wallMods[(int)WallModsIndex.Moutain])
+                            wallMod = .75;
+                        else if (wallMods[(int)WallModsIndex.WallOfStone])
+                            wallMod = .5;
+                        break;
+                    case (int)WallType.StoneUnworked:
+                        if (wallMods[(int)WallModsIndex.Fabricate] ||
+                            wallMods[(int)WallModsIndex.StoneShape] ||
+                            wallMods[(int)WallModsIndex.Moutain])
+                            wallMod = .75;
+                        else if (wallMods[(int)WallModsIndex.WallOfStone])
+                            wallMod = .5;
+                        break;
+                    case (int)WallType.WallOfForce:
+                        if (wallMods[(int)WallModsIndex.WallOfForce])
+                            wallMod = .5;
+                        break;
+                    case (int)WallType.Wood:
+                        if (wallMods[(int)WallModsIndex.Fabricate] ||
+                            wallMods[(int)WallModsIndex.PlantGrowth] ||
+                            wallMods[(int)WallModsIndex.Forest])
+                            wallMod = .75;
+                        else if (wallMods[(int)WallModsIndex.Above])
+                            wallMod = .5;
+                        break;
+                }
+                cost *= wallMod * costReduction * wallCount;
+                if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.None)
+                    cost += wallCount *  0;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Slick)
+                    cost += wallCount *  500;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Airtight)
+                    cost += wallCount *  1000;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Spiderwalk ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Webbed)
+                    cost += wallCount *  1500;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.EtherallySolid ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Tanglewood)
+                    cost += wallCount *  2500;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.ElementalProtection ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.FogVeil ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Windwall)
+                    cost += wallCount *  3000;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.FogVeilSolid ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.MagicWarding ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Transparent)
+                    cost += wallCount *  5000;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.ElementalProtectionImproved)
+                    cost += wallCount *  6000;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Fiery ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.FogVeilStinking ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.FogVeilKilling ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Frostwall ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Thornwood)
+                    cost += wallCount *  7500;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.Bladed ||
+                    ((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.FogVeilIncendiary)
+                    cost += wallCount *  12500;
+                else if (((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex == (int)WallUpgrade.PrismaticScreen)
+                    cost += wallCount *  20000;
             }
             return cost;
         }
