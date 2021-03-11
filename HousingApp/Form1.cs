@@ -382,6 +382,15 @@ namespace HousingApp {
                     speedCost = 12500 * numORooms;
                     break;
             }
+            //type
+            if (mobilityTypeDropDown.SelectedIndex == 0)
+                speedCost = 0;
+            else if (mobilityTypeDropDown.SelectedIndex == 3 || //burrowing
+                mobilityTypeDropDown.SelectedIndex == 4) //submersive
+                speedCost *= 2;
+            else if (mobilityTypeDropDown.SelectedIndex == 5) //flying
+                speedCost *= 2.5;
+            costTotal += speedCost;
             //special
             if (mobilitySpecialDropDown.SelectedIndex == 2 ||
                 mobilitySpecialDropDown.SelectedIndex == 1)
@@ -391,13 +400,6 @@ namespace HousingApp {
             else if (mobilitySpecialDropDown.SelectedIndex == 4 ||
                 mobilitySpecialDropDown.SelectedIndex == 5)
                 speedCost += 25000 * numORooms;
-            //type
-            if (mobilityTypeDropDown.SelectedIndex == 3 || //burrowing
-                mobilityTypeDropDown.SelectedIndex == 4) //submersive
-                speedCost *= 2;
-            else if (mobilityTypeDropDown.SelectedIndex == 5) //flying
-                speedCost *= 2.5;
-            costTotal += speedCost;
 
             costTotal += CalculateWondrous();
             costTotal += CalculateFreeStandWalls();
@@ -424,7 +426,7 @@ namespace HousingApp {
             Button xb = new Button();
             wondrousArchPanel.Controls.Add(xb);
             xb.Location = new Point(6,
-                wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.Y + 24);
+                wondrousArchPanel.Controls[wondrousArchPanel.Controls.Count - 2].Location.Y + 30);
             xb.Size = new Size(13, 21);
             xb.Text = "X";
             xb.FlatStyle = FlatStyle.System;
@@ -802,22 +804,23 @@ namespace HousingApp {
                     writer.Write(r.QualityIndex);
                     writer.Write(r.WallIndex);
                     writer.Write(r.WallUpIndex);
-                    /*foreach (string s in r.Addons)
-                        writer.Write(s);*/
+                    writer.Write(r.Addons.Length);
+                    foreach (Addon a in r.Addons)
+                        writer.Write((int)a);
                 }
 
                 //wondrous architecture
-                for (int i =2; i < wondrousArchPanel.Controls.Count; i += 2) {
+                for (int i = 2; i < wondrousArchPanel.Controls.Count; i += 2) {
                     writer.Write('a');
-                        writer.Write(((ComboBox)wondrousArchPanel.Controls[i]).SelectedIndex);
+                    writer.Write(((ComboBox)wondrousArchPanel.Controls[i]).SelectedIndex);
                 }
 
                 //freestanding walls
                 for (int i = 2; i < freeStandWallsPanel.Controls.Count; i+= 4) {
                     writer.Write('f');
-                    writer.Write(((NumericUpDown)freeStandWallsPanel.Controls[i]).Value);
-                    /*writer.Write(((ComboBox)freeStandWallsPanel.Controls[i + 1]).SelectedIndex);
-                    int x = (((ComboBox)freeStandWallsPanel.Controls[i + 2]).SelectedIndex);*/
+                    writer.Write(((ComboBox)freeStandWallsPanel.Controls[i+1]).SelectedIndex);
+                    writer.Write(((ComboBox)freeStandWallsPanel.Controls[i+2]).SelectedIndex);
+                    writer.Write((int)(((NumericUpDown)freeStandWallsPanel.Controls[i]).Value));
                 }
 
                 saveFileDialog.FileName = null;
@@ -860,7 +863,15 @@ namespace HousingApp {
                                 break;
 
                             case 'r':
-                                Room r = new Room(roomPanel, roomInfo, wallMods, reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), null);
+                                int typeIn = reader.ReadInt32();
+                                int quaIn = reader.ReadInt32();
+                                int wallIn = reader.ReadInt32();
+                                int wallUpIn = reader.ReadInt32();
+                                int addinsLength = reader.ReadInt32();
+                                int[] addins = new int[addinsLength];
+                                for (int i = 0; i < addinsLength; i++)
+                                    addins[i] = reader.ReadInt32();
+                                Room r = new Room(roomPanel, roomInfo, wallMods, typeIn, quaIn, wallIn, wallUpIn, addins);
                                 rooms.Add(r);
                                 break;
 
@@ -871,12 +882,11 @@ namespace HousingApp {
 
                             case 'f':
                                 newWallSectionButton_Click(sender, e);
-                                ((NumericUpDown)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 3]).Value = reader.ReadInt32();
-/*                                ((ComboBox)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 2]).SelectedIndex = reader.ReadInt32();
-                                int g = reader.ReadInt32();
-*/                                break;
+                                ((ComboBox)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 2]).SelectedIndex = reader.ReadInt32();
+                                ((ComboBox)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 1]).SelectedIndex = reader.ReadInt32();
+                                ((NumericUpDown)freeStandWallsPanel.Controls[freeStandWallsPanel.Controls.Count - 3]).Value = reader.Read();
+                                break;
                         }
-
                     } catch (Exception) {
                         moreToRead = false;
                     }

@@ -650,6 +650,7 @@
             // 
             // saveFileDialog
             // 
+            this.saveFileDialog.DefaultExt = "*.house";
             this.saveFileDialog.Filter = "Building files|*.house";
             this.saveFileDialog.Title = "Save a house";
             // 
