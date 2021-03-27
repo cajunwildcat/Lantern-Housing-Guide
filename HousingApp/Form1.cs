@@ -13,6 +13,7 @@ namespace HousingApp {
 
     delegate void RoomSizeDelegate();
     delegate void RoomRemovedDelegate(Object sender);
+    delegate void CostDelegate();
 
     enum RoomType: int {
         Armory = 0,
@@ -272,11 +273,14 @@ namespace HousingApp {
         }
 
         private void NewRoomButton_Click(object sender, EventArgs e) {
-            //TODO if shift is being helf when clicked, add 10 rooms
             int roomsToAdd = 1;
             if (Control.ModifierKeys == Keys.Shift)
                 roomsToAdd = 10;
             for (int j = 0; j < roomsToAdd; j++) {
+                if (rooms.Count > 190) {
+                    MessageBox.Show("Maximum amount of rooms added!", "Error");
+                    break;
+                }
                 Room room = new Room(roomPanel, roomInfo, wallMods);
                 rooms.Add(room);
                 room.RoomSizeChanged += RoomCountChanged;

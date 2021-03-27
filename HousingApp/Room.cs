@@ -11,6 +11,7 @@ namespace HousingApp {
 
         public event RoomSizeDelegate RoomSizeChanged;
         public event RoomRemovedDelegate RoomRemoved;
+        public event CostDelegate CostUpdated;
 
         private int margin;
         private int roomCost;
@@ -153,9 +154,9 @@ namespace HousingApp {
                 125);
             addonButton.Click += AddAddon;
 
-            //
+            //setup events for comboboxes
             typeDrop.SelectedIndexChanged += RoomTypeChanged;
-            typeDrop.SelectedIndexChanged += UpdateRoomSize; 
+            typeDrop.SelectedIndexChanged += UpdateRoomSize;
             qualityDrop.SelectedIndexChanged += QualityChanged;
             qualityDrop.SelectedIndexChanged += UpdateRoomSize;
             wallDrop.SelectedIndexChanged += UpdateWallCost;
