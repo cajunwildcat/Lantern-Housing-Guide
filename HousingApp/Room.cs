@@ -12,16 +12,20 @@ namespace HousingApp {
         public event RoomSizeDelegate RoomSizeChanged;
         public event RoomRemovedDelegate RoomRemoved;
 
-        private double roomSize;
+        private int margin;
         private int roomCost;
         private int qualityMod;
         private int wallCost;
         private int wallUpCost;
         private double wallMod; //decimal representation of percent
-        private GroupBox box;
+        private double roomSize;
         private List<bool> wallMods;
         private List<string[]> roomOptions;
+        private List<Addon> addons;
+        private string[] possibleAddons;
 
+        private Panel roomPanel;
+        private GroupBox box;
         private Label typeLabel;
         private Label qualityLabel;
         private Label wallLabel;
@@ -32,11 +36,6 @@ namespace HousingApp {
         private ComboBox wallUpDrop;
         private Button addonButton;
         private Button closeButton;
-        private List<Addon> addons;
-        private string[] possibleAddons;
-
-        private int margin;
-        private Panel roomPanel;
 
         public Room(Panel roomPanel, List<string[]> roomOptions, List<bool> wallMods) {
             this.roomPanel = roomPanel;
@@ -605,7 +604,6 @@ namespace HousingApp {
                     + box.Parent.Controls[box.Parent.Controls.IndexOf(box) - 1].Location.Y + 12);
         }
 
-        public GroupBox Box { get { return box; } }
         public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost + AddonCost(); } }
         public double RoomSize { get { return roomSize; } }
         public List<bool> WallMods { set { wallMods = value; } }
