@@ -245,11 +245,12 @@ namespace HousingApp {
             //initialize lists
             numORooms = 0;
 
-            roomInfo = new List<string[]>();
-            roomInfo.Add(roomTypes);
-            roomInfo.Add(wallTypes);
-            roomInfo.Add(wallUpgrades);
-            roomInfo.Add(addons);
+            roomInfo = new List<string[]> {
+                roomTypes,
+                wallTypes,
+                wallUpgrades,
+                addons
+            };
             rooms = new List<Room>();
 
             wallMods = new List<bool>();
