@@ -72,11 +72,15 @@
             this.freeStandWallsPanel = new System.Windows.Forms.Panel();
             this.newWallSectionButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.calculateButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.loadButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.toolBar = new System.Windows.Forms.ToolStrip();
+            this.fileDropDown = new System.Windows.Forms.ToolStripDropDownButton();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -85,6 +89,7 @@
             this.wallModsBox.SuspendLayout();
             this.wondrousArchPanel.SuspendLayout();
             this.freeStandWallsPanel.SuspendLayout();
+            this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // mobilitySpeedDropDown
@@ -105,10 +110,11 @@
             "Very Fast",
             "Extraordinary",
             "Incredible"});
-            this.mobilitySpeedDropDown.Location = new System.Drawing.Point(72, 19);
+            this.mobilitySpeedDropDown.Location = new System.Drawing.Point(48, 19);
             this.mobilitySpeedDropDown.Name = "mobilitySpeedDropDown";
             this.mobilitySpeedDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilitySpeedDropDown.TabIndex = 0;
+            this.mobilitySpeedDropDown.TabStop = false;
             // 
             // mobilityGroup
             // 
@@ -118,9 +124,9 @@
             this.mobilityGroup.Controls.Add(this.mobilityTypeDropDown);
             this.mobilityGroup.Controls.Add(this.label1);
             this.mobilityGroup.Controls.Add(this.mobilitySpeedDropDown);
-            this.mobilityGroup.Location = new System.Drawing.Point(32, 213);
+            this.mobilityGroup.Location = new System.Drawing.Point(32, 200);
             this.mobilityGroup.Name = "mobilityGroup";
-            this.mobilityGroup.Size = new System.Drawing.Size(211, 109);
+            this.mobilityGroup.Size = new System.Drawing.Size(178, 109);
             this.mobilityGroup.TabIndex = 1;
             this.mobilityGroup.TabStop = false;
             this.mobilityGroup.Text = "Mobility";
@@ -145,10 +151,11 @@
             "Plane Linked",
             "Plane Shifting",
             "Teleporting"});
-            this.mobilitySpecialDropDown.Location = new System.Drawing.Point(72, 73);
+            this.mobilitySpecialDropDown.Location = new System.Drawing.Point(48, 73);
             this.mobilitySpecialDropDown.Name = "mobilitySpecialDropDown";
             this.mobilitySpecialDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilitySpecialDropDown.TabIndex = 4;
+            this.mobilitySpecialDropDown.TabStop = false;
             // 
             // label2
             // 
@@ -170,10 +177,11 @@
             "Burrowing",
             "Submersible",
             "Flying"});
-            this.mobilityTypeDropDown.Location = new System.Drawing.Point(72, 46);
+            this.mobilityTypeDropDown.Location = new System.Drawing.Point(48, 46);
             this.mobilityTypeDropDown.Name = "mobilityTypeDropDown";
             this.mobilityTypeDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilityTypeDropDown.TabIndex = 2;
+            this.mobilityTypeDropDown.TabStop = false;
             // 
             // label1
             // 
@@ -195,7 +203,7 @@
             // buildingSizeGroup
             // 
             this.buildingSizeGroup.Controls.Add(this.buildingSizeText);
-            this.buildingSizeGroup.Location = new System.Drawing.Point(32, 156);
+            this.buildingSizeGroup.Location = new System.Drawing.Point(55, 129);
             this.buildingSizeGroup.Name = "buildingSizeGroup";
             this.buildingSizeGroup.Size = new System.Drawing.Size(133, 51);
             this.buildingSizeGroup.TabIndex = 4;
@@ -216,9 +224,9 @@
             this.totalCostGroup.Controls.Add(this.DTPCostText);
             this.totalCostGroup.Controls.Add(this.goldCostLabel);
             this.totalCostGroup.Controls.Add(this.goldCostText);
-            this.totalCostGroup.Location = new System.Drawing.Point(32, 71);
+            this.totalCostGroup.Location = new System.Drawing.Point(32, 31);
             this.totalCostGroup.Name = "totalCostGroup";
-            this.totalCostGroup.Size = new System.Drawing.Size(169, 79);
+            this.totalCostGroup.Size = new System.Drawing.Size(178, 79);
             this.totalCostGroup.TabIndex = 5;
             this.totalCostGroup.TabStop = false;
             this.totalCostGroup.Text = "Total Cost";
@@ -254,9 +262,9 @@
             this.roomPanel.AutoScroll = true;
             this.roomPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.roomPanel.Controls.Add(this.addNewRoomButton);
-            this.roomPanel.Location = new System.Drawing.Point(298, 24);
+            this.roomPanel.Location = new System.Drawing.Point(232, 32);
             this.roomPanel.Name = "roomPanel";
-            this.roomPanel.Size = new System.Drawing.Size(250, 637);
+            this.roomPanel.Size = new System.Drawing.Size(250, 633);
             this.roomPanel.TabIndex = 6;
             // 
             // addNewRoomButton
@@ -369,7 +377,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 18);
+            this.label4.Location = new System.Drawing.Point(241, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 7;
@@ -391,7 +399,7 @@
             this.wallModsBox.Controls.Add(this.wallOStoneCheck);
             this.wallModsBox.Controls.Add(this.wallOThornsCheck);
             this.wallModsBox.Controls.Add(this.wallOWaterCheck);
-            this.wallModsBox.Location = new System.Drawing.Point(32, 328);
+            this.wallModsBox.Location = new System.Drawing.Point(46, 325);
             this.wallModsBox.Name = "wallModsBox";
             this.wallModsBox.Size = new System.Drawing.Size(142, 340);
             this.wallModsBox.TabIndex = 8;
@@ -571,7 +579,7 @@
             this.wondrousArchPanel.AutoScroll = true;
             this.wondrousArchPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.wondrousArchPanel.Controls.Add(this.addNewWondrousArch);
-            this.wondrousArchPanel.Location = new System.Drawing.Point(585, 28);
+            this.wondrousArchPanel.Location = new System.Drawing.Point(519, 32);
             this.wondrousArchPanel.Name = "wondrousArchPanel";
             this.wondrousArchPanel.Size = new System.Drawing.Size(217, 300);
             this.wondrousArchPanel.TabIndex = 11;
@@ -579,7 +587,7 @@
             // wondrousArchitectureLabel
             // 
             this.wondrousArchitectureLabel.AutoSize = true;
-            this.wondrousArchitectureLabel.Location = new System.Drawing.Point(591, 21);
+            this.wondrousArchitectureLabel.Location = new System.Drawing.Point(525, 27);
             this.wondrousArchitectureLabel.Name = "wondrousArchitectureLabel";
             this.wondrousArchitectureLabel.Size = new System.Drawing.Size(116, 13);
             this.wondrousArchitectureLabel.TabIndex = 11;
@@ -590,9 +598,9 @@
             this.freeStandWallsPanel.AutoScroll = true;
             this.freeStandWallsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.freeStandWallsPanel.Controls.Add(this.newWallSectionButton);
-            this.freeStandWallsPanel.Location = new System.Drawing.Point(585, 361);
+            this.freeStandWallsPanel.Location = new System.Drawing.Point(519, 362);
             this.freeStandWallsPanel.Name = "freeStandWallsPanel";
-            this.freeStandWallsPanel.Size = new System.Drawing.Size(217, 300);
+            this.freeStandWallsPanel.Size = new System.Drawing.Size(217, 303);
             this.freeStandWallsPanel.TabIndex = 12;
             // 
             // newWallSectionButton
@@ -610,43 +618,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(591, 351);
+            this.label10.Location = new System.Drawing.Point(525, 352);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(97, 13);
             this.label10.TabIndex = 17;
             this.label10.Text = "Freestanding Walls";
-            // 
-            // calculateButton
-            // 
-            this.calculateButton.Location = new System.Drawing.Point(192, 172);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(75, 23);
-            this.calculateButton.TabIndex = 18;
-            this.calculateButton.Text = "Calculate";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.AutoSize = true;
-            this.saveButton.Location = new System.Drawing.Point(33, 28);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(82, 23);
-            this.saveButton.TabIndex = 19;
-            this.saveButton.Text = "Save Building";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // loadButton
-            // 
-            this.loadButton.AutoSize = true;
-            this.loadButton.Location = new System.Drawing.Point(162, 28);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(81, 23);
-            this.loadButton.TabIndex = 20;
-            this.loadButton.Text = "Load Building";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
             // saveFileDialog
             // 
@@ -659,29 +635,93 @@
             this.openFileDialog.DefaultExt = "*.house";
             this.openFileDialog.Filter = "Building files|*.house";
             // 
+            // toolBar
+            // 
+            this.toolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileDropDown});
+            this.toolBar.Location = new System.Drawing.Point(0, 0);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolBar.Size = new System.Drawing.Size(757, 25);
+            this.toolBar.TabIndex = 21;
+            // 
+            // fileDropDown
+            // 
+            this.fileDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fileDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.loadToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+            this.fileDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fileDropDown.Name = "fileDropDown";
+            this.fileDropDown.ShowDropDownArrow = false;
+            this.fileDropDown.Size = new System.Drawing.Size(29, 22);
+            this.fileDropDown.Text = "File";
+            this.fileDropDown.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Save As";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.SaveAs_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.Load_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 677);
-            this.Controls.Add(this.loadButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.calculateButton);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(757, 677);
+            this.Controls.Add(this.toolBar);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.freeStandWallsPanel);
             this.Controls.Add(this.wondrousArchitectureLabel);
             this.Controls.Add(this.wondrousArchPanel);
             this.Controls.Add(this.wallModsBox);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.roomPanel);
             this.Controls.Add(this.totalCostGroup);
             this.Controls.Add(this.buildingSizeGroup);
             this.Controls.Add(this.mobilityGroup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Lantern\'s Housing Calculator";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyCombos);
             this.mobilityGroup.ResumeLayout(false);
             this.mobilityGroup.PerformLayout();
             this.buildingSizeGroup.ResumeLayout(false);
@@ -698,6 +738,8 @@
             this.wondrousArchPanel.PerformLayout();
             this.freeStandWallsPanel.ResumeLayout(false);
             this.freeStandWallsPanel.PerformLayout();
+            this.toolBar.ResumeLayout(false);
+            this.toolBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,12 +794,16 @@
         private System.Windows.Forms.CheckBox plantGrowthCheck;
         private System.Windows.Forms.CheckBox articCheck;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.CheckBox wallOIceCheck;
-        private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStrip toolBar;
+        private System.Windows.Forms.ToolStripDropDownButton fileDropDown;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

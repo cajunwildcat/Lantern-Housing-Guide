@@ -11,7 +11,7 @@ namespace HousingApp {
 
         public event RoomSizeDelegate RoomSizeChanged;
         public event RoomRemovedDelegate RoomRemoved;
-        public event CostDelegate CostUpdated;
+        //public event CostDelegate CostUpdated;
 
         private int margin;
         private int roomCost;
@@ -144,6 +144,7 @@ namespace HousingApp {
             wallUpDrop.Location = new Point(box.Width - margin - wallUpDrop.Width, 96);
             wallUpDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             wallUpDrop.DataSource = roomOptions[2].Clone();
+            wallUpDrop.SelectedIndex = 0;
 
             //add add-on button
             addonButton = new Button();
@@ -152,6 +153,7 @@ namespace HousingApp {
             addonButton.AutoSize = true;
             addonButton.Location = new Point((box.Width - addonButton.Width) / 2,
                 125);
+            addonButton.BackColor = Color.FromName("ControlLight");
             addonButton.Click += AddAddon;
 
             //setup events for comboboxes

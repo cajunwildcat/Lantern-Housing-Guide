@@ -239,7 +239,7 @@ namespace HousingApp {
             //building selection information
             roomTypes = new string[] { "Armory", "Auditorium", "Barbican", "Barracks/Quarters", "Bath", "Bedroom", "Bedroom Suite", "Chapel", "Common Area", "Courtyard", "Dining Hall", "Dock", "Gatehouse", "Kitchen", "Library", "Magic Laboratory", "Shop", "Stable", "Storage", "Study/Office", "Tavern", "Throne Room", "Combat Training Hall", "Rogue Training Hall", "Trophy Hall", "Workshop" };
             wallTypes = new string[] { "Adamantine", "Bone", "Deep Coral", "Earth, Packed", "Glass, Magically Treated", "Ice", "Iron", "Living Wood", "Masonry", "Masonry Superior", "Masonry, Reinforced", "Mithral", "Stone, Hewn", "Stone, Unworked", "Wall of Force", "Wood" };
-            wallUpgrades = new string[] { "Airtight", "Bladed", "Elemental Protection", "Elemental Protection, Improved", "Ethereally Solid", "Fiery", "Fog Veil", "Fog Veil, Solid", "Fog Veil, Stinking", "Fog Veil, Killing", "Fog Veil, Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick", "Spiderwalk", "Tanglewood", "Thornwood", "Transparent", "Webbed", "Windwall" };
+            wallUpgrades = new string[] { "None", "Airtight", "Bladed", "Elemental Protection", "Elemental Protection, Improved", "Ethereally Solid", "Fiery", "Fog Veil", "Fog Veil, Solid", "Fog Veil, Stinking", "Fog Veil, Killing", "Fog Veil, Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick", "Spiderwalk", "Tanglewood", "Thornwood", "Transparent", "Webbed", "Windwall" };
             addons = new string[] { "Door, Wood Good", "Door, Wood Strong", "Door, Stone Simple", "Door, Stone Good", "Door, Stone Strong", "Door, Iron/Steel Simple", "Door, Iron/Steel Good", "Door, Iron/Steel Strong", "Lock, Simple (DC 10)", "Lock, Average (DC 15)", "Lock, Good (DC 20)", "Lock, Amazing (DC 25)", "Lock, Impossible (DC 30)", "Door, secret (Investigation DC 10)", "Door, secret (Investigation DC 15)", "Door, secret (Investigation DC 20)", "Door, secret (Investigation DC 25)", "Door, secret (Investigation DC 30)", "Gate or Portcullis, Wood Simple", "Gate or Portcullis, Wood Good", "Gate or Portcullis, Wood Strong", "Gate or Portcullis, Iron, Simple", "Gate or Portcullis, Iron, Good", "Gate or Portcullis, Iron, Strong", "Drawbridge, Wood", "Drawbridge, Iron", "Window, Shutters, Good", "Window, Iron Bars", "Window, Arrow Slit", "Window, Glass", "Window, Stained glass", "Window, Stained glass, fancy", "Portal, Same Plane, Limited Use (3/day)", "Portal, Other Plane, Limited Use (3/day)", "Portal, Same Plane", "Portal, Other Plane", "Two-Way Portal" };
             wondrousArch = new string[] { "Ambassador's Chambers", "Bed of Regeneration", "Bed of Restoration, Lesser", "Bed of Restoration, Greater", "Bed of Wellness", "Bier of Inquisition", "Black Luminary", "Brazier of Bright Bursts", "Bright Luminary", "Cabinet of Stasis", "Cacophonous Chamber", "Chamber of Airy Water", "Chamber of Climbing", "Chamber of Comfort", "Chamber of Courage", "Chamber of the Earthbound", "Chamber of Guidance", "Chamber of Safety", "Chamber of Safety, Greater", "Chamber of Seeing", "Chamber of Sloth", "Chamber of Speed", "Chamber of the Unliving", "Everful Basin", "Everful Larder", "Garden of Understanding", "Guardian Statue", "Hall of Babbling", "Hall of Despair", "Hall of Friendship", "Hall of Friendship, Greater", "Hall of Holiness", "Hall of Hope", "Hall of Silence", "Hall of Speech", "Hall of Truth", "Hole of Hiding", "Hurricane's Eye", "Illusory Landscape", "Inscriptions of Concealment", "Inscriptions of Concealment, Greater", "Inscriptions of Privacy", "Invisible Helper", "Jester's Theater", "Map of Guidance", "Map of Tactics", "Map of Tactics, Greater", "Morgue of Preservation", "Oaken Guardian", "Orb of Pleasant Breezes", "Path of Watery Solidity", "Platform of Jaunting", "Platform of Jaunting, Greater", "Platform of Levitation", "Platform of Levitation, Greater", "Pool of Scrying", "Sanctum Sanctorum", "Sigils of Antimagic", "Speaking Stones", "Stable of Understanding", "Table of Feasting", "Table of Freshness", "Touchstone of Faith", "Touchstone of Safety", "Tree of Jaunting", "Tree of Jaunting, Greater", "Vegetative Trap", "Warding Bell", "Well of Falling", "Well of Flying" };
             //initialize lists
@@ -770,7 +770,18 @@ namespace HousingApp {
             return cost;
         }
 
-        private void saveButton_Click(object sender, EventArgs e) {
+        private void KeyCombos(object sender, KeyEventArgs e) {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+                SaveAs_Click(sender, new EventArgs());
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.L)
+                Load_Click(sender, new EventArgs());
+        }
+
+        private void Save_Click(object sender, EventArgs e) { 
+            
+        }
+
+        private void SaveAs_Click(object sender, EventArgs e) {
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 string filePath = saveFileDialog.FileName;
                 FileStream outstream = File.OpenWrite(filePath);
@@ -817,7 +828,7 @@ namespace HousingApp {
             }
         }
 
-        private void loadButton_Click(object sender, EventArgs e) {
+        private void Load_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 FileStream instream = File.OpenRead(openFileDialog.FileName);
                 BinaryReader reader = new BinaryReader(instream);
@@ -883,6 +894,11 @@ namespace HousingApp {
                 reader.Close();
                 openFileDialog.FileName = null;
             }
+        }
+
+        private void Exit_Click(object sender, EventArgs e) {
+            //TODO check for if the user has saved
+            this.Dispose();
         }
     }
 }
