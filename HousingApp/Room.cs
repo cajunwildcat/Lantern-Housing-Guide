@@ -11,7 +11,7 @@ namespace HousingApp {
 
         public event RoomSizeDelegate RoomSizeChanged;
         public event RoomRemovedDelegate RoomRemoved;
-        //public event CostDelegate CostUpdated;
+        public event CostDelegate CostUpdated;
 
         private int margin;
         private int roomCost;
@@ -162,7 +162,9 @@ namespace HousingApp {
             qualityDrop.SelectedIndexChanged += QualityChanged;
             qualityDrop.SelectedIndexChanged += UpdateRoomSize;
             wallDrop.SelectedIndexChanged += UpdateWallCost;
+            wallDrop.SelectedIndexChanged += CalculateCall;
             wallUpDrop.SelectedIndexChanged += WallUpgradeChanged;
+            wallUpDrop.SelectedIndexChanged += CalculateCall;
 
 
             possibleAddons = (string[])roomOptions[3].Clone();
@@ -411,12 +413,12 @@ namespace HousingApp {
                         wallMod = .5;
                     break;
                 case (int)WallType.Wood:
-                    if (wallMods[(int)WallModsIndex.Fabricate] ||
+                    if (wallMods[(int)WallModsIndex.Above])
+                        wallMod = 0;
+                    else if (wallMods[(int)WallModsIndex.Fabricate] ||
                         wallMods[(int)WallModsIndex.PlantGrowth] ||
                         wallMods[(int)WallModsIndex.Forest])
                         wallMod = .75;
-                    else if (wallMods[(int)WallModsIndex.Above])
-                        wallMod = 0;
                     break;
             }
         }
@@ -480,6 +482,7 @@ namespace HousingApp {
             cb.Location = new Point(box.Width - margin - cb.Width, 96 + 24 * addons.Count);
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
             cb.SelectedIndexChanged += UpdateAddon;
+            cb.SelectedIndexChanged += CalculateCall;
 
             Button s = (Button)sender;
             s.Location = new Point(s.Location.X, s.Location.Y + 24);
@@ -487,6 +490,7 @@ namespace HousingApp {
             for (int i = box.Parent.Controls.IndexOf(box)+1; i < box.Parent.Controls.Count; i++) {
                 box.Parent.Controls[i].Location = new Point(box.Parent.Controls[i].Location.X, box.Parent.Controls[i].Location.Y + 24);
             }
+            CalculateCall(sender, e);
         }
 
         private void UpdateAddon(Object sender, EventArgs e) {
@@ -514,6 +518,7 @@ namespace HousingApp {
             for (int i = roomPanel.Controls.IndexOf(box) + 1; i < roomPanel.Controls.Count; i++) {
                 roomPanel.Controls[i].Location = new Point(roomPanel.Controls[i].Location.X, roomPanel.Controls[i].Location.Y - 24);
             }
+            CalculateCall(sender, e);
         }
 
         private int AddonCost() {
@@ -599,6 +604,11 @@ namespace HousingApp {
                 }
             }
             return cost;
+        }
+
+        private void CalculateCall(Object sender, EventArgs e) {
+            if (CostUpdated != null)
+                CostUpdated(sender, e);
         }
 
         public void MoveUp() {

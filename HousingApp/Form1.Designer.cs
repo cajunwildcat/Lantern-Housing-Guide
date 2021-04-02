@@ -77,10 +77,11 @@
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.fileDropDown = new System.Windows.Forms.ToolStripDropDownButton();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -115,6 +116,7 @@
             this.mobilitySpeedDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilitySpeedDropDown.TabIndex = 0;
             this.mobilitySpeedDropDown.TabStop = false;
+            this.mobilitySpeedDropDown.SelectedIndexChanged += new System.EventHandler(this.CalculateTotal);
             // 
             // mobilityGroup
             // 
@@ -156,6 +158,7 @@
             this.mobilitySpecialDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilitySpecialDropDown.TabIndex = 4;
             this.mobilitySpecialDropDown.TabStop = false;
+            this.mobilitySpecialDropDown.SelectedIndexChanged += new System.EventHandler(this.CalculateTotal);
             // 
             // label2
             // 
@@ -182,6 +185,7 @@
             this.mobilityTypeDropDown.Size = new System.Drawing.Size(121, 21);
             this.mobilityTypeDropDown.TabIndex = 2;
             this.mobilityTypeDropDown.TabStop = false;
+            this.mobilityTypeDropDown.SelectedIndexChanged += new System.EventHandler(this.CalculateTotal);
             // 
             // label1
             // 
@@ -652,8 +656,9 @@
             this.fileDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.fileDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.loadToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.calculateToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -670,20 +675,20 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStripMenuItem1
+            // saveAsToolStripMenuItem
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "Save As";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.SaveAs_Click);
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAs_Click);
             // 
-            // loadToolStripMenuItem
+            // openToolStripMenuItem
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadToolStripMenuItem.Text = "Load";
-            this.loadToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.Load_Click);
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.Load_Click);
             // 
             // toolStripSeparator1
             // 
@@ -697,6 +702,13 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // calculateToolStripMenuItem
+            // 
+            this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
+            this.calculateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.calculateToolStripMenuItem.Text = "Calculate";
+            this.calculateToolStripMenuItem.Click += new System.EventHandler(this.CalculateTotal);
             // 
             // Form1
             // 
@@ -720,7 +732,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Lantern\'s Housing Calculator";
+            this.Text = "Untitled - Lantern\'s Housing Calculator";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyCombos);
             this.mobilityGroup.ResumeLayout(false);
             this.mobilityGroup.PerformLayout();
@@ -800,10 +812,11 @@
         private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripDropDownButton fileDropDown;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calculateToolStripMenuItem;
     }
 }
 
