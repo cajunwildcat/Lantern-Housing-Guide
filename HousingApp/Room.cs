@@ -8,11 +8,20 @@ using System.Windows.Forms;
 
 namespace HousingApp {
     class Room {
-
+        /// <summary>
+        /// called when the room size is changed either from room type or quality change
+        /// </summary>
         public event RoomSizeDelegate RoomSizeChanged;
+        /// <summary>
+        /// called when the room is removed
+        /// </summary>
         public event RoomRemovedDelegate RoomRemoved;
+        /// <summary>
+        /// called when any information is changed
+        /// </summary>
         public event CostDelegate CostUpdated;
 
+        //costs & reference data
         private int margin;
         private int roomCost;
         private int qualityMod;
@@ -25,6 +34,7 @@ namespace HousingApp {
         private List<Addon> addons;
         private string[] possibleAddons;
 
+        //base controls
         private Panel roomPanel;
         private GroupBox box;
         private Label typeLabel;
@@ -38,6 +48,12 @@ namespace HousingApp {
         private Button addonButton;
         private Button closeButton;
 
+        /// <summary>
+        /// creates a new Room with basic selections
+        /// </summary>
+        /// <param name="roomPanel">the panel to place the room in</param>
+        /// <param name="roomOptions">list of string arrays used to fill the drop down boxes</param>
+        /// <param name="wallMods">list of bools that determine cost reductions for wall costs</param>
         public Room(Panel roomPanel, List<string[]> roomOptions, List<bool> wallMods) {
             this.roomPanel = roomPanel;
             this.roomOptions = roomOptions;
@@ -52,6 +68,17 @@ namespace HousingApp {
             wallDrop.SelectedIndex = wallDrop.Items.Count - 1;
         }
 
+        /// <summary>
+        /// creates a new Room with information from a loaded room
+        /// </summary>
+        /// <param name="roomPanel">the panel to place the room in</param>
+        /// <param name="roomOptions">list of string arrays used to fill the drop down boxes</param>
+        /// <param name="wallMods">list of bools that determine cost reductions for wall costs</param>
+        /// <param name="typeIndex">the index of the selected room type</param>
+        /// <param name="qualityIndex">the index of the selected room quality </param>
+        /// <param name="wallIndex">the index of the selected wall type</param>
+        /// <param name="wallUpIndex">the index of the selected wall upgrade</param>
+        /// <param name="addonsIndexes">the indices of any add-ons</param>
         public Room(Panel roomPanel, List<string[]> roomOptions, List<bool> wallMods, 
             int typeIndex, int qualityIndex, int wallIndex, int wallUpIndex, int[] addonsIndexes) {
             this.roomPanel = roomPanel;
@@ -71,6 +98,9 @@ namespace HousingApp {
             }
         }
 
+        /// <summary>
+        /// setus the base controls' positions, properties, and events
+        /// </summary>
         private void SetUpControls() {
             margin = 6;
             addons = new List<Addon>();
@@ -91,6 +121,7 @@ namespace HousingApp {
             closeButton.Location = new Point(box.Width - closeButton.Width, 5);
             closeButton.Text = "x";
             closeButton.FlatStyle = FlatStyle.System;
+            closeButton.TabStop = false;
             closeButton.Click += RemoveRoom;
 
             //room type
@@ -105,6 +136,7 @@ namespace HousingApp {
             typeDrop.Location = new Point(box.Width - margin - typeDrop.Width, 24);
             typeDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             typeDrop.DataSource = roomOptions[0].Clone();
+            typeDrop.TabStop = false;
 
             //room quality
             qualityLabel = new Label();
@@ -118,6 +150,7 @@ namespace HousingApp {
             qualityDrop.Location = new Point(box.Width - margin - qualityDrop.Width, 48);
             qualityDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             qualityDrop.DataSource = new string[] { "Basic", "Fnacy", "Luxury" };
+            qualityDrop.TabStop = false;
 
             //wall type
             wallLabel = new Label();
@@ -131,6 +164,7 @@ namespace HousingApp {
             wallDrop.Location = new Point(box.Width - margin - wallDrop.Width, 72);
             wallDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             wallDrop.DataSource = roomOptions[1].Clone();
+            wallDrop.TabStop = false;
 
             //wall upgrades
             wallUpLabel = new Label();
@@ -141,10 +175,12 @@ namespace HousingApp {
 
             wallUpDrop = new ComboBox();
             box.Controls.Add(wallUpDrop);
-            wallUpDrop.Location = new Point(box.Width - margin - wallUpDrop.Width, 96);
+            wallUpDrop.Location = new Point(wallUpLabel.Location.X + wallUpLabel.Width + margin, 96);
+            wallUpDrop.Width = box.Width - wallUpDrop.Location.X - margin;
             wallUpDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             wallUpDrop.DataSource = roomOptions[2].Clone();
             wallUpDrop.SelectedIndex = 0;
+            wallUpDrop.TabStop = false;
 
             //add add-on button
             addonButton = new Button();
@@ -155,6 +191,7 @@ namespace HousingApp {
                 125);
             addonButton.BackColor = Color.FromName("ControlLight");
             addonButton.Click += AddAddon;
+            addonButton.TabStop = false;
 
             //setup events for comboboxes
             typeDrop.SelectedIndexChanged += RoomTypeChanged;
@@ -170,6 +207,12 @@ namespace HousingApp {
             possibleAddons = (string[])roomOptions[3].Clone();
         }
 
+        /// <summary>
+        /// removes the current room by disposing of the coresponding GroupBox and alerts the parent container to move
+        /// the remainder rooms to the correct position
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveRoom(Object sender, EventArgs e) {
             box.Parent.Controls.Remove(box);
             box.Dispose();
@@ -177,6 +220,11 @@ namespace HousingApp {
                 RoomRemoved(this);
         }
 
+        /// <summary>
+        /// updates the base room cost & available qualities depending on the selected index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RoomTypeChanged(Object sender, EventArgs e) {
             ComboBox drop = (ComboBox)sender;
             //room quality
@@ -223,6 +271,11 @@ namespace HousingApp {
                 roomCost = 2500;
         }
 
+        /// <summary>
+        /// updates the quality modifier based on the selected index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QualityChanged(Object sender, EventArgs e) {
             if (qualityDrop.SelectedIndex == 0)
                 qualityMod = 1;
@@ -232,6 +285,12 @@ namespace HousingApp {
                 qualityMod = 15;
         }
 
+        /// <summary>
+        /// updates the room size when the room type or quality is changed and alerts the main 
+        /// form to recalculate building size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateRoomSize(Object sender, EventArgs e) {
             //room size
             if (qualityDrop.SelectedIndex == 0) {
@@ -279,6 +338,11 @@ namespace HousingApp {
                 RoomSizeChanged();
         }
 
+        /// <summary>
+        /// updates the base wall cost based on the selected index and calls UpdateWallMod
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateWallCost(Object sender, EventArgs e) {
             switch (wallDrop.SelectedIndex) {
                 case (int)WallType.Adamatine:
@@ -333,6 +397,9 @@ namespace HousingApp {
             UpdateWallMod();
         }
         
+        /// <summary>
+        /// updates the wallMod depending on the selected checkboxes represented in the wallMods list
+        /// </summary>
         public void UpdateWallMod() {
             wallMod = 1;
             switch (wallDrop.SelectedIndex) {
@@ -423,6 +490,11 @@ namespace HousingApp {
             }
         }
 
+        /// <summary>
+        /// updates the wallUpCost corresponding to the selected index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WallUpgradeChanged(Object sender, EventArgs e) {
             if (wallUpDrop.SelectedIndex == (int)WallUpgrade.None)
                 wallUpCost = 0;
@@ -459,6 +531,11 @@ namespace HousingApp {
                 wallUpCost = 20000;
         }
 
+        /// <summary>
+        /// adds a new addon drop down and associated label and remove button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddAddon(Object sender, EventArgs e) {
             addons.Add(Addon.DoorWoodGood);
 
@@ -469,6 +546,7 @@ namespace HousingApp {
             b.Text = "x";
             b.FlatStyle = FlatStyle.System;
             b.Click += RemoveAddon;
+            b.TabStop = false;
 
             Label l = new Label();
             box.Controls.Add(l);
@@ -479,10 +557,12 @@ namespace HousingApp {
             ComboBox cb = new ComboBox();
             box.Controls.Add(cb);
             cb.DataSource = possibleAddons.Clone();
-            cb.Location = new Point(box.Width - margin - cb.Width, 96 + 24 * addons.Count);
+            cb.Location = new Point(l.Location.X + l.Size.Width + margin, 96 + 24 * addons.Count);
+            cb.Width = box.Width - cb.Location.X - margin;
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
             cb.SelectedIndexChanged += UpdateAddon;
             cb.SelectedIndexChanged += CalculateCall;
+            cb.TabStop = false;
 
             Button s = (Button)sender;
             s.Location = new Point(s.Location.X, s.Location.Y + 24);
@@ -493,11 +573,21 @@ namespace HousingApp {
             CalculateCall(sender, e);
         }
 
+        /// <summary>
+        /// updates the addon in the addon array to correspond to the selected index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateAddon(Object sender, EventArgs e) {
             ComboBox cb = (ComboBox)sender;
             addons[(box.Controls.IndexOf(cb) - 12) /3] = (Addon)cb.SelectedIndex;
         }
 
+        /// <summary>
+        /// removes the current addon and moves the ones below up and re-numbers them
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveAddon(Object sender, EventArgs e) {
             Button b = (Button)sender;
             int addonIndex = box.Controls.IndexOf(b);
@@ -521,6 +611,10 @@ namespace HousingApp {
             CalculateCall(sender, e);
         }
 
+        /// <summary>
+        /// calculates the total cost of the selected addons
+        /// </summary>
+        /// <returns></returns>
         private int AddonCost() {
             //IMPORTANT NOTE: for two-portals to properly be accounted for, the addon after the kind of portal must be Portal, Two-Way
             int cost = 0;
@@ -571,7 +665,7 @@ namespace HousingApp {
                     addons[i] == Addon.DrawbridgeIron)
                     cost += 1500;
                 else if (addons[i] == Addon.PortalSPLU) {
-                    if (addons[i + 1] == Addon.PortalTW) {
+                    if (addons.Count > i+1 && addons[i + 1] == Addon.PortalTW) {
                         cost += 45000;
                         i++;
                     }
@@ -579,7 +673,7 @@ namespace HousingApp {
                         cost += 30000;
                 }
                 else if (addons[i] == Addon.PortalOPLU) {
-                    if (addons[i + 1] == Addon.PortalTW) {
+                    if (addons.Count > i + 1 && addons[i + 1] == Addon.PortalTW) {
                         cost += 67500;
                         i++;
                     }
@@ -587,7 +681,7 @@ namespace HousingApp {
                         cost += 45000;
                 }
                 else if (addons[i] == Addon.PortalSP) {
-                    if (addons[i + 1] == Addon.PortalTW) {
+                    if (addons.Count > i + 1 && addons[i + 1] == Addon.PortalTW) {
                         cost += 75000;
                         i++;
                     }
@@ -595,7 +689,7 @@ namespace HousingApp {
                         cost += 50000;
                 }
                 else if (addons[i] == Addon.PortalOP) {
-                    if (addons[i + 1] == Addon.PortalTW) {
+                    if (addons.Count > i + 1 && addons[i + 1] == Addon.PortalTW) {
                         cost += 112500;
                         i++;
                     }
@@ -606,24 +700,56 @@ namespace HousingApp {
             return cost;
         }
 
+        /// <summary>
+        /// tells the main form to update the cost
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateCall(Object sender, EventArgs e) {
             if (CostUpdated != null)
                 CostUpdated(sender, e);
         }
 
+        /// <summary>
+        /// moves the GroupBox up, called when a room above is removed
+        /// </summary>
         public void MoveUp() {
             box.Location = new Point(12,
                     box.Parent.Controls[box.Parent.Controls.IndexOf(box)-1].Height
                     + box.Parent.Controls[box.Parent.Controls.IndexOf(box) - 1].Location.Y + 12);
         }
 
+        /// <summary>
+        /// the total cost of the room
+        /// </summary>
         public double Cost { get { return (roomCost * qualityMod) + (wallCost * wallMod * roomSize) + wallUpCost + AddonCost(); } }
+        /// <summary>
+        /// the size of the room used in calculating the building type
+        /// </summary>
         public double RoomSize { get { return roomSize; } }
+        /// <summary>
+        /// the current list of bools representing the wall cost modifiers
+        /// </summary>
         public List<bool> WallMods { set { wallMods = value; } }
+        /// <summary>
+        /// the room type index
+        /// </summary>
         public int RoomIndex { get { return typeDrop.SelectedIndex; } }
+        /// <summary>
+        /// the room quality index
+        /// </summary>
         public int QualityIndex { get { return qualityDrop.SelectedIndex; } }
+        /// <summary>
+        /// the room's wall type index
+        /// </summary>
         public int WallIndex { get { return wallDrop.SelectedIndex; } }
+        /// <summary>
+        /// the room's wall upgrade index
+        /// </summary>
         public int WallUpIndex { get { return wallUpDrop.SelectedIndex; } }
+        /// <summary>
+        /// the current addons in the room
+        /// </summary>
         public Addon[] Addons { get { return addons.ToArray(); } }
     }
 }

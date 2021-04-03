@@ -79,9 +79,12 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.submitFeedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mobilityGroup.SuspendLayout();
             this.buildingSizeGroup.SuspendLayout();
             this.totalCostGroup.SuspendLayout();
@@ -146,6 +149,7 @@
             // 
             this.mobilitySpecialDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mobilitySpecialDropDown.FormattingEnabled = true;
+            this.mobilitySpecialDropDown.ItemHeight = 13;
             this.mobilitySpecialDropDown.Items.AddRange(new object[] {
             "None",
             "Astral",
@@ -202,7 +206,7 @@
             this.goldCostText.Name = "goldCostText";
             this.goldCostText.ReadOnly = true;
             this.goldCostText.Size = new System.Drawing.Size(100, 20);
-            this.goldCostText.TabIndex = 3;
+            this.goldCostText.TabIndex = 1;
             // 
             // buildingSizeGroup
             // 
@@ -221,6 +225,7 @@
             this.buildingSizeText.ReadOnly = true;
             this.buildingSizeText.Size = new System.Drawing.Size(120, 20);
             this.buildingSizeText.TabIndex = 7;
+            this.buildingSizeText.TabStop = false;
             // 
             // totalCostGroup
             // 
@@ -251,6 +256,7 @@
             this.DTPCostText.ReadOnly = true;
             this.DTPCostText.Size = new System.Drawing.Size(100, 20);
             this.DTPCostText.TabIndex = 5;
+            this.DTPCostText.TabStop = false;
             // 
             // goldCostLabel
             // 
@@ -268,17 +274,18 @@
             this.roomPanel.Controls.Add(this.addNewRoomButton);
             this.roomPanel.Location = new System.Drawing.Point(232, 32);
             this.roomPanel.Name = "roomPanel";
-            this.roomPanel.Size = new System.Drawing.Size(250, 633);
+            this.roomPanel.Size = new System.Drawing.Size(270, 633);
             this.roomPanel.TabIndex = 6;
             // 
             // addNewRoomButton
             // 
             this.addNewRoomButton.AutoSize = true;
             this.addNewRoomButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addNewRoomButton.Location = new System.Drawing.Point(79, 12);
+            this.addNewRoomButton.Location = new System.Drawing.Point(89, 12);
             this.addNewRoomButton.Name = "addNewRoomButton";
             this.addNewRoomButton.Size = new System.Drawing.Size(92, 23);
             this.addNewRoomButton.TabIndex = 3;
+            this.addNewRoomButton.TabStop = false;
             this.addNewRoomButton.Text = "Add New Room";
             this.addNewRoomButton.UseVisualStyleBackColor = true;
             this.addNewRoomButton.Click += new System.EventHandler(this.NewRoomButton_Click);
@@ -419,6 +426,7 @@
             this.aboveGroundCheck.Name = "aboveGroundCheck";
             this.aboveGroundCheck.Size = new System.Drawing.Size(95, 17);
             this.aboveGroundCheck.TabIndex = 11;
+            this.aboveGroundCheck.TabStop = false;
             this.aboveGroundCheck.Text = "Above Ground";
             this.aboveGroundCheck.UseVisualStyleBackColor = true;
             this.aboveGroundCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -430,6 +438,7 @@
             this.articCheck.Name = "articCheck";
             this.articCheck.Size = new System.Drawing.Size(118, 17);
             this.articCheck.TabIndex = 6;
+            this.articCheck.TabStop = false;
             this.articCheck.Text = "Environment, Arctic";
             this.articCheck.UseVisualStyleBackColor = true;
             this.articCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -441,6 +450,7 @@
             this.forestCheck.Name = "forestCheck";
             this.forestCheck.Size = new System.Drawing.Size(126, 17);
             this.forestCheck.TabIndex = 12;
+            this.forestCheck.TabStop = false;
             this.forestCheck.Text = "Envirvonment, Forest";
             this.forestCheck.UseVisualStyleBackColor = true;
             this.forestCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -452,6 +462,7 @@
             this.mountainCheck.Name = "mountainCheck";
             this.mountainCheck.Size = new System.Drawing.Size(135, 17);
             this.mountainCheck.TabIndex = 9;
+            this.mountainCheck.TabStop = false;
             this.mountainCheck.Text = "Environment, Mountain";
             this.mountainCheck.UseVisualStyleBackColor = true;
             this.mountainCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -463,6 +474,7 @@
             this.fabricateCheck.Name = "fabricateCheck";
             this.fabricateCheck.Size = new System.Drawing.Size(70, 17);
             this.fabricateCheck.TabIndex = 0;
+            this.fabricateCheck.TabStop = false;
             this.fabricateCheck.Text = "Fabricate";
             this.fabricateCheck.UseVisualStyleBackColor = true;
             this.fabricateCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -474,6 +486,7 @@
             this.moveEarthCheck.Name = "moveEarthCheck";
             this.moveEarthCheck.Size = new System.Drawing.Size(81, 17);
             this.moveEarthCheck.TabIndex = 1;
+            this.moveEarthCheck.TabStop = false;
             this.moveEarthCheck.Text = "Move Earth";
             this.moveEarthCheck.UseVisualStyleBackColor = true;
             this.moveEarthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -485,6 +498,7 @@
             this.plantGrowthCheck.Name = "plantGrowthCheck";
             this.plantGrowthCheck.Size = new System.Drawing.Size(87, 17);
             this.plantGrowthCheck.TabIndex = 7;
+            this.plantGrowthCheck.TabStop = false;
             this.plantGrowthCheck.Text = "Plant Growth";
             this.plantGrowthCheck.UseVisualStyleBackColor = true;
             this.plantGrowthCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -496,6 +510,7 @@
             this.stoneShapeCheck.Name = "stoneShapeCheck";
             this.stoneShapeCheck.Size = new System.Drawing.Size(88, 17);
             this.stoneShapeCheck.TabIndex = 5;
+            this.stoneShapeCheck.TabStop = false;
             this.stoneShapeCheck.Text = "Stone Shape";
             this.stoneShapeCheck.UseVisualStyleBackColor = true;
             this.stoneShapeCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -507,6 +522,7 @@
             this.underGround.Name = "underGround";
             this.underGround.Size = new System.Drawing.Size(88, 17);
             this.underGround.TabIndex = 2;
+            this.underGround.TabStop = false;
             this.underGround.Text = "Underground";
             this.underGround.UseVisualStyleBackColor = true;
             this.underGround.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -518,6 +534,7 @@
             this.wallOForceCheck.Name = "wallOForceCheck";
             this.wallOForceCheck.Size = new System.Drawing.Size(89, 17);
             this.wallOForceCheck.TabIndex = 10;
+            this.wallOForceCheck.TabStop = false;
             this.wallOForceCheck.Text = "Wall of Force";
             this.wallOForceCheck.UseVisualStyleBackColor = true;
             this.wallOForceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -529,6 +546,7 @@
             this.wallOIceCheck.Name = "wallOIceCheck";
             this.wallOIceCheck.Size = new System.Drawing.Size(77, 17);
             this.wallOIceCheck.TabIndex = 13;
+            this.wallOIceCheck.TabStop = false;
             this.wallOIceCheck.Text = "Wall of Ice";
             this.wallOIceCheck.UseVisualStyleBackColor = true;
             this.wallOIceCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -540,6 +558,7 @@
             this.wallOStoneCheck.Name = "wallOStoneCheck";
             this.wallOStoneCheck.Size = new System.Drawing.Size(90, 17);
             this.wallOStoneCheck.TabIndex = 8;
+            this.wallOStoneCheck.TabStop = false;
             this.wallOStoneCheck.Text = "Wall of Stone";
             this.wallOStoneCheck.UseVisualStyleBackColor = true;
             this.wallOStoneCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -551,6 +570,7 @@
             this.wallOThornsCheck.Name = "wallOThornsCheck";
             this.wallOThornsCheck.Size = new System.Drawing.Size(95, 17);
             this.wallOThornsCheck.TabIndex = 4;
+            this.wallOThornsCheck.TabStop = false;
             this.wallOThornsCheck.Text = "Wall of Thorns";
             this.wallOThornsCheck.UseVisualStyleBackColor = true;
             this.wallOThornsCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -562,6 +582,7 @@
             this.wallOWaterCheck.Name = "wallOWaterCheck";
             this.wallOWaterCheck.Size = new System.Drawing.Size(91, 17);
             this.wallOWaterCheck.TabIndex = 3;
+            this.wallOWaterCheck.TabStop = false;
             this.wallOWaterCheck.Text = "Wall of Water";
             this.wallOWaterCheck.UseVisualStyleBackColor = true;
             this.wallOWaterCheck.CheckedChanged += new System.EventHandler(this.WallModsUpdated);
@@ -574,6 +595,7 @@
             this.addNewWondrousArch.Name = "addNewWondrousArch";
             this.addNewWondrousArch.Size = new System.Drawing.Size(121, 23);
             this.addNewWondrousArch.TabIndex = 4;
+            this.addNewWondrousArch.TabStop = false;
             this.addNewWondrousArch.Text = "Add New Architecture";
             this.addNewWondrousArch.UseVisualStyleBackColor = true;
             this.addNewWondrousArch.Click += new System.EventHandler(this.addNewWondrousArch_Click);
@@ -615,6 +637,7 @@
             this.newWallSectionButton.Name = "newWallSectionButton";
             this.newWallSectionButton.Size = new System.Drawing.Size(100, 23);
             this.newWallSectionButton.TabIndex = 14;
+            this.newWallSectionButton.TabStop = false;
             this.newWallSectionButton.Text = "Add New Section";
             this.newWallSectionButton.UseVisualStyleBackColor = true;
             this.newWallSectionButton.Click += new System.EventHandler(this.newWallSectionButton_Click);
@@ -643,7 +666,8 @@
             // 
             this.toolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileDropDown});
+            this.fileDropDown,
+            this.toolStripDropDownButton1});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
             this.toolBar.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
@@ -671,44 +695,71 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAs_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openToolStripMenuItem.Click += new System.EventHandler(this.Load_Click);
             // 
+            // calculateToolStripMenuItem
+            // 
+            this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
+            this.calculateToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.calculateToolStripMenuItem.Text = "Calculate";
+            this.calculateToolStripMenuItem.Click += new System.EventHandler(this.CalculateTotal);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
             // 
-            // calculateToolStripMenuItem
+            // toolStripDropDownButton1
             // 
-            this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
-            this.calculateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.calculateToolStripMenuItem.Text = "Calculate";
-            this.calculateToolStripMenuItem.Click += new System.EventHandler(this.CalculateTotal);
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem,
+            this.submitFeedbackToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.ShowDropDownArrow = false;
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(36, 22);
+            this.toolStripDropDownButton1.Text = "Help";
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            // 
+            // submitFeedbackToolStripMenuItem
+            // 
+            this.submitFeedbackToolStripMenuItem.Name = "submitFeedbackToolStripMenuItem";
+            this.submitFeedbackToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.submitFeedbackToolStripMenuItem.Text = "Submit Feedback";
+            this.submitFeedbackToolStripMenuItem.Click += new System.EventHandler(this.submitFeedbackToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -817,6 +868,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calculateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem submitFeedbackToolStripMenuItem;
     }
 }
 

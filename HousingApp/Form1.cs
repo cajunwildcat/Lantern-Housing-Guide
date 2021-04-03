@@ -15,6 +15,9 @@ namespace HousingApp {
     delegate void RoomRemovedDelegate(Object sender);
     delegate void CostDelegate(Object sender, EventArgs e);
 
+    /// <summary>
+    /// integer indicies of each room type
+    /// </summary>
     enum RoomType: int {
         Armory = 0,
         Auditorium = 1,
@@ -43,7 +46,9 @@ namespace HousingApp {
         Trophy = 24,
         Workshop = 25
     }
-
+    /// <summary>
+    /// integer indicies of each wall type
+    /// </summary>
     enum WallType: int {
         Adamatine = 0,
         Bone = 1,
@@ -62,7 +67,9 @@ namespace HousingApp {
         WallOfForce = 14,
         Wood = 15
     }
-
+    /// <summary>
+    /// integer indicies of each wallcost modifier
+    /// </summary>
     enum WallModsIndex: int {
         Above = 0,
         Artic = 1,
@@ -79,7 +86,9 @@ namespace HousingApp {
         WallOfThorns = 12,
         WallOfWater = 13
     }
-
+    /// <summary>
+    /// integer indicies of each wall upgrade
+    /// </summary>
     enum WallUpgrade: int {
         None = 0,
         Airtight = 1,
@@ -104,7 +113,9 @@ namespace HousingApp {
         Webbed = 20,
         Windwall = 21
     }
-
+    /// <summary>
+    /// integer indicies of each addon
+    /// </summary>
     enum Addon: int {
         DoorWoodGood = 0,
         DoorWoodStrong = 1,
@@ -144,7 +155,9 @@ namespace HousingApp {
         PortalOP = 35,
         PortalTW = 36
     }
-
+    /// <summary>
+    /// integer indicies of each wondrous architecture
+    /// </summary>
     enum WondrousArch:int {
         AmbassadorsChambers = 0,
         BedofRegeneration = 1,
@@ -218,13 +231,15 @@ namespace HousingApp {
         WellofFlying = 69
     }
     public partial class Form1 : Form {
-
-        private double numORooms; //room slots
+        //building info
+        private double numORooms;
         private double costTotal;
+
+        //file info
         private string fileName;
         private string fileDir;
 
-        //room info
+        //room info arrays
         private string[] roomTypes;
         private string[] wallTypes;
         private string[] wallUpgrades;
@@ -239,10 +254,11 @@ namespace HousingApp {
         public Form1() {
             InitializeComponent();
             //building selection information
+            //suck my dick im not making these more than 1 line
             roomTypes = new string[] { "Armory", "Auditorium", "Barbican", "Barracks/Quarters", "Bath", "Bedroom", "Bedroom Suite", "Chapel", "Common Area", "Courtyard", "Dining Hall", "Dock", "Gatehouse", "Kitchen", "Library", "Magic Laboratory", "Shop", "Stable", "Storage", "Study/Office", "Tavern", "Throne Room", "Combat Training Hall", "Rogue Training Hall", "Trophy Hall", "Workshop" };
             wallTypes = new string[] { "Adamantine", "Bone", "Deep Coral", "Earth, Packed", "Glass, Magically Treated", "Ice", "Iron", "Living Wood", "Masonry", "Masonry Superior", "Masonry, Reinforced", "Mithral", "Stone, Hewn", "Stone, Unworked", "Wall of Force", "Wood" };
             wallUpgrades = new string[] { "None", "Airtight", "Bladed", "Elemental Protection", "Elemental Protection, Improved", "Ethereally Solid", "Fiery", "Fog Veil", "Fog Veil, Solid", "Fog Veil, Stinking", "Fog Veil, Killing", "Fog Veil, Incendiary", "Frostwall", "Magic Warding", "Prismatic Screen", "Slick", "Spiderwalk", "Tanglewood", "Thornwood", "Transparent", "Webbed", "Windwall" };
-            addons = new string[] { "Door, Wood Good", "Door, Wood Strong", "Door, Stone Simple", "Door, Stone Good", "Door, Stone Strong", "Door, Iron/Steel Simple", "Door, Iron/Steel Good", "Door, Iron/Steel Strong", "Lock, Simple (DC 10)", "Lock, Average (DC 15)", "Lock, Good (DC 20)", "Lock, Amazing (DC 25)", "Lock, Impossible (DC 30)", "Door, secret (Investigation DC 10)", "Door, secret (Investigation DC 15)", "Door, secret (Investigation DC 20)", "Door, secret (Investigation DC 25)", "Door, secret (Investigation DC 30)", "Gate or Portcullis, Wood Simple", "Gate or Portcullis, Wood Good", "Gate or Portcullis, Wood Strong", "Gate or Portcullis, Iron, Simple", "Gate or Portcullis, Iron, Good", "Gate or Portcullis, Iron, Strong", "Drawbridge, Wood", "Drawbridge, Iron", "Window, Shutters, Good", "Window, Iron Bars", "Window, Arrow Slit", "Window, Glass", "Window, Stained glass", "Window, Stained glass, fancy", "Portal, Same Plane, Limited Use (3/day)", "Portal, Other Plane, Limited Use (3/day)", "Portal, Same Plane", "Portal, Other Plane", "Two-Way Portal" };
+            addons = new string[] { "Door, Wood Good", "Door, Wood Strong", "Door, Stone Simple", "Door, Stone Good", "Door, Stone Strong", "Door, Iron Simple", "Door, Iron Good", "Door, Iron Strong", "Lock, Simple", "Lock, Average", "Lock, Good", "Lock, Amazing", "Lock, Impossible", "Secret Door, Simple", "Secret Door, Average", "Secret Door, Good", "Secret Door, Amazing", "Secret Door, Impossible", "Gate, Wood Simple", "Gate, Wood Good", "Gate, Wood Strong", "Gate, Iron, Simple", "Gate, Iron, Good", "Gate, Iron, Strong", "Drawbridge, Wood", "Drawbridge, Iron", "Window, Shutters, Good", "Window, Iron Bars", "Window, Arrow Slit", "Window, Glass", "Window, Stained glass", "Window, Stained glass, Fancy", "Portal, Same Plane, Limited", "Portal, Other Plane, Limited", "Portal, Same Plane", "Portal, Other Plane", "Two-Way Portal" };
             wondrousArch = new string[] { "Ambassador's Chambers", "Bed of Regeneration", "Bed of Restoration, Lesser", "Bed of Restoration, Greater", "Bed of Wellness", "Bier of Inquisition", "Black Luminary", "Brazier of Bright Bursts", "Bright Luminary", "Cabinet of Stasis", "Cacophonous Chamber", "Chamber of Airy Water", "Chamber of Climbing", "Chamber of Comfort", "Chamber of Courage", "Chamber of the Earthbound", "Chamber of Guidance", "Chamber of Safety", "Chamber of Safety, Greater", "Chamber of Seeing", "Chamber of Sloth", "Chamber of Speed", "Chamber of the Unliving", "Everful Basin", "Everful Larder", "Garden of Understanding", "Guardian Statue", "Hall of Babbling", "Hall of Despair", "Hall of Friendship", "Hall of Friendship, Greater", "Hall of Holiness", "Hall of Hope", "Hall of Silence", "Hall of Speech", "Hall of Truth", "Hole of Hiding", "Hurricane's Eye", "Illusory Landscape", "Inscriptions of Concealment", "Inscriptions of Concealment, Greater", "Inscriptions of Privacy", "Invisible Helper", "Jester's Theater", "Map of Guidance", "Map of Tactics", "Map of Tactics, Greater", "Morgue of Preservation", "Oaken Guardian", "Orb of Pleasant Breezes", "Path of Watery Solidity", "Platform of Jaunting", "Platform of Jaunting, Greater", "Platform of Levitation", "Platform of Levitation, Greater", "Pool of Scrying", "Sanctum Sanctorum", "Sigils of Antimagic", "Speaking Stones", "Stable of Understanding", "Table of Feasting", "Table of Freshness", "Touchstone of Faith", "Touchstone of Safety", "Tree of Jaunting", "Tree of Jaunting, Greater", "Vegetative Trap", "Warding Bell", "Well of Falling", "Well of Flying" };
             //initialize lists
             numORooms = 0;
@@ -260,13 +276,17 @@ namespace HousingApp {
                 wallMods.Add(((CheckBox)wallModsBox.Controls[i]).Checked);
             }
 
-            //default control settings
+            //default index for mobility drop downs
             mobilitySpeedDropDown.SelectedIndex = 0;
             mobilityTypeDropDown.SelectedIndex = 0;
             mobilitySpecialDropDown.SelectedIndex = 0;
             this.Text = this.Text.Substring(1);
         }
-
+        /// <summary>
+        /// updates the list of wall mods in every room
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WallModsUpdated(Object sender, EventArgs e) {
             for (int i = 0; i < wallMods.Count; i++)
                 wallMods[i] = ((CheckBox)wallModsBox.Controls[i]).Checked;
@@ -276,7 +296,11 @@ namespace HousingApp {
             }
             CalculateTotal(sender, e);
         }
-
+        /// <summary>
+        /// adds a new room the room panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewRoomButton_Click(object sender, EventArgs e) {
             int roomsToAdd = 1;
             if (Control.ModifierKeys == Keys.Shift)
@@ -294,7 +318,10 @@ namespace HousingApp {
             }
             RoomCountChanged();
         }
-
+        /// <summary>
+        /// called when a room is removed, removes it from the list and calls every room below to move up
+        /// </summary>
+        /// <param name="sender"></param>
         private void RoomRemoved(Object sender) {
             rooms.Remove((Room)sender);
             for (int i = 0; i < rooms.Count; i++) {
@@ -304,7 +331,9 @@ namespace HousingApp {
             RoomCountChanged();
             CalculateTotal(sender, new EventArgs());
         }
-
+        /// <summary>
+        /// updates the building size when the room size is changed
+        /// </summary>
         private void RoomCountChanged() {
             numORooms = 0;
             foreach (Room r in rooms)
@@ -331,7 +360,11 @@ namespace HousingApp {
                 buildingSizeText.Text = "Large Dungeon";
             CalculateTotal(new Object(), new EventArgs());
         }
-
+        /// <summary>
+        /// calculates the total cost of the building whenever an aspect is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateTotal(Object sender, EventArgs e) {
             if (!(this.Text[0] == '*'))
                 this.Text = "*" + this.Text;
@@ -388,7 +421,6 @@ namespace HousingApp {
                 speedCost *= 2;
             else if (mobilityTypeDropDown.SelectedIndex == 5) //flying
                 speedCost *= 2.5;
-            costTotal += speedCost;
             //special
             if (mobilitySpecialDropDown.SelectedIndex == 2 ||
                 mobilitySpecialDropDown.SelectedIndex == 1)
@@ -398,6 +430,7 @@ namespace HousingApp {
             else if (mobilitySpecialDropDown.SelectedIndex == 4 ||
                 mobilitySpecialDropDown.SelectedIndex == 5)
                 speedCost += 25000 * numORooms;
+            costTotal += speedCost;
 
             costTotal += CalculateWondrous();
             costTotal += CalculateFreeStandWalls();
@@ -419,7 +452,11 @@ namespace HousingApp {
                 DTPCostText.Text = "500";
             goldCostText.Text = costTotal.ToString();
         }
-
+        /// <summary>
+        /// adds a new wondrous architecture drop down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addNewWondrousArch_Click(object sender, EventArgs e) {
             Button xb = new Button();
             wondrousArchPanel.Controls.Add(xb);
@@ -429,6 +466,7 @@ namespace HousingApp {
             xb.Text = "X";
             xb.FlatStyle = FlatStyle.System;
             xb.Click += RemoveWondrousArch;
+            xb.TabStop = false;
 
             ComboBox cb = new ComboBox();
             wondrousArchPanel.Controls.Add(cb);
@@ -438,10 +476,15 @@ namespace HousingApp {
             cb.DataSource = wondrousArch.Clone();
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
             cb.SelectedIndexChanged += CalculateTotal;
+            cb.TabStop = false;
 
             CalculateTotal(sender, e);
         }
-
+        /// <summary>
+        /// removes wondrous acrchitecture and moves the ones below it up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveWondrousArch(Object sender, EventArgs e) {
             Button b = (Button)sender;
             int index = wondrousArchPanel.Controls.IndexOf(b);
@@ -455,7 +498,10 @@ namespace HousingApp {
             }
             CalculateTotal(sender, e);
         }
-
+        /// <summary>
+        /// calculates the cost of all wondrous architectures
+        /// </summary>
+        /// <returns></returns>
         private double CalculateWondrous() {
             ComboBox cb;
             double cost = 0;
@@ -547,7 +593,11 @@ namespace HousingApp {
             }
             return cost;
         }
-
+        /// <summary>
+        /// creates a new freestanding wall section
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newWallSectionButton_Click(object sender, EventArgs e) {
             Button xb = new Button();
             freeStandWallsPanel.Controls.Add(xb);
@@ -557,6 +607,7 @@ namespace HousingApp {
             xb.Text = "X";
             xb.FlatStyle = FlatStyle.System;
             xb.Click += RemoveWallSection;
+            xb.TabStop = false;
 
             NumericUpDown nud = new NumericUpDown();
             freeStandWallsPanel.Controls.Add(nud);
@@ -566,6 +617,7 @@ namespace HousingApp {
             nud.UpDownAlign = LeftRightAlignment.Left;
             nud.TextAlign = HorizontalAlignment.Center;
             nud.ValueChanged += CalculateTotal;
+            nud.TabStop = false;
 
             ComboBox cb = new ComboBox();
             freeStandWallsPanel.Controls.Add(cb);
@@ -574,6 +626,7 @@ namespace HousingApp {
             cb.DataSource = wallTypes.Clone();
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
             cb.SelectedIndexChanged += CalculateTotal;
+            cb.TabStop = false;
 
             ComboBox wb = new ComboBox();
             freeStandWallsPanel.Controls.Add(wb);
@@ -582,8 +635,13 @@ namespace HousingApp {
             wb.DataSource = wallUpgrades.Clone();
             wb.DropDownStyle = ComboBoxStyle.DropDownList;
             wb.SelectedIndexChanged += CalculateTotal;
+            wb.TabStop = false;
         }
-
+        /// <summary>
+        /// removes a freestanding wall section and moves the section below up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveWallSection(Object sender, EventArgs e) {
             Button b = (Button)sender;
             int index = freeStandWallsPanel.Controls.IndexOf(b);
@@ -603,7 +661,10 @@ namespace HousingApp {
             }
             CalculateTotal(sender, e);
         }
-
+        /// <summary>
+        /// calculates the cost of all the freestanding wall sections
+        /// </summary>
+        /// <returns></returns>
         private double CalculateFreeStandWalls() {
             double cost = 0;
             double costReduction = .25;
@@ -784,7 +845,11 @@ namespace HousingApp {
             }
             return cost;
         }
-
+        /// <summary>
+        /// checks for user input key combos to save and load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeyCombos(object sender, KeyEventArgs e) {
             if (e.Control && e.Shift && e.KeyCode == Keys.S)
                 SaveAs_Click(sender, new EventArgs());
@@ -793,7 +858,11 @@ namespace HousingApp {
             else if (e.Control && e.KeyCode == Keys.O)
                 Load_Click(sender, new EventArgs());
         }
-
+        /// <summary>
+        /// saves the file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Save_Click(object sender, EventArgs e) {
             if (this.Text[0] != '*')
                 return;
@@ -844,7 +913,11 @@ namespace HousingApp {
                 this.Text = fileName + " - Lantern's Housing Calculator";
             }
         }
-
+        /// <summary>
+        /// opens the saveFileDialog to prompt the user on where to save thefile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveAs_Click(object sender, EventArgs e) {
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 fileName = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
@@ -853,7 +926,11 @@ namespace HousingApp {
                 Save_Click(sender, e);
             }
         }
-
+        /// <summary>
+        /// loads a file chosen by the user through the file browser dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Load_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 fileName = openFileDialog.FileName.Substring(openFileDialog.FileName.LastIndexOf('\\') + 1);
@@ -934,10 +1011,30 @@ namespace HousingApp {
             CalculateTotal(sender, e);
             this.Text = fileName + " - Lantern's Housing Calculator";
         }
-
+        /// <summary>
+        /// closes the program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit_Click(object sender, EventArgs e) {
             //TODO check for if the user has saved
             this.Dispose();
+        }
+        /// <summary>
+        /// opens the webpage to submit issues on Github
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void submitFeedbackToolStripMenuItem_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/cajunwildcat/Lantern-Housing-Guide/issues");
+        }
+        /// <summary>
+        /// opens the webpage containing the README on Github
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/cajunwildcat/Lantern-Housing-Guide/blob/main/README.md");
         }
     }
 }
